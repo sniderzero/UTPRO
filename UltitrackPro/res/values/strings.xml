@@ -8,5 +8,14 @@
     <string name="btn_Preferences">Preferences</string>
     <string name="btn_Bands">Customize Bands</string>
     <string name="btn_Program">Select Program</string>
+    <string name="sEquipKey">Equipment Key</string>
+    <string name="btn_Date">Date</string>
+    <string name="btn_Prev">Previous</string>
+    <string name="btn_Skip">Skip</string>
+    <string name="btn_Save">Save</string>
+    <string name="sReps">Reps</string>
+    <string name="sMinusSign">-</string>
+    <string name="sPlusSign">+</string>
+    <string name="sWeight">Weight</string>
 
 </resources>

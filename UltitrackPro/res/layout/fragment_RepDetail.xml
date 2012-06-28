@@ -1,0 +1,115 @@
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rlRepDetail"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <Button
+            android:id="@+id/bDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/btn_Date" />
+
+        <LinearLayout
+            android:id="@+id/llhNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/bDate" >
+
+            <Button
+                android:id="@+id/bPrevious"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_Prev" />
+
+            <Button
+                android:id="@+id/bSkip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_Skip" />
+
+            <Button
+                android:id="@+id/bSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_Save" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llhRep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/llhNav" >
+
+            <TextView
+                android:id="@+id/tvRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sReps"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/bMinusRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sMinusSign" />
+
+            <EditText
+                android:id="@+id/etRep"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10" >
+
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/bPlusRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sPlusSign" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llhWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llhRep" >
+
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sWeight"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/bMinusWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sMinusSign" />
+
+            <EditText
+                android:id="@+id/etWeight"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10" />
+
+            <Button
+                android:id="@+id/bPlusWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sPlusSign" />
+        </LinearLayout>
+
+    </RelativeLayout>
