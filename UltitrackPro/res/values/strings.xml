@@ -17,5 +17,8 @@
     <string name="sMinusSign">-</string>
     <string name="sPlusSign">+</string>
     <string name="sWeight">Weight</string>
+    <string name="sBand">Band</string>
+    <string name="sNotesHint">Enter Notes Here</string>
+    <string name="sHistory">History</string>
 
 </resources>
