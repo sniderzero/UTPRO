@@ -148,23 +148,11 @@
             android:hint="@string/sNotesHint"
             android:inputType="textMultiLine" />
 
-        <TextView
-            android:id="@+id/tvHistory"
-            android:layout_width="match_parent"
+        <include
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/etNotes"
-            android:gravity="center"
-            android:text="@string/sHistory"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <ListView
-            android:id="@+id/lvHistory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/tvHistory" >
-
-        </ListView>
+            android:layout_below="@+id/etNotes"
+            layout="@layout/part_historylist" />
 
     </RelativeLayout>

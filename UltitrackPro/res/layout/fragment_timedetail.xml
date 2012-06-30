@@ -51,4 +51,23 @@
 
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/etNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llhButtons"
+            android:ems="10"
+            android:hint="@string/sNotesHint"
+            android:inputType="textMultiLine" >
+
+            <requestFocus />
+        </EditText>
+
+        <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/etNotes"
+            layout="@layout/part_historylist" />
+
     </RelativeLayout>

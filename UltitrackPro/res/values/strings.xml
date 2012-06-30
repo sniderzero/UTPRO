@@ -27,5 +27,11 @@
     <string name="sStop">Stop</string>
     <string name="sPause">Pause</string>
     <string name="sReset">Reset</string>
+    <string name="sCustomBands">Custom Bands</string>
+    <string name="sName">Name</string>
+    <string name="sBandColor">Color</string>
+    <string name="sAdd">Add</string>
+    <string name="sCancel">Cancel</string>
+    <string name="sDone">Done</string>
 
 </resources>
