@@ -20,5 +20,12 @@
     <string name="sBand">Band</string>
     <string name="sNotesHint">Enter Notes Here</string>
     <string name="sHistory">History</string>
+    <string name="sHome">Home</string>
+    <string name="sShare">Share</string>
+    <string name="sTimer">00.00.00</string>
+    <string name="sStart">Start</string>
+    <string name="sStop">Stop</string>
+    <string name="sPause">Pause</string>
+    <string name="sReset">Reset</string>
 
 </resources>

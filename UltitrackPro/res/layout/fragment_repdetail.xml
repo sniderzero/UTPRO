@@ -154,11 +154,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/etNotes"
+            android:gravity="center"
             android:text="@string/sHistory"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ListView
-            android:id="@+id/listView1"
+            android:id="@+id/lvHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
