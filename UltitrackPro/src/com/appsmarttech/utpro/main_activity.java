@@ -1,16 +1,10 @@
 package com.appsmarttech.utpro;
 
 import java.io.IOException;
-
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import android.os.Bundle;
-import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
 
-public class main_activity extends FragmentActivity {
+public class main_activity extends SherlockFragmentActivity {
 	
 	//Declarations
 	DBHelper_activity db;
@@ -31,11 +25,6 @@ public class main_activity extends FragmentActivity {
         
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main_activity, menu);
-        return true;
-    }
 
     
 }
