@@ -1,14 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlProgramsRow"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/llhProgramsRow"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+    <TextView
+        android:id="@+id/tvProgramName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/sHome"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/tvProgramName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/tvActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/sActive"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    </LinearLayout>
+</RelativeLayout>
