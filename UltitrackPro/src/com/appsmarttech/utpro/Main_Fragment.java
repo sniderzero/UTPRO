@@ -3,12 +3,17 @@ package com.appsmarttech.utpro;
 import java.io.IOException;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class Main_Fragment extends SherlockFragment {
 	
@@ -21,8 +26,9 @@ public class Main_Fragment extends SherlockFragment {
         Bundle savedInstanceState) {
         // Inflate the layout for this fragment
    	 	View vMain = inflater.inflate(R.layout.fragment_main, container, false);
-   	 	//setting title of activity
-   	 	getActivity().setTitle("UltiTrack Pro");
+   	 	//telling it that it has an actionbar
+   	 	setHasOptionsMenu(true);
+   	 	
         db = new DBHelper_activity(getActivity());
         try {
 			db.createDataBase();
@@ -45,6 +51,36 @@ public class Main_Fragment extends SherlockFragment {
         });
         return vMain;
     }
+    
+    //creating the options menu - actionbar
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+		inflater.inflate(R.menu.main_actionbar, menu);
+		
+		super.onCreateOptionsMenu(menu, inflater);
+		
+	}
+	//setting the actions for the actionbar icons
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.miBands:
+			Toast.makeText(getActivity(), "You Pushed Bands", Toast.LENGTH_SHORT)
+					.show();
+			break;
+		case R.id.miMeasurements:
+			Toast.makeText(getActivity(), "You want to weight your fat ass", Toast.LENGTH_SHORT)
+					.show();
+			break;
+
+		default:
+			Toast.makeText(getActivity(), "You pressed some other shit", Toast.LENGTH_SHORT)
+			.show();
+			break;
+		}
+
+		return true;
+	}
+
     
     public void mProgramSelect(View v){
     	Intent in = new Intent(getActivity(), Programs_Activity.class);

@@ -33,5 +33,8 @@
     <string name="sAdd">Add</string>
     <string name="sCancel">Cancel</string>
     <string name="sDone">Done</string>
+    <string name="sPreferences">Preferences</string>
+    <string name="sMeasurements">Measurements</string>
+    <string name="sFacebook">Facebook</string>
 
 </resources>
