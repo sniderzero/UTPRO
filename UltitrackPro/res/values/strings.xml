@@ -37,5 +37,6 @@
     <string name="sMeasurements">Measurements</string>
     <string name="sFacebook">Facebook</string>
     <string name="sActive">Active</string>
+    <string name="sCustom">Custom</string>
 
 </resources>

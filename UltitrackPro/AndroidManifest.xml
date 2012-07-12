@@ -10,7 +10,7 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Sherlock.Light.DarkActionBar">
+        android:theme="@style/Theme.Sherlock.Light">
         <activity
             android:name=".main_activity"
             android:uiOptions="splitActionBarWhenNarrow"
@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Programs_Activity"></activity>
+        <activity android:name="Programs_Activity"
+        android:uiOptions="splitActionBarWhenNarrow"></activity>
     </application>
 
 </manifest>

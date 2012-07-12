@@ -1,6 +1,10 @@
 package com.appsmarttech.utpro;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Programs_Fragment extends SherlockFragment {
 	
@@ -24,6 +29,9 @@ public class Programs_Fragment extends SherlockFragment {
         Bundle savedInstanceState) {
     	// Inflate the layout for this fragment
    	 	View vPrograms = inflater.inflate(R.layout.programs_fragment, container, false);
+   	 	
+   	 	//telling it that it has an actionbar
+   	 	setHasOptionsMenu(true);
    	 	
    	 	//assigning listview to listview widget
    	 	lvPrograms = (ListView)vPrograms.findViewById(R.id.lvPrograms);
@@ -73,4 +81,32 @@ public class Programs_Fragment extends SherlockFragment {
 	      return view;  
 	    }  
 	  }  
+	   //creating the options menu - actionbar
+		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+			inflater.inflate(R.menu.customize_actionbar, menu);
+			
+			super.onCreateOptionsMenu(menu, inflater);
+			
+		}
+		//setting the actions for the actionbar icons
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+			case R.id.miCancel:
+				Toast.makeText(getActivity(), "Cancel Bitch", Toast.LENGTH_SHORT)
+						.show();
+				break;
+			case R.id.miAddCustom:
+				Toast.makeText(getActivity(), "Have it your way", Toast.LENGTH_SHORT)
+						.show();
+				break;
+
+			default:
+				Toast.makeText(getActivity(), "You pressed some other shit", Toast.LENGTH_SHORT)
+				.show();
+				break;
+			}
+
+			return true;
+		}
 }

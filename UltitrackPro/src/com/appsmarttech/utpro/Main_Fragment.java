@@ -26,9 +26,11 @@ public class Main_Fragment extends SherlockFragment {
         Bundle savedInstanceState) {
         // Inflate the layout for this fragment
    	 	View vMain = inflater.inflate(R.layout.fragment_main, container, false);
+   	 	
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
    	 	
+   	 	//copying the shipped database if it's not already there
         db = new DBHelper_activity(getActivity());
         try {
 			db.createDataBase();
@@ -63,8 +65,8 @@ public class Main_Fragment extends SherlockFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.miBands:
-			Toast.makeText(getActivity(), "You Pushed Bands", Toast.LENGTH_SHORT)
+		case R.id.miCancel:
+			Toast.makeText(getActivity(), "You Pressed Cancel - DICK", Toast.LENGTH_SHORT)
 					.show();
 			break;
 		case R.id.miMeasurements:
@@ -81,7 +83,7 @@ public class Main_Fragment extends SherlockFragment {
 		return true;
 	}
 
-    
+    //method activated when user selects the program select button
     public void mProgramSelect(View v){
     	Intent in = new Intent(getActivity(), Programs_Activity.class);
     	startActivity(in);
