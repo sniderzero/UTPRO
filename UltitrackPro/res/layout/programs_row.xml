@@ -4,21 +4,31 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/tvProgramName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/sHome"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/tvActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="12dp"
         android:text="@string/sActive"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <CheckBox
+        android:id="@+id/cbProgram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/tvProgramName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:layout_toRightOf="@+id/cbProgram"
+        android:text="@string/sHome"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

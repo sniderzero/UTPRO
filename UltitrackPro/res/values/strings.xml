@@ -38,5 +38,8 @@
     <string name="sFacebook">Facebook</string>
     <string name="sActive">Active</string>
     <string name="sCustom">Custom</string>
+    <string name="sEdit">Edit</string>
+    <string name="sDelete">Delete</string>
+    <string name="sClone">Clone</string>
 
 </resources>
