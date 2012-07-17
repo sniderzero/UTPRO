@@ -18,6 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -34,10 +37,12 @@ public class Programs_Fragment extends SherlockFragment {
 		Cursor cPrograms;
 		SharedPreferences spPreferences;
 		Editor ePreferences;
-		String sActiveProgram;
+		String sActiveProgram, sProgramName;
 		Integer iActiveProgram, iProgramID;
 		ActionMode mActionMode;
 		ActionBar actionBar;
+		OnItemClickListener lvProgramListener;
+		OnItemLongClickListener lvProgramLongListener;
 		
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -50,6 +55,10 @@ public class Programs_Fragment extends SherlockFragment {
 
         //declare preference editor
         ePreferences = spPreferences.edit();
+        
+        //setting active program for testing purposes
+        ePreferences.putString("kActiveProgram", "1");
+        ePreferences.commit();
 
         //grabbing the active program from preferences
         sActiveProgram = spPreferences.getString("kActiveProgram", "0");
@@ -62,15 +71,6 @@ public class Programs_Fragment extends SherlockFragment {
         
         actionBar.setHomeButtonEnabled(true);
         
-        
-/*
-        //converting back to a string
-        strRuns = String.valueOf(intRuns);
-        //storing in preferences
-        edit.putString("runnumber", strRuns);
-        edit.commit(); 
-        */
-   	 	
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
    	 	
@@ -86,10 +86,44 @@ public class Programs_Fragment extends SherlockFragment {
         
         //building cursor
         cPrograms = db.rawQuery("SELECT _id, trackName FROM ProgramKey", null);
+
+    	//building the onclick listener for the lvPrograms Listview
+        lvProgramListener = new OnItemClickListener() {
+
+    		@Override
+    		public void onItemClick(AdapterView<?> parent, View view, int position,
+    				long id) {
+    			//setting iActiveProgram to the selected item
+    			iActiveProgram = cPrograms.getInt(cPrograms.getColumnIndex("_id"));
+    	        //converting to a string
+    	        sActiveProgram = String.valueOf(iActiveProgram);
+    	        //storing in preferences
+    	        ePreferences.putString("kActiveProgram", sActiveProgram);
+    	        ePreferences.commit(); 
+    	        //refreshing the listview
+    	        lvPrograms.invalidateViews();
+    		}
+      	  
+        };
+        //building the long onclick listener for the lvPrograms listview
         
-        //setting adapter to the listview
+        lvProgramLongListener = new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				//grabbing program name to update the action bar with
+				sProgramName = cPrograms.getString(1);
+				//launching the contextual action bar
+				mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
+				return true;
+			}
+        	
+        };
+        //setting click listener, long click listener, and adapter to the listview
+        lvPrograms.setOnItemClickListener(lvProgramListener);
+        lvPrograms.setOnItemLongClickListener(lvProgramLongListener);
         lvPrograms.setAdapter(new adapter(getActivity(),cPrograms));
-        
         
         return vPrograms;
     }
@@ -109,7 +143,6 @@ public class Programs_Fragment extends SherlockFragment {
 	    @Override  
 	    public void bindView(View view, Context context, final Cursor cursor) {  
 	      TextView tvProgramName = (TextView)view.findViewById(R.id.tvProgramName);
-	      CheckBox cbProgram = (CheckBox)view.findViewById(R.id.cbProgram);
 	      tvProgramName.setText(cursor.getString(cursor.getColumnIndex("trackName")));
 	  
 	      //retrieving the program ID from the cursor
@@ -122,44 +155,7 @@ public class Programs_Fragment extends SherlockFragment {
 	      else{
 	    	  //if not hide the active textview
 	    	  ((TextView)view.findViewById(R.id.tvActive)).setVisibility(View.INVISIBLE);
-	      } 
-	      //building an onclick listener for tvProgramName
-	      OnClickListener tvProgramListener = new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				
-				Toast.makeText(getActivity(), cursor.getString(cursor.getColumnIndex("trackName")), Toast.LENGTH_SHORT)
-				.show();
-				
-		        //setting active program for testing purposes
-		        //ePreferences.putString("kActiveProgram", cursor.getInt(cursor.getColumnIndex("_id")));
-		        //ePreferences.commit();
-				
-			}
-	    	  
-	      };
-	      //assigning the onclicklistener to the tvProgramName text view
-	      tvProgramName.setOnClickListener(tvProgramListener);
-	      
-	      //building an onclick listener for cbProgram
-	      OnCheckedChangeListener cbProgramListener = new OnCheckedChangeListener(){
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				
-				mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
-				
-				Toast.makeText(getActivity(), "check status changed" , Toast.LENGTH_SHORT)
-				.show();
-				
-			}
-	    	  
-	      };
-	      
-	      cbProgram.setOnCheckedChangeListener(cbProgramListener);
-	      
-	      
+	      }
 	      
 	      }  
 	  
@@ -180,7 +176,7 @@ public class Programs_Fragment extends SherlockFragment {
 			MenuInflater inflater = mode.getMenuInflater();
 			// Assumes that you have "contexual.xml" menu resources
 			inflater.inflate(R.menu.programs_contextual_actionbar, menu);
-			mode.setTitle("1 Giant ball sack");
+			mode.setTitle(sProgramName);
 			return true;
 		}
 
@@ -211,7 +207,9 @@ public class Programs_Fragment extends SherlockFragment {
 	};
 	
 	
-	   //creating the options menu - actionbar
+
+	
+	   //creating the actionbar
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
 			inflater.inflate(R.menu.customize_actionbar, menu);
 			
@@ -231,6 +229,11 @@ public class Programs_Fragment extends SherlockFragment {
 						.show();
 				break;
 
+			case R.id.miAccept:
+				Toast.makeText(getActivity(), String.valueOf(iActiveProgram), Toast.LENGTH_SHORT)
+						.show();
+				break;
+				
 			default:
 				Toast.makeText(getActivity(), "You pressed some other shit", Toast.LENGTH_SHORT)
 				.show();
