@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/miCancel"
+        android:title="@string/sCancel"
+        android:orderInCategory="3"
+        android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/miAddCustom" android:showAsAction="ifRoom|withText" android:title="@string/sCustom" android:orderInCategory="2"></item>
+    <item android:id="@+id/miGetFit" android:showAsAction="ifRoom|withText" android:title="@string/sGetFit" android:orderInCategory="1"></item>
+
+</menu>

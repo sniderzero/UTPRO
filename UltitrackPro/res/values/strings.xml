@@ -41,5 +41,6 @@
     <string name="sEdit">Edit</string>
     <string name="sDelete">Delete</string>
     <string name="sClone">Clone</string>
+    <string name="sGetFit">Get Fit!</string>
 
 </resources>

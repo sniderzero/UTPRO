@@ -7,7 +7,9 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -16,14 +18,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,6 +41,8 @@ public class Programs_Fragment extends SherlockFragment {
 		ActionBar actionBar;
 		OnItemClickListener lvProgramListener;
 		OnItemLongClickListener lvProgramLongListener;
+		Boolean bActionPresent;
+		Intent inDays;
 		
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -56,9 +56,12 @@ public class Programs_Fragment extends SherlockFragment {
         //declare preference editor
         ePreferences = spPreferences.edit();
         
+        //declaring intents
+        inDays = new Intent(getActivity(), Days_Activity.class);
+        
         //setting active program for testing purposes
-        ePreferences.putString("kActiveProgram", "1");
-        ePreferences.commit();
+        //ePreferences.putString("kActiveProgram", "1");
+        //ePreferences.commit();
 
         //grabbing the active program from preferences
         sActiveProgram = spPreferences.getString("kActiveProgram", "0");
@@ -70,6 +73,9 @@ public class Programs_Fragment extends SherlockFragment {
         actionBar = getSherlockActivity().getSupportActionBar();
         
         actionBar.setHomeButtonEnabled(true);
+        
+        bActionPresent = false;
+        
         
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
@@ -85,7 +91,7 @@ public class Programs_Fragment extends SherlockFragment {
         db = (new DBHelper_activity(getActivity())).getReadableDatabase();
         
         //building cursor
-        cPrograms = db.rawQuery("SELECT _id, trackName FROM ProgramKey", null);
+        cPrograms = db.rawQuery("SELECT _id, programName, isEditable, timesCompleted FROM ProgramKey", null);
 
     	//building the onclick listener for the lvPrograms Listview
         lvProgramListener = new OnItemClickListener() {
@@ -93,6 +99,11 @@ public class Programs_Fragment extends SherlockFragment {
     		@Override
     		public void onItemClick(AdapterView<?> parent, View view, int position,
     				long id) {
+    			//check if cab is present
+    			if(bActionPresent == true){
+    				
+    			}
+    			else{
     			//setting iActiveProgram to the selected item
     			iActiveProgram = cPrograms.getInt(cPrograms.getColumnIndex("_id"));
     	        //converting to a string
@@ -102,6 +113,7 @@ public class Programs_Fragment extends SherlockFragment {
     	        ePreferences.commit(); 
     	        //refreshing the listview
     	        lvPrograms.invalidateViews();
+    			}
     		}
       	  
         };
@@ -143,7 +155,7 @@ public class Programs_Fragment extends SherlockFragment {
 	    @Override  
 	    public void bindView(View view, Context context, final Cursor cursor) {  
 	      TextView tvProgramName = (TextView)view.findViewById(R.id.tvProgramName);
-	      tvProgramName.setText(cursor.getString(cursor.getColumnIndex("trackName")));
+	      tvProgramName.setText(cursor.getString(cursor.getColumnIndex("programName")));
 	  
 	      //retrieving the program ID from the cursor
 	      iProgramID = cursor.getInt(cursor.getColumnIndex("_id"));
@@ -175,8 +187,9 @@ public class Programs_Fragment extends SherlockFragment {
 			// Inflate a menu resource providing context menu items
 			MenuInflater inflater = mode.getMenuInflater();
 			// Assumes that you have "contexual.xml" menu resources
-			inflater.inflate(R.menu.programs_contextual_actionbar, menu);
+			inflater.inflate(R.menu.programs_cab, menu);
 			mode.setTitle(sProgramName);
+			bActionPresent = true;
 			return true;
 		}
 
@@ -202,6 +215,7 @@ public class Programs_Fragment extends SherlockFragment {
 
 		// Called when the user exits the action mode
 		public void onDestroyActionMode(ActionMode mode) {
+			bActionPresent = false;
 			mActionMode = null;
 		}
 	};
@@ -211,7 +225,7 @@ public class Programs_Fragment extends SherlockFragment {
 	
 	   //creating the actionbar
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-			inflater.inflate(R.menu.customize_actionbar, menu);
+			inflater.inflate(R.menu.programs_ab, menu);
 			
 			super.onCreateOptionsMenu(menu, inflater);
 			
@@ -229,9 +243,8 @@ public class Programs_Fragment extends SherlockFragment {
 						.show();
 				break;
 
-			case R.id.miAccept:
-				Toast.makeText(getActivity(), String.valueOf(iActiveProgram), Toast.LENGTH_SHORT)
-						.show();
+			case R.id.miGetFit:
+				startActivity(inDays);
 				break;
 				
 			default:
