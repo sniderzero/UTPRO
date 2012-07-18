@@ -179,7 +179,7 @@ public class Programs_Fragment extends SherlockFragment {
 	
 		//building contextual actionbar stuff
 	
-	private final class mActionModeCallback implements ActionMode.Callback {
+	public final class mActionModeCallback implements ActionMode.Callback {
 
 		// Called when the action mode is created; startActionMode() was called
 		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
