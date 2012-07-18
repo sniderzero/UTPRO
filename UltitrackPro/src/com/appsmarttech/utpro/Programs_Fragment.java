@@ -76,7 +76,6 @@ public class Programs_Fragment extends SherlockFragment {
         
         bActionPresent = false;
         
-        
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
    	 	

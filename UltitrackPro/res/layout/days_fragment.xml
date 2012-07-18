@@ -8,18 +8,9 @@
             android:id="@+id/lvDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/tvEquipKey"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true" >
 
         </ListView>
-
-        <TextView
-            android:id="@+id/tvEquipKey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@string/sEquipKey"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </RelativeLayout>

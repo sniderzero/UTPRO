@@ -21,13 +21,15 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 
 public class Days_Fragment extends SherlockFragment{
 	
 	//Declarations
 	SQLiteDatabase db;
 	ListView lvDays;
-	Cursor cDays;
+	Cursor cDays, cPrograms;
 	SharedPreferences spPreferences;
 	Editor ePreferences;
 	String sActiveProgram, sDayName;
@@ -41,7 +43,7 @@ public class Days_Fragment extends SherlockFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
     	// Inflate the layout for this fragment
-   	 	View vDays = inflater.inflate(R.layout.daylist_fragment, container, false);
+   	 	View vDays = inflater.inflate(R.layout.days_fragment, container, false);
    	 	
         //open preferences
         spPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -59,14 +61,24 @@ public class Days_Fragment extends SherlockFragment{
         //converting it to Integer
         iActiveProgram = Integer.valueOf(sActiveProgram);
    	 	
-      //setting activity title
-   	 	getActivity().setTitle("Select Program");
-   	 	
    	 	//assigning listview to listview widget
    	 	lvDays = (ListView)vDays.findViewById(R.id.lvDays);
    	 	
+   	 	//telling it that it has an actionbar
+   	 	setHasOptionsMenu(true);
+   	 	
         //opening database
         db = (new DBHelper_activity(getActivity())).getWritableDatabase();
+        
+        //builing a cursor to get the program names 
+        cPrograms = db.rawQuery("SELECT _id, programName FROM ProgramKey WHERE _id = " + iActiveProgram, null);
+        cPrograms.moveToFirst();
+        
+        //setting activity title based on selected program
+        getActivity().setTitle(cPrograms.getString(1));
+        
+        //closing program name cursor
+        cPrograms.close();
         
         //building cursor - need to make this an object - JM needs to help
         cDays = db.rawQuery("SELECT DayKey._id, DayOrder.programID, DayOrder.dayID, DayOrder.dayCompleted, " +
@@ -125,15 +137,26 @@ public class Days_Fragment extends SherlockFragment{
   	    public void bindView(View view, Context context, final Cursor cursor) {  
   	      TextView tvDayName = (TextView)view.findViewById(R.id.tvDayName);
   	      tvDayName.setText(cursor.getString(cursor.getColumnIndex("DayKey.dayName")));
+  	      
+  	      TextView tvDayNumber = (TextView)view.findViewById(R.id.tvDayNumber);
+  	      tvDayNumber.setText(cursor.getString(5));
   	  
   	      }   
   	  
   	    @Override  
   	    public View newView(Context context, Cursor cDays, ViewGroup parent) {  
-  	      final View view = mInflater.inflate(R.layout.daylist_row, parent, false);  
+  	      final View view = mInflater.inflate(R.layout.days_row, parent, false);  
   	      return view;  
   	    }  
   	  }  
+  	
+	   //creating the actionbar
+		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+			inflater.inflate(R.menu.days_ab, menu);
+			
+			super.onCreateOptionsMenu(menu, inflater);
+			
+		}
 }
     
     

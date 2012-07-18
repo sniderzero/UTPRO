@@ -42,5 +42,8 @@
     <string name="sDelete">Delete</string>
     <string name="sClone">Clone</string>
     <string name="sGetFit">Get Fit!</string>
+    <string name="sDay">Day </string>
+    <string name="sDayNumber">1</string>
+    <string name="sRestart">Restart</string>
 
 </resources>

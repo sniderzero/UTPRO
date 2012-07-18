@@ -5,11 +5,23 @@
         android:layout_height="fill_parent" >
 
         <TextView
+            android:id="@+id/tvDay_Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sDay" />
+
+        <TextView
+            android:id="@+id/tvDayNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sDayNumber" />
+
+        <TextView
             android:id="@+id/tvDayName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sName"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_marginLeft="2dp"
+            android:text="@string/sName" />
 
         <LinearLayout
             android:id="@+id/llvStatus"
