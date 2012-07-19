@@ -18,7 +18,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
  
     private static String DB_NAME = "UTPRO";
  
-    private SQLiteDatabase myDataBase; 
+    private SQLiteDatabase myDataBase, db; 
  
     private final Context myContext;
  
@@ -135,6 +135,16 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     	    super.close();
  
 	}
+    
+    public void dayComplete (int iAction, int iDayID){
+    	 String myPath = DB_PATH + DB_NAME;
+    	db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+    	
+    	db.execSQL("UPDATE DayOrder SET dayCompleted=" + iAction +" WHERE _id="+iDayID);
+    	
+    	db.close();
+    	
+    }
  
 	@Override
 	public void onCreate(SQLiteDatabase db) {

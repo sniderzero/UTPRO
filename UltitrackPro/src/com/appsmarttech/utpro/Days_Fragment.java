@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,18 +29,20 @@ import com.actionbarsherlock.view.MenuItem;
 public class Days_Fragment extends SherlockFragment{
 	
 	//Declarations
+	DBHelper_activity dba;
 	SQLiteDatabase db;
 	ListView lvDays;
 	Cursor cDays, cPrograms;
 	SharedPreferences spPreferences;
 	Editor ePreferences;
 	String sActiveProgram, sDayName;
-	Integer iActiveProgram, iProgramID;
+	Integer iActiveProgram, iProgramID, iImageVisible;
 	ActionMode mActionMode;
 	ActionBar actionBar;
 	OnItemClickListener lvDaysListener;
 	OnItemLongClickListener lvDaysLongListener;
 	Boolean bActionPresent;
+	
 	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -53,10 +56,8 @@ public class Days_Fragment extends SherlockFragment{
         //declare preference editor
         ePreferences = spPreferences.edit();
         
-        //setting active program for testing purposes
-        //ePreferences.putString("kActiveProgram", "1");
-        //ePreferences.commit();
-
+        bActionPresent = false;
+        
         //grabbing the active program from preferences
         sActiveProgram = spPreferences.getString("kActiveProgram", "0");
         
@@ -83,7 +84,7 @@ public class Days_Fragment extends SherlockFragment{
         cPrograms.close();
         
         //building cursor - need to make this an object - JM needs to help
-        cDays = db.rawQuery("SELECT DayKey._id, DayOrder.programID, DayOrder.dayID, DayOrder.dayCompleted, " +
+        cDays = db.rawQuery("SELECT DayOrder._id, DayOrder.programID, DayOrder.dayID, DayOrder.dayCompleted, " +
         		"DayKey.dayName, DayOrder.dayNumber FROM DayOrder JOIN DayKey ON " +
         		"DayOrder.dayID=DayKey._id WHERE programID = " + iActiveProgram, null);
 
@@ -117,7 +118,7 @@ public class Days_Fragment extends SherlockFragment{
         lvDays.setOnItemLongClickListener(lvDaysLongListener);
         lvDays.setAdapter(new adapter(getActivity(),cDays));
         
-        db.close();
+        //db.close();
    	 	return vDays;
     }
     
@@ -129,19 +130,42 @@ public class Days_Fragment extends SherlockFragment{
   	    LayoutInflater mInflater;  
   	    
   	  
-  	    public adapter(Context context, Cursor cDays) {  
-  	      super(context, cDays, true);  
+  	    public adapter(Context context, Cursor cursor) {  
+  	      super(context, cursor, true);  
   	      mInflater = LayoutInflater.from(context);  
   	      mContext = context;  
   	    }  
   	  
   	    @Override  
   	    public void bindView(View view, Context context, final Cursor cursor) {  
+  	    	//declaring textviews and setting values from the cursor
   	      TextView tvDayName = (TextView)view.findViewById(R.id.tvDayName);
   	      tvDayName.setText(cursor.getString(cursor.getColumnIndex("DayKey.dayName")));
   	      
   	      TextView tvDayNumber = (TextView)view.findViewById(R.id.tvDayNumber);
   	      tvDayNumber.setText(cursor.getString(5));
+  	      
+  	      //declaring image views and assigning widgets
+  	      ImageView ivCheck = (ImageView)view.findViewById(R.id.ivCheck);
+  	      ImageView ivX = (ImageView)view.findViewById(R.id.ivX);
+  	      
+  	      //determining imageview visibility based on dayCompleted flag
+  	      switch(cursor.getInt(3)){
+  	      case 1:
+
+  	    	  ivCheck.setVisibility(View.VISIBLE);
+	    	  ivX.setVisibility(View.GONE);
+	    	  break;
+  	      case 2:
+  	    	  ivCheck.setVisibility(View.GONE);
+	    	  ivX.setVisibility(View.VISIBLE);
+	    	  break;
+	      default:
+	    	  ivCheck.setVisibility(View.GONE);
+	    	  ivX.setVisibility(View.GONE);
+	    	  break;
+  	      }
+  	      
   	  
   	      }   
   	  
@@ -183,8 +207,20 @@ public class Days_Fragment extends SherlockFragment{
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 				case R.id.miComplete:
-					Toast.makeText(getActivity(), "Selected menu",
-							Toast.LENGTH_LONG).show();
+
+					db.execSQL("UPDATE DayOrder SET dayCompleted= 1 WHERE _id="+cDays.getInt(0));
+					
+					
+					lvDays.invalidateViews();
+					
+					mode.finish(); // Action picked, so close the CAB
+					return true;
+				case R.id.miSkip:
+					db.execSQL("UPDATE DayOrder SET dayCompleted= 2 WHERE _id="+cDays.getInt(0));
+					
+					
+					lvDays.invalidateViews();
+					
 					mode.finish(); // Action picked, so close the CAB
 					return true;
 				default:
