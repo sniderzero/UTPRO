@@ -59,9 +59,6 @@ public class Programs_Fragment extends SherlockFragment {
         //declaring intents
         inDays = new Intent(getActivity(), Days_Activity.class);
         
-        //setting active program for testing purposes
-        //ePreferences.putString("kActiveProgram", "1");
-        //ePreferences.commit();
 
         //grabbing the active program from preferences
         sActiveProgram = spPreferences.getString("kActiveProgram", "0");
@@ -116,24 +113,10 @@ public class Programs_Fragment extends SherlockFragment {
     		}
       	  
         };
-        //building the long onclick listener for the lvPrograms listview
-        
-        lvProgramLongListener = new OnItemLongClickListener() {
 
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				//grabbing program name to update the action bar with
-				sProgramName = cPrograms.getString(1);
-				//launching the contextual action bar
-				mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
-				return true;
-			}
         	
-        };
         //setting click listener, long click listener, and adapter to the listview
         lvPrograms.setOnItemClickListener(lvProgramListener);
-        lvPrograms.setOnItemLongClickListener(lvProgramLongListener);
         lvPrograms.setAdapter(new adapter(getActivity(),cPrograms));
         
         return vPrograms;
@@ -177,50 +160,6 @@ public class Programs_Fragment extends SherlockFragment {
 	    }  
 	  }  
 	
-		//building contextual actionbar stuff
-	
-	public final class mActionModeCallback implements ActionMode.Callback {
-
-		// Called when the action mode is created; startActionMode() was called
-		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-			// Inflate a menu resource providing context menu items
-			MenuInflater inflater = mode.getMenuInflater();
-			// Assumes that you have "contexual.xml" menu resources
-			inflater.inflate(R.menu.programs_cab, menu);
-			mode.setTitle(sProgramName);
-			bActionPresent = true;
-			return true;
-		}
-
-		// Called each time the action mode is shown. Always called after
-		// onCreateActionMode, but
-		// may be called multiple times if the mode is invalidated.
-		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-			return false; // Return false if nothing is done
-		}
-
-		// Called when the user selects a contextual menu item
-		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-			switch (item.getItemId()) {
-			case R.id.miEdit:
-				Toast.makeText(getActivity(), "Selected menu",
-						Toast.LENGTH_LONG).show();
-				mode.finish(); // Action picked, so close the CAB
-				return true;
-			default:
-				return false;
-			}
-		}
-
-		// Called when the user exits the action mode
-		public void onDestroyActionMode(ActionMode mode) {
-			bActionPresent = false;
-			mActionMode = null;
-		}
-	};
-	
-	
-
 	
 	   //creating the actionbar
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
@@ -233,12 +172,8 @@ public class Programs_Fragment extends SherlockFragment {
 		@Override
 		public boolean onOptionsItemSelected(MenuItem item) {
 			switch (item.getItemId()) {
-			case R.id.miCancel:
-				Toast.makeText(getActivity(), "Cancel Bitch", Toast.LENGTH_SHORT)
-						.show();
-				break;
-			case R.id.miAddCustom:
-				Toast.makeText(getActivity(), "Have it your way", Toast.LENGTH_SHORT)
+			case R.id.miSettings:
+				Toast.makeText(getActivity(), "You called settings", Toast.LENGTH_SHORT)
 						.show();
 				break;
 

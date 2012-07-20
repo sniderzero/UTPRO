@@ -1,6 +1,0 @@
-
-    <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/miEdit" android:title="@string/sEdit"></item>
-        <item android:id="@+id/miDelete" android:title="@string/sDelete"></item>
-        <item android:id="@+id/miClone" android:title="@string/sClone"></item>
-    </menu>
