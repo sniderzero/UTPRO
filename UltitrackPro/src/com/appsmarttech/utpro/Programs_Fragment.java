@@ -19,10 +19,12 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.CursorAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,7 @@ public class Programs_Fragment extends SherlockFragment {
 		OnItemLongClickListener lvProgramLongListener;
 		Boolean bActionPresent;
 		Intent inDays;
+		ListAdapter lvProgramsAdapter;
 		
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -95,11 +98,7 @@ public class Programs_Fragment extends SherlockFragment {
     		@Override
     		public void onItemClick(AdapterView<?> parent, View view, int position,
     				long id) {
-    			//check if cab is present
-    			if(bActionPresent == true){
-    				
-    			}
-    			else{
+
     			//setting iActiveProgram to the selected item
     			iActiveProgram = cPrograms.getInt(cPrograms.getColumnIndex("_id"));
     	        //converting to a string
@@ -108,16 +107,18 @@ public class Programs_Fragment extends SherlockFragment {
     	        ePreferences.putString("kActiveProgram", sActiveProgram);
     	        ePreferences.commit(); 
     	        //refreshing the listview
-    	        lvPrograms.invalidateViews();
-    			}
+    	        cPrograms.requery(); //may have to find another way to do this
+    			
     		}
       	  
         };
 
+        //setting up adapter
+        lvProgramsAdapter = new adapter(getActivity(),cPrograms);
         	
         //setting click listener, long click listener, and adapter to the listview
         lvPrograms.setOnItemClickListener(lvProgramListener);
-        lvPrograms.setAdapter(new adapter(getActivity(),cPrograms));
+        lvPrograms.setAdapter(lvProgramsAdapter);
         
         return vPrograms;
     }
@@ -173,11 +174,13 @@ public class Programs_Fragment extends SherlockFragment {
 		public boolean onOptionsItemSelected(MenuItem item) {
 			switch (item.getItemId()) {
 			case R.id.miSettings:
+				//launch settings preference
 				Toast.makeText(getActivity(), "You called settings", Toast.LENGTH_SHORT)
 						.show();
 				break;
 
 			case R.id.miGetFit:
+				//launch days activity
 				startActivity(inDays);
 				break;
 				

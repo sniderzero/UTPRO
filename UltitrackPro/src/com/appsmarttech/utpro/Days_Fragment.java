@@ -105,8 +105,8 @@ public class Days_Fragment extends SherlockFragment{
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				//grabbing program name to update the action bar with
-				//sProgramName = cPrograms.getString(1);
+				//grabbing dayname to update the action bar with
+				sDayName = cDays.getString(4);
 				//launching the contextual action bar
 				mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
 				return true;
@@ -192,6 +192,7 @@ public class Days_Fragment extends SherlockFragment{
 				MenuInflater inflater = mode.getMenuInflater();
 				// Assumes that you have "contexual.xml" menu resources
 				inflater.inflate(R.menu.days_cab, menu);
+				mode.setTitle(sDayName);
 				bActionPresent = true;
 				return true;
 			}
@@ -207,18 +208,19 @@ public class Days_Fragment extends SherlockFragment{
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				switch (item.getItemId()) {
 				case R.id.miComplete:
-
+					//marking the day as completed
 					db.execSQL("UPDATE DayOrder SET dayCompleted= 1 WHERE _id="+cDays.getInt(0));
 					
-					
+					cDays.requery();
 					lvDays.invalidateViews();
 					
 					mode.finish(); // Action picked, so close the CAB
 					return true;
 				case R.id.miSkip:
+					//marking the day as skipped
 					db.execSQL("UPDATE DayOrder SET dayCompleted= 2 WHERE _id="+cDays.getInt(0));
 					
-					
+					cDays.requery();
 					lvDays.invalidateViews();
 					
 					mode.finish(); // Action picked, so close the CAB
