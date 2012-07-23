@@ -1,29 +1,27 @@
 package com.appsmarttech.utpro;
 
+import java.util.List;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.CursorAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,7 +30,7 @@ import android.widget.Toast;
 public class Programs_Fragment extends SherlockFragment {
 	
 	//Declarations
-		SQLiteDatabase db;
+		DBHelper_activity db;
 		ListView lvPrograms;
 		Cursor cPrograms;
 		SharedPreferences spPreferences;
@@ -46,6 +44,7 @@ public class Programs_Fragment extends SherlockFragment {
 		Boolean bActionPresent;
 		Intent inDays;
 		ListAdapter lvProgramsAdapter;
+		Program pSelected;
 		
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -72,8 +71,9 @@ public class Programs_Fragment extends SherlockFragment {
         //changing action bar settings
         actionBar = getSherlockActivity().getSupportActionBar();
         
-        actionBar.setHomeButtonEnabled(true);
-        
+        //sets home button as enabled (the app icon in the left corner)
+        //actionBar.setHomeButtonEnabled(true);
+        //boolean for determining if the cab is up - not necessary for UT90 or UT92
         bActionPresent = false;
         
    	 	//telling it that it has an actionbar
@@ -87,10 +87,12 @@ public class Programs_Fragment extends SherlockFragment {
    	 	lvPrograms = (ListView)vPrograms.findViewById(R.id.lvPrograms);
    	 	
         //opening database
-        db = (new DBHelper_activity(getActivity())).getReadableDatabase();
+        db = (new DBHelper_activity(getActivity()));
         
         //building cursor
-        cPrograms = db.rawQuery("SELECT _id, programName, isEditable, timesCompleted FROM ProgramKey", null);
+        //cPrograms = db.rawQuery("SELECT _id, programName, isEditable, timesCompleted FROM ProgramKey", null);
+        //building list of programs
+        List<Program> Programs = db.getAllPrograms();
 
     	//building the onclick listener for the lvPrograms Listview
         lvProgramListener = new OnItemClickListener() {
@@ -99,22 +101,24 @@ public class Programs_Fragment extends SherlockFragment {
     		public void onItemClick(AdapterView<?> parent, View view, int position,
     				long id) {
 
-    			//setting iActiveProgram to the selected item
-    			iActiveProgram = cPrograms.getInt(cPrograms.getColumnIndex("_id"));
+    			//grabbing the selected item from lvPrograms
+    			pSelected = (Program) (lvPrograms.getItemAtPosition(position));
+    			//setting iActiveProgram to the selected item ID
+    			iActiveProgram = pSelected.getID();
     	        //converting to a string
     	        sActiveProgram = String.valueOf(iActiveProgram);
     	        //storing in preferences
     	        ePreferences.putString("kActiveProgram", sActiveProgram);
     	        ePreferences.commit(); 
     	        //refreshing the listview
-    	        cPrograms.requery(); //may have to find another way to do this
+    	        lvPrograms.invalidateViews();
     			
     		}
       	  
         };
 
         //setting up adapter
-        lvProgramsAdapter = new adapter(getActivity(),cPrograms);
+        lvProgramsAdapter = new ProgramArrayAdapter(getActivity(),Programs);
         	
         //setting click listener, long click listener, and adapter to the listview
         lvPrograms.setOnItemClickListener(lvProgramListener);
@@ -122,44 +126,45 @@ public class Programs_Fragment extends SherlockFragment {
         
         return vPrograms;
     }
-    //creating adapter for the list view
-	public class adapter extends CursorAdapter{  
-	    private Cursor mCursor;  
-	    private Context mContext;  
-	    LayoutInflater mInflater;  
-	    
-	  
-	    public adapter(Context context, Cursor cPrograms) {  
-	      super(context, cPrograms, true);  
-	      mInflater = LayoutInflater.from(context);  
-	      mContext = context;  
-	    }  
-	  
-	    @Override  
-	    public void bindView(View view, Context context, final Cursor cursor) {  
-	      TextView tvProgramName = (TextView)view.findViewById(R.id.tvProgramName);
-	      tvProgramName.setText(cursor.getString(cursor.getColumnIndex("programName")));
-	  
-	      //retrieving the program ID from the cursor
-	      iProgramID = cursor.getInt(cursor.getColumnIndex("_id"));
-	      //if programID is equal to the active program
-	      if(iProgramID == iActiveProgram){
-	    	  //then show the active textview
-	    	  ((TextView)view.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);
-	      }
-	      else{
-	    	  //if not hide the active textview
-	    	  ((TextView)view.findViewById(R.id.tvActive)).setVisibility(View.INVISIBLE);
-	      }
-	      
-	      }  
-	  
-	    @Override  
-	    public View newView(Context context, Cursor cPrograms, ViewGroup parent) {  
-	      final View view = mInflater.inflate(R.layout.programs_row, parent, false);  
-	      return view;  
-	    }  
-	  }  
+
+	
+	//creating custom listview adapter for programs
+	public class ProgramArrayAdapter extends ArrayAdapter<Program> {
+		private final Context context;
+		
+	 
+		public ProgramArrayAdapter(Context context, List<Program> values) {
+			super(context, R.layout.programs_row, values);
+			this.context = context;
+			
+		}
+	 
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	 
+			View rowView = inflater.inflate(R.layout.programs_row, parent, false);
+			TextView tvProgramName = (TextView)rowView.findViewById(R.id.tvProgramName);
+	 
+			//grab current program
+			pSelected = getItem(position);
+			
+			//setting text of program name
+			tvProgramName.setText(pSelected.getName());
+			
+			//retrieving the program ID from the object
+			iProgramID = pSelected.getID();
+			if(iProgramID == iActiveProgram){
+				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);
+			}
+			else{
+				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.INVISIBLE);
+			}
+
+			return rowView;
+		}
+	}
 	
 	
 	   //creating the actionbar

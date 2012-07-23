@@ -4,8 +4,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
+import java.util.ArrayList;
+import java.util.List;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -21,6 +24,15 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     private SQLiteDatabase myDataBase, db; 
  
     private final Context myContext;
+    
+    //table names
+    private static final String TABLE_PROGRAMS = "ProgramKey";
+    
+    //program table field names
+    private static final String KEY_ID = "_id";
+    private static final String KEY_PROG_NAME = "programName";
+    private static final String KEY_EDITABLE = "isEditable";
+    private static final String KEY_TIMES_COMPLETED = "timesCompleted";
  
     /**
      * Constructor
@@ -136,15 +148,6 @@ public class DBHelper_activity extends SQLiteOpenHelper{
  
 	}
     
-    public void dayComplete (int iAction, int iDayID){
-    	 String myPath = DB_PATH + DB_NAME;
-    	db = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-    	
-    	db.execSQL("UPDATE DayOrder SET dayCompleted=" + iAction +" WHERE _id="+iDayID);
-    	
-    	db.close();
-    	
-    }
  
 	@Override
 	public void onCreate(SQLiteDatabase db) {
@@ -156,5 +159,101 @@ public class DBHelper_activity extends SQLiteOpenHelper{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+     * All CRUD(Create, Read, Update, Delete) Operations for Programs
+     */
+ 
+    // Adding new program - not necessary for UT90 and UT92
+	// inserts a new program into the programkey table
+    void addProgram(Program Program) {
+        db = this.getWritableDatabase();
+ 
+        ContentValues values = new ContentValues();
+        values.put(KEY_PROG_NAME, Program.getName()); // Program Name
+        values.put(KEY_TIMES_COMPLETED, Program.getTimesCompleted()); // Program Times Completed
+        values.put(KEY_EDITABLE, Program.getEditable()); // Program is editable
+        
+        
+        // Inserting Row
+        db.insert(TABLE_PROGRAMS, null, values);
+        db.close(); // Closing database connection
+    }
+ 
+    // Getting a single program
+    Program getProgram(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+ 
+        Cursor cursor = db.query(TABLE_PROGRAMS, new String[] { KEY_ID,
+                KEY_PROG_NAME, KEY_EDITABLE, KEY_TIMES_COMPLETED }, KEY_ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+ 
+        Program Program = new Program(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), Boolean.valueOf(cursor.getString(2)), cursor.getInt(3));
+        // return contact
+        return Program;
+    }
+ 
+    // Getting All Contacts
+    public List<Program> getAllPrograms() {
+        List<Program> programList = new ArrayList<Program>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_PROGRAMS;
+ 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Program Program = new Program();
+                Program.setID(Integer.parseInt(cursor.getString(0)));
+                Program.setName(cursor.getString(1));
+                Program.setEditable(Boolean.valueOf(cursor.getString(2)));
+                Program.setTimesCompleted(cursor.getInt(3));
+                // Adding program to list
+                programList.add(Program);
+            } while (cursor.moveToNext());
+        }
+ 
+        // return program list
+        return programList;
+    }
+ 
+    // Updating single program
+    public int updateProgram(Program Program) {
+        SQLiteDatabase db = this.getWritableDatabase();
+ 
+        ContentValues values = new ContentValues();
+        values.put(KEY_PROG_NAME, Program.getName());
+        values.put(KEY_EDITABLE, Program.getEditable());
+ 
+        // updating row
+        return db.update(TABLE_PROGRAMS, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(Program.getID()) });
+    }
+ 
+    // Deleting single program
+    public void deleteContact(Program Program) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PROGRAMS, KEY_ID + " = ?",
+                new String[] { String.valueOf(Program.getID()) });
+        db.close();
+    }
+ 
+    // Getting programs Count
+    public int getContactsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_PROGRAMS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        cursor.close();
+ 
+        // return count
+        return cursor.getCount();
+    }
+ 
+
  
 }

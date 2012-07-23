@@ -1,5 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     
-    <item android:id="@+id/miGetFit" android:showAsAction="ifRoom|withText" android:title="@string/sGetFit" android:orderInCategory="1"></item><item android:id="@+id/miSettings" android:title="@string/sPreferences" android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/miGetFit" android:showAsAction="ifRoom|withText" android:title="@string/sGetFit" android:orderInCategory="1"></item><item android:id="@+id/miSettings" android:title="@string/sSettings" android:showAsAction="ifRoom|withText" />
 
 </menu>

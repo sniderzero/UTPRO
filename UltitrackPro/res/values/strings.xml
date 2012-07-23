@@ -47,5 +47,6 @@
     <string name="sRestart">Restart</string>
     <string name="sComplete">Complete</string>
     <string name="sSkip">Skip</string>
+    <string name="sSettings">Settings</string>
 
 </resources>
