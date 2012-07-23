@@ -3,6 +3,7 @@ package com.appsmarttech.utpro;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -48,6 +49,7 @@ public class Days_Fragment extends SherlockFragment{
 	Day dSelected;
 	ListAdapter lvDaysAdapter;
 	List<Day> Days;
+	Intent inExerDetails;
 	
 	
     @Override
@@ -62,6 +64,7 @@ public class Days_Fragment extends SherlockFragment{
         //declare preference editor
         ePreferences = spPreferences.edit();
         
+        //boolean for tracking the presence of the cab
         bActionPresent = false;
         
         //grabbing the active program from preferences
@@ -75,6 +78,9 @@ public class Days_Fragment extends SherlockFragment{
    	 	
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
+   	 	
+   	 	//declaring intents
+   	 	inExerDetails = new Intent(getActivity(), ExerDetail_Activity.class);
    	 	
         //opening database
    	 	db = (new DBHelper_activity(getActivity()));
@@ -96,7 +102,7 @@ public class Days_Fragment extends SherlockFragment{
     		@Override
     		public void onItemClick(AdapterView<?> parent, View view, int position,
     				long id) {
-
+    			startActivity(inExerDetails);
     		}
       	  
         };
@@ -119,10 +125,10 @@ public class Days_Fragment extends SherlockFragment{
         };
         
         //setting up adapter
-        //setting up adapter
         lvDaysAdapter = new DayArrayAdapter(getActivity(),Days);
+        
         //setting click listener, long click listener, and adapter to the listview
-        //lvDays.setOnItemClickListener(lvDaysListener);
+        lvDays.setOnItemClickListener(lvDaysListener);
         lvDays.setOnItemLongClickListener(lvDaysLongListener);
         lvDays.setAdapter(lvDaysAdapter);
         

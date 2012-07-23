@@ -26,6 +26,7 @@
         <activity android:name="Days_Activity"
         android:uiOptions="splitActionBarWhenNarrow">
         </activity>
+        <activity android:name="ExerDetail_Activity"></activity>
     </application>
 
 </manifest>
