@@ -86,11 +86,9 @@ public class Programs_Fragment extends SherlockFragment {
    	 	//assigning listview to listview widget
    	 	lvPrograms = (ListView)vPrograms.findViewById(R.id.lvPrograms);
    	 	
-        //opening database
+        //declearing database helper
         db = (new DBHelper_activity(getActivity()));
-        
-        //building cursor
-        //cPrograms = db.rawQuery("SELECT _id, programName, isEditable, timesCompleted FROM ProgramKey", null);
+
         //building list of programs
         List<Program> Programs = db.getAllPrograms();
 

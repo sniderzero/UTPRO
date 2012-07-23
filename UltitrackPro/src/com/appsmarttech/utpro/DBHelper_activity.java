@@ -27,12 +27,19 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     
     //table names
     private static final String TABLE_PROGRAMS = "ProgramKey";
+    private static final String TABLE_DAYORDER = "DayOrder";
     
     //program table field names
     private static final String KEY_ID = "_id";
     private static final String KEY_PROG_NAME = "programName";
     private static final String KEY_EDITABLE = "isEditable";
     private static final String KEY_TIMES_COMPLETED = "timesCompleted";
+    private static final String KEY_PROG_ID = "programID";
+    private static final String KEY_DAY_ID = "dayID";
+    private static final String KEY_WEEK_NUM = "weekNumber";
+    private static final String KEY_DAY_NUM = "dayNumber";
+    private static final String KEY_DAY_COMPLETED = "dayCompleted";
+    private static final String KEY_DAY_NAME = "dayName";
  
     /**
      * Constructor
@@ -196,7 +203,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         return Program;
     }
  
-    // Getting All Contacts
+    // Getting All Programs
     public List<Program> getAllPrograms() {
         List<Program> programList = new ArrayList<Program>();
         // Select All Query
@@ -254,6 +261,78 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         return cursor.getCount();
     }
  
-
+	/**
+     * All CRUD(Create, Read, Update, Delete) Operations for Days
+     */
+ 
+ 
+    // Getting a single Day from the Day Order Table joined on the Day Key table
+    Day getDay(int dayID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+ 
+        Cursor cursor = db.rawQuery("SELECT DayOrder._id, DayOrder.programID, DayOrder.dayID, DayOrder.dayCompleted, " +
+        		"DayKey.dayName, DayOrder.dayNumber, DayOrder.weekNumber, DayKey.type FROM DayOrder JOIN DayKey ON " +
+        		"DayOrder.dayID=DayKey._id WHERE dayID = " + dayID, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+ 
+        Day Day = new Day(Integer.parseInt(cursor.getString(0)), cursor.getString(4),cursor.getInt(7), cursor.getInt(3), 
+        cursor.getInt(2), cursor.getInt(6), cursor.getInt(5));
+        
+        cursor.close();
+        db.close();
+        // return Day
+        return Day;
+    }
+ 
+    // Getting All Days for a certain Program
+    public List<Day> getAllProgramDays(int programID) {
+        List<Day> DayList = new ArrayList<Day>();
+ 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT DayOrder._id, DayOrder.programID, DayOrder.dayID, DayOrder.dayCompleted, " +
+        		"DayKey.dayName, DayOrder.dayNumber, DayOrder.weekNumber, DayKey.type FROM DayOrder JOIN DayKey ON " +
+        		"DayOrder.dayID=DayKey._id WHERE programID = " + programID, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Day Day = new Day();
+                Day.setID(Integer.parseInt(cursor.getString(0)));
+                Day.setName(cursor.getString(4));
+                Day.setType(cursor.getInt(7));
+                Day.setCompleted(cursor.getInt(3));
+                Day.setDayID(cursor.getInt(2));
+                Day.setWeekNumber(cursor.getInt(6));
+                Day.setDayNumber(cursor.getInt(5));
+                // Adding Day to list
+                DayList.add(Day);
+            } while (cursor.moveToNext());
+        }
+ 		
+ 		cursor.close();
+ 		db.close();
+        // return Day list
+        return DayList;
+    }
+ 
+    // Mark a Day Complete or skipped
+    public void dayCompleteSkipped(int iStatus, int _id) { //iStatus is 1 for complete 2 for skipped, _id is the _id in the dayOrder table
+        SQLiteDatabase db = this.getWritableDatabase();
+ 
+        db.execSQL("UPDATE dayOrder SET dayCompleted=" + iStatus + " WHERE _id=" + _id);
+        
+        db.close();
+    }
+ 
+    // Clear Program Progress
+    public void progClearFlags(int programID) { 
+        SQLiteDatabase db = this.getWritableDatabase();
+ 
+        db.execSQL("UPDATE dayOrder SET dayCompleted= 0  WHERE programID=" + programID);
+        
+        db.close();
+    }
+    
  
 }
