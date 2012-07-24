@@ -16,6 +16,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	List<Exercise> Exercises;
 	int iDayID;
 	DBHelper_activity db;
+	Exercise eFirstExercise;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -54,6 +55,8 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
             String log = "Id: "+cn.getID()+" ,Name: " + cn.getName();
                 // Writing Contacts to log
         Log.d("Exercises: ", log);
+        
+        eFirstExercise = Exercises.get(0);
         }
 
     	
@@ -70,6 +73,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		if(tab.getPosition() == 0){
 			RepDetail_Fragment fRepDetail = new RepDetail_Fragment();
 			ft.replace(android.R.id.content, fRepDetail);
+			
 		}
 	}
 
