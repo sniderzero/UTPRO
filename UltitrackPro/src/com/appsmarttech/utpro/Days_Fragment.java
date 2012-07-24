@@ -1,5 +1,6 @@
 package com.appsmarttech.utpro;
 
+import java.io.Serializable;
 import java.util.List;
 
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
+
 public class Days_Fragment extends SherlockFragment{
 	
 	//Declarations
@@ -49,6 +52,7 @@ public class Days_Fragment extends SherlockFragment{
 	Day dSelected;
 	ListAdapter lvDaysAdapter;
 	List<Day> Days;
+	List<Exercise> Exercises;
 	Intent inExerDetails;
 	
 	
@@ -102,6 +106,11 @@ public class Days_Fragment extends SherlockFragment{
     		@Override
     		public void onItemClick(AdapterView<?> parent, View view, int position,
     				long id) {
+    			//grabbing the selected day object
+    			dSelected = (Day) (lvDays.getItemAtPosition(position));
+    			//putting the dayID of the selected day in a bundle to send to the next activity
+    			inExerDetails.putExtra("DAY_ID", dSelected.getDayID());
+    			//launching the exercise details activity
     			startActivity(inExerDetails);
     		}
       	  

@@ -334,5 +334,53 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         db.close();
     }
     
+ // Getting All Exercises for a certain day
+    public List<Exercise> getAllDayExercises(int dayID) {
+        List<Exercise> ExerciseList = new ArrayList<Exercise>();
+ 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+	Cursor cursor = db.rawQuery("SELECT ExerOrder._id, ExerOrder.dayID, ExerOrder.exerOrder, ExerOrder.exerID, ExerOrder.exerCompleted, " +
+	"ExerKey.exerName, ExerKey.exerType FROM ExerOrder JOIN ExerKey ON ExerKey.exerID = ExerOrder.exerID WHERE ExerOrder.dayID = " + dayID, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Exercise Exercise = new Exercise();
+                Exercise.setID(Integer.parseInt(cursor.getString(0)));
+                Exercise.setName(cursor.getString(5));
+                Exercise.setType(cursor.getInt(6));
+                Exercise.setExerCompleted(cursor.getInt(4));
+                Exercise.setExerOrder(cursor.getInt(2));
+                Exercise.setExerID(cursor.getInt(3));
+
+                // Adding Day to list
+                ExerciseList.add(Exercise);
+            } while (cursor.moveToNext());
+        }
+ 
+  cursor.close();
+  db.close();
+        // return Exercise list
+        return ExerciseList;
+    }
+
+    // Mark an Exercise Complete or skipped
+    public void exerciseCompleteSkipped(int iStatus, int _id) { //iStatus is 1 for complete 2 for skipped, _id is the _id in the exerciseOrder table
+        SQLiteDatabase db = this.getWritableDatabase();
+ 
+        db.execSQL("UPDATE ExerOrder SET exerCompleted=" + iStatus + " WHERE _id=" + _id);
+        
+        db.close();
+    }
+
+    // Clear Day Progress
+    public void dayClearFlags(int dayID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+ 
+        db.execSQL("UPDATE ExerOrder SET exerCompleted= 0 WHERE exerCompleted != null && dayID=" + dayID);
+        
+        db.close();
+    }
  
 }
