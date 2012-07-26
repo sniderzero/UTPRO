@@ -24,14 +24,14 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class RepDetail_Fragment extends SherlockFragment{
 	Calendar cDate;
-	Button bDate , bPlusRep;
+	Button bDate , bPlusRep, bMinusRep;
 	DBHelper_activity db;
 	int iDayID, iSize, e, iReps;
 	List<Exercise> Exercises;
 	Menu mnuActionBar;
 	MenuItem miSaveNext;
 	EditText etRep, etWeight, etNotes;
-	OnClickListener bPlusRepListener;
+	OnClickListener bPlusListener, bMinusListener;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -41,6 +41,7 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	//assigning widgets
    	 	bDate = (Button)vExercises.findViewById(R.id.bDate);
    	 	bPlusRep = (Button)vExercises.findViewById(R.id.bPlusRep);
+   	 	bMinusRep = (Button)vExercises.findViewById(R.id.bMinusRep);
    	 	etRep = (EditText)vExercises.findViewById(R.id.etRep);
    	 	etWeight = (EditText)vExercises.findViewById(R.id.etWeight);
    	 	etNotes = (EditText)vExercises.findViewById(R.id.etNotes);
@@ -63,18 +64,32 @@ public class RepDetail_Fragment extends SherlockFragment{
         //setting title to first exercise name
         getActivity().setTitle(Exercises.get(e).getName());
         //building onclick listeners
-        bPlusRep.setOnClickListener(new OnClickListener() {
+        
+        
+        bPlusListener = new OnClickListener() {
 
 
 			@Override
 			public void onClick(View vExercises) {
-				onPlusReps();
+				onPlusRep();
 				
 			}
       	  
-        });
-		
+        };
         
+        bMinusListener = new OnClickListener() {
+
+
+			@Override
+			public void onClick(View vExercises) {
+				onMinusRep();
+				
+			}
+      	  
+        };
+		
+        bPlusRep.setOnClickListener(bPlusListener);
+        bMinusRep.setOnClickListener(bMinusListener);
 	
    	 	return vExercises;
 	}
@@ -131,7 +146,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	}
 	
 	//actions when user clicks the "+" button for reps
-	public void onPlusReps(){
+	public void onPlusRep(){
 		int iLen = etRep.length();
 		if(iLen <=0){//checking if the reps edit box is null
 			iReps = 0; //if it is make iReps 0
@@ -143,6 +158,26 @@ public class RepDetail_Fragment extends SherlockFragment{
 		//then add one to iReps and put that value in the edit box
 		iReps = iReps +1;
 		etRep.setText(String.valueOf(iReps));
+	}
+	
+	public void onMinusRep(){
+		int iLen = etRep.length();
+		if(iLen <=0){//checking if the reps edit box is null
+			
+		}
+		else
+		{
+			iReps = Integer.parseInt(etRep.getText().toString());
+			if(iReps == 0){
+				
+			}
+			else{
+			iReps = iReps -1;
+			etRep.setText(String.valueOf(iReps));
+			}
+		}
+		//then add one to iReps and put that value in the edit box
+		
 	}
 	
 	   //creating the actionbar
