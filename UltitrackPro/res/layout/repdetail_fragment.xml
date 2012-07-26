@@ -4,49 +4,12 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <Button
-            android:id="@+id/bDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="@string/btn_Date" />
-
-        <LinearLayout
-            android:id="@+id/llhNav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/bDate" >
-
-            <Button
-                android:id="@+id/bPrevious"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_Prev" />
-
-            <Button
-                android:id="@+id/bSkip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_Skip" />
-
-            <Button
-                android:id="@+id/bSave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/btn_Save" />
-        </LinearLayout>
-
         <LinearLayout
             android:id="@+id/llhRep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/llhNav" >
+            android:layout_below="@+id/llhHeader" >
 
             <TextView
                 android:id="@+id/tvRep"
@@ -66,7 +29,6 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
                 android:inputType="number" >
 
                 <requestFocus />
@@ -75,7 +37,7 @@
             <Button
                 android:id="@+id/bPlusRep"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="wrap_content" 
                 android:text="@string/sPlusSign" />
 
         </LinearLayout>
@@ -134,25 +96,40 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
-
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/etNotes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/llhBands"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:hint="@string/sNotesHint"
-            android:inputType="textMultiLine" />
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true" >
 
-        <include
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/llhHeader"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/etNotes"
-            layout="@layout/part_historylist" />
+            android:layout_alignParentTop="true" >
+
+            <Button
+                android:id="@+id/bDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_Date" />
+
+            <EditText
+                android:id="@+id/etNotes"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/sNotesHint"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
 
     </RelativeLayout>

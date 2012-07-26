@@ -1,6 +1,5 @@
 package com.appsmarttech.utpro;
 
-import java.io.Serializable;
 import java.util.List;
 
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

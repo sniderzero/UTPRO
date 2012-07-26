@@ -27,7 +27,8 @@
         android:uiOptions="splitActionBarWhenNarrow">
         </activity>
         <activity android:name="ExerDetail_Activity"
-        android:uiOptions="splitActionBarWhenNarrow">
+        android:uiOptions="splitActionBarWhenNarrow"
+        >
         </activity>
     </application>
 

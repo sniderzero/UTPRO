@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -43,21 +42,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	//adding the tabs to the action bar
     	getSupportActionBar().addTab(tWorkout);
     	getSupportActionBar().addTab(tHistory);
-    	
-    	//declaring db helper class
-   	 	db = (new DBHelper_activity(this));
-    	//grabbing the DayID passed by the day list activity
-    	iDayID = this.getIntent().getIntExtra("DAY_ID", 0);
-    	//creating a list of exercises based on the dayID
-    	Exercises = db.getAllDayExercises(iDayID);
-    	//for testing purposes pushing them all to the log
-        for (Exercise cn : Exercises) {
-            String log = "Id: "+cn.getID()+" ,Name: " + cn.getName();
-                // Writing Contacts to log
-        Log.d("Exercises: ", log);
-        
-        eFirstExercise = Exercises.get(0);
-        }
+    
 
     	
     }
