@@ -3,35 +3,30 @@ package com.appsmarttech.utpro;
 import java.util.Calendar;
 import java.util.List;
 
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class RepDetail_Fragment extends SherlockFragment{
 	Calendar cDate;
-	Button bDate , bPlusRep, bMinusRep;
+	Button bDate , bPlusRep, bMinusRep, bPlusWeight, bMinusWeight;
 	DBHelper_activity db;
-	int iDayID, iSize, e, iReps;
+	int iDayID, iSize, e, iReps, iWeight;
 	List<Exercise> Exercises;
 	Menu mnuActionBar;
 	MenuItem miSaveNext;
 	EditText etRep, etWeight, etNotes;
-	OnClickListener bPlusListener, bMinusListener;
+	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -42,6 +37,8 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	bDate = (Button)vExercises.findViewById(R.id.bDate);
    	 	bPlusRep = (Button)vExercises.findViewById(R.id.bPlusRep);
    	 	bMinusRep = (Button)vExercises.findViewById(R.id.bMinusRep);
+   	 	bPlusWeight = (Button)vExercises.findViewById(R.id.bPlusWeight);
+   	 	bMinusWeight = (Button)vExercises.findViewById(R.id.bMinusWeight);
    	 	etRep = (EditText)vExercises.findViewById(R.id.etRep);
    	 	etWeight = (EditText)vExercises.findViewById(R.id.etWeight);
    	 	etNotes = (EditText)vExercises.findViewById(R.id.etNotes);
@@ -87,9 +84,33 @@ public class RepDetail_Fragment extends SherlockFragment{
 			}
       	  
         };
+        
+        bPlusWeightListener = new OnClickListener() {
+
+
+ 			@Override
+ 			public void onClick(View vExercises) {
+ 				onPlusWeight();
+ 				
+ 			}
+       	  
+         };
+         
+         bMinusWeightListener = new OnClickListener() {
+
+
+ 			@Override
+ 			public void onClick(View vExercises) {
+ 				onMinusWeight();
+ 				
+ 			}
+       	  
+         };
 		
         bPlusRep.setOnClickListener(bPlusListener);
         bMinusRep.setOnClickListener(bMinusListener);
+        bPlusWeight.setOnClickListener(bPlusWeightListener);
+        bMinusWeight.setOnClickListener(bMinusWeightListener);
 	
    	 	return vExercises;
 	}
@@ -131,11 +152,14 @@ public class RepDetail_Fragment extends SherlockFragment{
 		{
 		e=e+1;
 		getActivity().setTitle(Exercises.get(e).getName());
+			if(e==iSize)
+			{
+			miSaveNext.setTitle("Done");
+			}
 		}
 		else
 		{
-			Toast.makeText(getActivity(), "You're at the end", Toast.LENGTH_SHORT)
-			.show();
+			onDone();
 		}
 	}
 	
@@ -176,8 +200,38 @@ public class RepDetail_Fragment extends SherlockFragment{
 			etRep.setText(String.valueOf(iReps));
 			}
 		}
-		//then add one to iReps and put that value in the edit box
+	}
+		//actions when user clicks the "+" button for reps
+		public void onPlusWeight(){
+			int iLen = etWeight.length();
+			if(iLen <=0){//checking if the reps edit box is null
+				iWeight = 0; //if it is make iReps 0
+			}
+			else
+			{
+				iWeight = Integer.parseInt(etWeight.getText().toString());
+						}
+			//then add one to iReps and put that value in the edit box
+			iWeight = iWeight +1;
+			etWeight.setText(String.valueOf(iWeight));
+		}
 		
+		public void onMinusWeight(){
+			int iLen = etWeight.length();
+			if(iLen <=0){//checking if the reps edit box is null
+				
+			}
+			else
+			{
+				iWeight = Integer.parseInt(etWeight.getText().toString());
+				if(iWeight == 0){
+					
+				}
+				else{
+				iWeight = iWeight -1;
+				etWeight.setText(String.valueOf(iWeight));
+				}
+			}
 	}
 	
 	   //creating the actionbar
