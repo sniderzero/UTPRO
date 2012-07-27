@@ -144,7 +144,7 @@ return this.sNotes;
 }
 
 // setting Notes
-public void setID(String sNotes){
+public void setNotes(String sNotes){
 this.sNotes = sNotes;
 }
 

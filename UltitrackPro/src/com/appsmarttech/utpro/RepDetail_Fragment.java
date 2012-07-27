@@ -169,6 +169,16 @@ public class RepDetail_Fragment extends SherlockFragment{
 		.show();
 	}
 	
+	//actions when the user hits save/next
+	public void onSave(){
+		int tExerID = Exercises.get(e).getExerID();
+		int tWeight = Integer.parseInt(etWeight.getText().toString());
+		int tRep = Integer.parseInt(etRep.getText().toString());
+		String tDate = bDate.getText().toString();
+		String tNotes = etNotes.getText().toString();
+		db.saveStat(1, tExerID, tWeight, tRep, 0, 0, tDate, tNotes);
+	}
+	
 	//actions when user clicks the "+" button for reps
 	public void onPlusRep(){
 		int iLen = etRep.length();
@@ -252,6 +262,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 					onDone();
 				}
 				else{
+					onSave();
 					onNext();
 				}
 				

@@ -382,5 +382,104 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         
         db.close();
     }
+    
+ // Getting All Stats for a certain exerciseID
+    public List<Stat> getExerciseStats(int iExerID) {
+        List<Stat> StatList = new ArrayList<Stat>();
+ 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
+	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExeryKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
+	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC", null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Stat Stat = new Stat();
+                Stat.setID(cursor.getInt(0));
+                Stat.setUserID(cursor.getInt(1));
+                Stat.setExerciseID(cursor.getInt(2));
+                Stat.setWeight(cursor.getInt(3));
+                Stat.setReps(cursor.getInt(4));
+                Stat.setBandID(cursor.getInt(5));
+		Stat.setTime(cursor.getInt(6));
+		Stat.setDate(cursor.getString(7));
+		Stat.setNotes(cursor.getString(8));
+		Stat.setType(cursor.getInt(9));
+
+                // Adding Day to list
+                StatList.add(Stat);
+            } while (cursor.moveToNext());
+        }
+ 
+  	cursor.close();
+  	db.close();
+        // return Stat list
+        return StatList;
+    }
+
+  // Getting All Stats for the last day
+    public List<Stat> getDayStats() {
+        List<Stat> StatList = new ArrayList<Stat>();
+ 
+        SQLiteDatabase db = this.getWritableDatabase();
+	
+	//building cursor to determin last date
+	Cursor dcursor = db.rawQuery("SELECT _id, date FROM UserStats ORDER BY date DESC",null);
+	
+	dcursor.moveToFirst();
+	
+	String dLast = dcursor.getString(1);
+	
+	//building cursor based on last date
+	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
+	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExeryKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
+	" WHERE UserStats.date = " + dLast, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Stat Stat = new Stat();
+                Stat.setID(cursor.getInt(0));
+                Stat.setUserID(cursor.getInt(1));
+                Stat.setExerciseID(cursor.getInt(2));
+                Stat.setWeight(cursor.getInt(3));
+                Stat.setReps(cursor.getInt(4));
+                Stat.setBandID(cursor.getInt(5));
+		Stat.setTime(cursor.getInt(6));
+		Stat.setDate(cursor.getString(7));
+		Stat.setNotes(cursor.getString(8));
+		Stat.setType(cursor.getInt(9));
+
+                // Adding Day to list
+                StatList.add(Stat);
+            } while (cursor.moveToNext());
+        }
+ 
+  	cursor.close();
+  	db.close();
+        // return Stat list
+        return StatList;
+    }
+
+    // Update a Stat - when the user makes a change to a history item
+    public void updateUserStat(int iWeight, int iReps, int iBandID, int iTime, String sDate, String sNotes, int _id) { 
+        SQLiteDatabase db = this.getWritableDatabase();
+ 
+        db.execSQL("UPDATE userStats SET weight=" + iWeight + ", reps= " +  iReps + ", bandID= " + iBandID + ",time= " + 
+	iTime + ",date= " + "'" + sDate + "'" + ",notes=" + "'" + sNotes + "'" + " WHERE _id=" + _id);
+        
+        db.close();
+    }
+
+//Save a stat - when user presses save/next
+public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, int iTime, String sDate, String sNotes){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+	db.execSQL("INSERT INTO userStats (userID, exerID, weight, reps, bandID, time, date, notes) VALUES(" + 
+	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + iTime + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" + ")");
+}
+
  
 }
