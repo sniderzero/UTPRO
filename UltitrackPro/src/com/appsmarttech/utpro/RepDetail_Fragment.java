@@ -8,7 +8,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -261,6 +260,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 			//getting the stats for the current exercise
 			Stats = db.getExerciseStats(Exercises.get(e).getExerID());
 			int s = Stats.size() -1 ;
+			//setting the appropriate fields to the last user stat
 			etRep.setText(String.valueOf(Stats.get(s).getReps()));
 			etWeight.setText(String.valueOf(Stats.get(s).getWeight()));
 			etNotes.setText(Stats.get(s).getNotes());
@@ -296,6 +296,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 				break;
 			case R.id.miSkip:
 				onSkip();
+				getLastStat();
 				break;
 			default:
 				break;

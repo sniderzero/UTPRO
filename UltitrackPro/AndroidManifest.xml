@@ -15,11 +15,7 @@
             android:name=".main_activity"
             android:uiOptions="splitActionBarWhenNarrow"
              >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="Programs_Activity"
         android:uiOptions="splitActionBarWhenNarrow"></activity>
@@ -29,6 +25,13 @@
         <activity android:name="ExerDetail_Activity"
         android:uiOptions="splitActionBarWhenNarrow"
         >
+        </activity>
+        <activity android:name="Splash_Activity">
+                        <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
