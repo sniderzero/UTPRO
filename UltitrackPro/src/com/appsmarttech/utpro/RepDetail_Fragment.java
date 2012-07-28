@@ -7,8 +7,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +23,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	DBHelper_activity db;
 	int iDayID, iSize, e, iReps, iWeight;
 	List<Exercise> Exercises;
+	List<Stat> Stats;
 	Menu mnuActionBar;
 	MenuItem miSaveNext;
 	EditText etRep, etWeight, etNotes;
@@ -45,24 +46,35 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	
    	 	//setting current date to the date select button
    	 	bDate.setText(DateHelper.getDate());
+   	 	
    	 	//setting variable of e to 0 for exercise navigation
    	 	e=0;
+   	 	
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
+   	 	
+   	 	//decalring savenext menuitem so it can be manipulated
    	 	miSaveNext = (MenuItem) mnuActionBar.findItem(R.id.miSaveNext);
-    	//declaring db helper class
+    	
+   	 	//declaring db helper class
    	 	db = (new DBHelper_activity(getActivity()));
-    	//grabbing the DayID passed by the day list activity
+    	
+   	 	//grabbing the DayID passed by the day list activity
     	iDayID = getActivity().getIntent().getIntExtra("DAY_ID", 0);
+    	
     	//creating a list of exercises based on the dayID
     	Exercises = db.getAllDayExercises(iDayID);
+    	
     	//getting the count of exercise array items
     	iSize = (Exercises.size() - 1);
-        //setting title to first exercise name
+        
+    	//setting title to first exercise name
         getActivity().setTitle(Exercises.get(e).getName());
+        
+        //grabbing last stats
+        getLastStat();
+        
         //building onclick listeners
-        
-        
         bPlusListener = new OnClickListener() {
 
 
@@ -243,6 +255,16 @@ public class RepDetail_Fragment extends SherlockFragment{
 				}
 			}
 	}
+		
+		//method for getting the last exercise stats
+		public void getLastStat(){
+			//getting the stats for the current exercise
+			Stats = db.getExerciseStats(Exercises.get(e).getExerID());
+			int s = Stats.size() -1 ;
+			etRep.setText(String.valueOf(Stats.get(s).getReps()));
+			etWeight.setText(String.valueOf(Stats.get(s).getWeight()));
+			etNotes.setText(Stats.get(s).getNotes());
+		}
 	
 	   //creating the actionbar
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
@@ -264,11 +286,13 @@ public class RepDetail_Fragment extends SherlockFragment{
 				else{
 					onSave();
 					onNext();
+					getLastStat();
 				}
 				
 				break;
 			case R.id.miPrev:
 				onPrev();
+				getLastStat();
 				break;
 			case R.id.miSkip:
 				onSkip();

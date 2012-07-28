@@ -390,8 +390,8 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
 	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
-	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExeryKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
-	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC", null);
+	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
+	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date ASC", null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -403,10 +403,10 @@ public class DBHelper_activity extends SQLiteOpenHelper{
                 Stat.setWeight(cursor.getInt(3));
                 Stat.setReps(cursor.getInt(4));
                 Stat.setBandID(cursor.getInt(5));
-		Stat.setTime(cursor.getInt(6));
-		Stat.setDate(cursor.getString(7));
-		Stat.setNotes(cursor.getString(8));
-		Stat.setType(cursor.getInt(9));
+                Stat.setTime(cursor.getInt(6));
+                Stat.setDate(cursor.getString(7));
+                Stat.setNotes(cursor.getString(8));
+                Stat.setType(cursor.getInt(9));
 
                 // Adding Day to list
                 StatList.add(Stat);
@@ -434,7 +434,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
 	
 	//building cursor based on last date
 	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
-	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExeryKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
+	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
 	" WHERE UserStats.date = " + dLast, null);
  
         // looping through all rows and adding to list
@@ -447,10 +447,10 @@ public class DBHelper_activity extends SQLiteOpenHelper{
                 Stat.setWeight(cursor.getInt(3));
                 Stat.setReps(cursor.getInt(4));
                 Stat.setBandID(cursor.getInt(5));
-		Stat.setTime(cursor.getInt(6));
-		Stat.setDate(cursor.getString(7));
-		Stat.setNotes(cursor.getString(8));
-		Stat.setType(cursor.getInt(9));
+                Stat.setTime(cursor.getInt(6));
+                Stat.setDate(cursor.getString(7));
+                Stat.setNotes(cursor.getString(8));
+                Stat.setType(cursor.getInt(9));
 
                 // Adding Day to list
                 StatList.add(Stat);

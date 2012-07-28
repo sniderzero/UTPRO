@@ -63,11 +63,5 @@
             <requestFocus />
         </EditText>
 
-        <include
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/etNotes"
-            layout="@layout/part_historylist" />
 
     </RelativeLayout>
