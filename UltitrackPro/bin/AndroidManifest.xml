@@ -26,7 +26,7 @@
         android:uiOptions="splitActionBarWhenNarrow"
         >
         </activity>
-        <activity android:name="Splash_Activity">
+        <activity android:name="Splash_Activity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
                         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
