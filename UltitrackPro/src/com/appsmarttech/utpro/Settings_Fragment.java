@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class Main_Fragment extends SherlockFragment {
+public class Settings_Fragment extends SherlockFragment {
 	
 	//Declarations
 	DBHelper_activity db;
@@ -25,7 +25,7 @@ public class Main_Fragment extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-   	 	View vMain = inflater.inflate(R.layout.fragment_main, container, false);
+   	 	View vMain = inflater.inflate(R.layout.settings_fragment, container, false);
    	 	
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
