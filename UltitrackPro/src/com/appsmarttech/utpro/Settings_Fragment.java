@@ -30,14 +30,6 @@ public class Settings_Fragment extends SherlockFragment {
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
    	 	
-   	 	//copying the shipped database if it's not already there
-        db = new DBHelper_activity(getActivity());
-        try {
-			db.createDataBase();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         //declare buttons
         bProgramList = (Button) vMain.findViewById(R.id.button2);
         
@@ -56,7 +48,7 @@ public class Settings_Fragment extends SherlockFragment {
     
     //creating the options menu - actionbar
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-		inflater.inflate(R.menu.main_actionbar, menu);
+		inflater.inflate(R.menu.settings_ab, menu);
 		
 		super.onCreateOptionsMenu(menu, inflater);
 		
@@ -65,11 +57,11 @@ public class Settings_Fragment extends SherlockFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.miCancel:
+		case R.id.miEmail:
 			Toast.makeText(getActivity(), "You Pressed Cancel - DICK", Toast.LENGTH_SHORT)
 					.show();
 			break;
-		case R.id.miMeasurements:
+		case R.id.miShare:
 			Toast.makeText(getActivity(), "You want to weight your fat ass", Toast.LENGTH_SHORT)
 					.show();
 			break;

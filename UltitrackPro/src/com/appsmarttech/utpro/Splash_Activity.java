@@ -1,5 +1,6 @@
 package com.appsmarttech.utpro;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +17,7 @@ public class Splash_Activity extends Activity {
 	Editor Editor;
 	boolean bFirstLaunch;
 	int iTotalLaunch;
+	DBHelper_activity db;
 	
 	private long splashDelay = 1000; //2 seconds
 
@@ -38,7 +40,14 @@ public class Splash_Activity extends Activity {
         Editor.putString("kNagScreen", String.valueOf(iTotalLaunch));
         //committing edit
         Editor.commit();
-        
+   	 	//copying the shipped database if it's not already there
+        db = new DBHelper_activity(this);
+        try {
+			db.createDataBase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         
         TimerTask task = new TimerTask()

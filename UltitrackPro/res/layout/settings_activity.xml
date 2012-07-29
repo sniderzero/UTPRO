@@ -4,11 +4,11 @@
     android:layout_height="match_parent" >
 
     <fragment
-        android:name="com.appsmarttech.utpro.Main_Fragment"
+        android:name="com.appsmarttech.utpro.Settings_Fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/settings_fragment" />
 
 </RelativeLayout>

@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/miWeb"
+        android:title='website'
+        android:orderInCategory="100"
+        android:showAsAction="always"/>
+    <item android:id="@+id/miShare" android:showAsAction="always" android:title="@string/sShare"></item>
+    <item android:id="@+id/miEmail" android:title='Email' android:showAsAction="always"></item>
+
+</menu>
