@@ -7,6 +7,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +22,16 @@ public class RepDetail_Fragment extends SherlockFragment{
 	Calendar cDate;
 	Button bDate , bPlusRep, bMinusRep, bPlusWeight, bMinusWeight;
 	DBHelper_activity db;
-	int iDayID, iSize, e, iReps, iWeight;
+	int iDayID, iSize, e, ae, iReps, iWeight;
 	List<Exercise> Exercises;
 	List<Stat> Stats;
 	Menu mnuActionBar;
 	MenuItem miSaveNext;
 	EditText etRep, etWeight, etNotes;
 	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener;
+	updateEListener updateEListener;
+	String sDate, saDate;
+	Bundle bArgs;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -42,13 +47,23 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	etRep = (EditText)vExercises.findViewById(R.id.etRep);
    	 	etWeight = (EditText)vExercises.findViewById(R.id.etWeight);
    	 	etNotes = (EditText)vExercises.findViewById(R.id.etNotes);
-   	 	
+   	 	//grabbing arguments from the activity
+   	 	saDate = getArguments().getString("kDate");  //date
+   	 	ae = getArguments().getInt("kE");  //value of e
    	 	//setting current date to the date select button
+   	 	if(saDate == ""){
    	 	bDate.setText(DateHelper.getDate());
-   	 	
-   	 	//setting variable of e to 0 for exercise navigation
+   	 	}
+   	 	else{
+   	 		bDate.setText(saDate);
+   	 	}
+   	 	//setting variable of e for exercise navigation
+   	 	if( ae== -1){
    	 	e=0;
-   	 	
+   	 	}
+   	 	else{
+   	 		e=ae;
+   	 	}
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
    	 	
@@ -125,6 +140,13 @@ public class RepDetail_Fragment extends SherlockFragment{
 	
    	 	return vExercises;
 	}
+	
+	//declaring fragment listener for updating e in the activity
+	public interface updateEListener{
+	public void updateE(int e, String sDate);
+
+	}
+	
 	//actions when user hits save/next
 	public void onNext(){
 
@@ -185,9 +207,9 @@ public class RepDetail_Fragment extends SherlockFragment{
 		int tExerID = Exercises.get(e).getExerID();
 		int tWeight = Integer.parseInt(etWeight.getText().toString());
 		int tRep = Integer.parseInt(etRep.getText().toString());
-		String tDate = bDate.getText().toString();
+		sDate = bDate.getText().toString();
 		String tNotes = etNotes.getText().toString();
-		db.saveStat(1, tExerID, tWeight, tRep, 0, 0, tDate, tNotes);
+		db.saveStat(1, tExerID, tWeight, tRep, 0, 0, sDate, tNotes);
 	}
 	
 	//actions when user clicks the "+" button for reps
@@ -262,9 +284,9 @@ public class RepDetail_Fragment extends SherlockFragment{
 			int s = Stats.size() -1 ;
 			if (s > 0){
 			//setting the appropriate fields to the last user stat
-			etRep.setText(String.valueOf(Stats.get(s).getReps()));
-			etWeight.setText(String.valueOf(Stats.get(s).getWeight()));
-			etNotes.setText(Stats.get(s).getNotes());
+			etRep.setText(String.valueOf(Stats.get(0).getReps()));
+			etWeight.setText(String.valueOf(Stats.get(0).getWeight()));
+			etNotes.setText(Stats.get(0).getNotes());
 			}
 		}
 	
@@ -289,6 +311,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 					onSave();
 					onNext();
 					getLastStat();
+					updateEListener.updateE(e,sDate);
 				}
 				
 				break;
@@ -306,4 +329,16 @@ public class RepDetail_Fragment extends SherlockFragment{
 
 			return true;
 		}
+		
+		//attaching to the listener in the activity
+	    @Override
+	    public void onAttach(Activity activity) {
+	        super.onAttach(activity);
+	        try {
+	            updateEListener = (updateEListener) activity;
+	        } catch (ClassCastException e) {
+	            throw new ClassCastException(activity.toString()
+	                    + " must implement updateEListener");
+	        }
+	}
 }

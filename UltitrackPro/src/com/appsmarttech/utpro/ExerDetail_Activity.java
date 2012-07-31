@@ -9,13 +9,15 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.appsmarttech.utpro.RepDetail_Fragment.updateEListener;
 
-public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener {
+public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, updateEListener {
     
 	List<Exercise> Exercises;
-	int iDayID;
+	int iDayID, e;
 	DBHelper_activity db;
 	Exercise eFirstExercise;
+	String sDate;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -42,10 +44,15 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	//adding the tabs to the action bar
     	getSupportActionBar().addTab(tWorkout);
     	getSupportActionBar().addTab(tHistory);
+    	
+    	//initializine e and sDate
+    	e = -1;
+    	sDate = "";
     
 
     	
     }
+    
     
 
 	@Override
@@ -57,6 +64,10 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		toastText("tab " + String.valueOf(tab.getText()) + " clicked");
 		if(tab.getPosition() == 0){
 			RepDetail_Fragment fRepDetail = new RepDetail_Fragment();
+			Bundle bArgs = new Bundle();
+			bArgs.putInt("kE", e);
+			bArgs.putString("kDate", sDate);
+			fRepDetail.setArguments(bArgs);
 			ft.replace(android.R.id.content, fRepDetail);
 		}
 		if(tab.getPosition() == 1){
@@ -72,5 +83,16 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	private void toastText(String message){
 		Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 	}
+
+
+
+	@Override
+	public void updateE(int e, String sDate) {
+		this.e = e;
+		this.sDate = sDate;
+		
+	}
+
+
 
 }
