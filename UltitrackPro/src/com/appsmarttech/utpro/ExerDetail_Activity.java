@@ -24,7 +24,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
         setContentView(R.layout.exerdetail_activity);
         //declaring items about the action bar
         getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-    	getSupportActionBar().setDisplayUseLogoEnabled(false);
+    	getSupportActionBar().setDisplayUseLogoEnabled(true);
     	getSupportActionBar().setDisplayShowTitleEnabled(true);
     	getSupportActionBar().setDisplayShowHomeEnabled(true);
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,7 +58,10 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		if(tab.getPosition() == 0){
 			RepDetail_Fragment fRepDetail = new RepDetail_Fragment();
 			ft.replace(android.R.id.content, fRepDetail);
-			
+		}
+		if(tab.getPosition() == 1){
+			History_Fragment fHistory = new History_Fragment();
+			ft.replace(android.R.id.content, fHistory);
 		}
 	}
 
