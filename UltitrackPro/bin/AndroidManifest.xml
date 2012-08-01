@@ -33,6 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="Preferences_Activity" android:theme="@style/Theme.Sherlock.Light" android:label='Settings'></activity>
     </application>
 
 </manifest>

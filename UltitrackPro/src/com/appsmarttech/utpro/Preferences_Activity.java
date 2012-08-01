@@ -1,7 +1,82 @@
 package com.appsmarttech.utpro;
 
-import android.preference.PreferenceActivity;
+import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
-public class Preferences_Activity extends PreferenceActivity{
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.Toast;
 
+public class Preferences_Activity extends SherlockPreferenceActivity{
+	    @Override
+	    public boolean onCreateOptionsMenu(Menu menu) {
+	        //Used to put dark icons on light action bar
+	        
+
+	        menu.add("Share")
+	            .setIcon(R.drawable.ic_share)
+	            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+	        	
+
+	        menu.add("Email")
+	            .setIcon(R.drawable.ic_email)
+	            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+	        menu.add("WebPage")
+	            .setIcon(R.drawable.ic_website)
+	            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+	        return super.onCreateOptionsMenu(menu);
+	    }
+
+	    @Override
+	    protected void onCreate(Bundle savedInstanceState) {
+	        
+	        super.onCreate(savedInstanceState);
+
+	        addPreferencesFromResource(R.xml.utpro_preferences);
+	    }
+	
+	//setting the actions for the actionbar icons
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getTitle() == "Share")
+		{
+			shareApp();
+		}
+		if(item.getTitle() == "Email")
+		{
+			sendEmail();
+		}
+		if(item.getTitle() == "WebPage")
+		{
+			launchWebPage();
+		}
+
+
+		return true;
+	}
+	
+    public void sendEmail(){
+    	Intent intEmail = new Intent(android.content.Intent.ACTION_SEND);
+    	intEmail.setType("message/rfc822");
+    	intEmail.putExtra(android.content.Intent.EXTRA_EMAIL, "support@appsmarttech.com");
+    	intEmail.putExtra(android.content.Intent.EXTRA_SUBJECT, "UltiTrack 90 - Support");
+    	startActivity(intEmail);
+    }
+    
+    public void shareApp(){
+    	Intent intShare = new Intent(android.content.Intent.ACTION_SEND);
+    	intShare.setType("text/plain");
+    	intShare.putExtra(android.content.Intent.EXTRA_TEXT, "Check out UltiTrack 90, it's the shit!  http://www.ultitrack.net");
+    	startActivity(Intent.createChooser(intShare, "Share UltiTrack 90 :"));
+    }
+    
+    public void launchWebPage(){
+    	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+    	startActivity(browserIntent);
+    }
 }

@@ -81,7 +81,7 @@ public class Splash_Activity extends Activity {
     }
     
     public void goSettings(){  //launches settings screen
-    	Intent inSettings = new Intent(this,Settings_Activity.class);
+    	Intent inSettings = new Intent(this,Preferences_Activity.class);
     	startActivity(inSettings);
     }
     
