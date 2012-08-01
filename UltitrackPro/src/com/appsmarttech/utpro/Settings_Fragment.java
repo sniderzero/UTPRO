@@ -8,6 +8,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,12 +59,13 @@ public class Settings_Fragment extends SherlockFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.miEmail:
-			Toast.makeText(getActivity(), "You Pressed Cancel - DICK", Toast.LENGTH_SHORT)
-					.show();
+			sendEmail();
 			break;
 		case R.id.miShare:
-			Toast.makeText(getActivity(), "You want to weight your fat ass", Toast.LENGTH_SHORT)
-					.show();
+			shareApp();
+			break;
+		case R.id.miWeb:
+			launchWebPage();
 			break;
 
 		default:
@@ -80,5 +82,25 @@ public class Settings_Fragment extends SherlockFragment {
     	Intent in = new Intent(getActivity(), Programs_Activity.class);
     	startActivity(in);
     	
+    }
+    
+    public void sendEmail(){
+    	Intent intEmail = new Intent(android.content.Intent.ACTION_SEND);
+    	intEmail.setType("message/rfc822");
+    	intEmail.putExtra(android.content.Intent.EXTRA_EMAIL, "support@appsmarttech.com");
+    	intEmail.putExtra(android.content.Intent.EXTRA_SUBJECT, "UltiTrack 90 - Support");
+    	startActivity(intEmail);
+    }
+    
+    public void shareApp(){
+    	Intent intShare = new Intent(android.content.Intent.ACTION_SEND);
+    	intShare.setType("text/plain");
+    	intShare.putExtra(android.content.Intent.EXTRA_TEXT, "Check out UltiTrack 90, it's the shit!  http://www.ultitrack.net");
+    	startActivity(Intent.createChooser(intShare, "Share UltiTrack 90 :"));
+    }
+    
+    public void launchWebPage(){
+    	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+    	startActivity(browserIntent);
     }
 }

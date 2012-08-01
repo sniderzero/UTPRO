@@ -32,23 +32,16 @@ public class History_Fragment extends SherlockFragment{
    	 	db = (new DBHelper_activity(getActivity()));
    	 	//initialize listview widget
    	 	ListView lvHistory = (ListView)vHistory.findViewById(R.id.lvHistory);
+   	 	//grab exerID passed from the activity
+   	 	e = getArguments().getInt("kExerID");
    	 	//grabbing list of stats from exercise passed by activity 
-   	 	Stats = db.getExerciseStats(1); //using 1 for testing purposes
+   	 	Stats = db.getExerciseStats(e); //using 1 for testing purposes
    	 	//setting up adapter
         lvHistoryAdapter = new HistoryArrayAdapter(getActivity(),Stats);
    	 	//setting adapter to lvHistory
    	 	lvHistory.setAdapter(lvHistoryAdapter);
+
    	 	
-   	 	
-   	 	
-        for (Stat cn : Stats) {
-            String log = "Id: "+cn.getReps()+" ,Name: " + cn.getWeight() + " ,Editable: " + cn.getDate() +
-            		" time:" + cn.getTime() + " bandid " + cn.getBandID() + " notes: " +cn.getNotes();
-                // Writing Contacts to log
-        Log.d("Name: ", log);
-   	 	
-   	 	
-        }
    	 	return vHistory;
    	 	
 	}

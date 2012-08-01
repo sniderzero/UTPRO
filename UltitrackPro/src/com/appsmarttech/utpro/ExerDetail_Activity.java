@@ -14,7 +14,7 @@ import com.appsmarttech.utpro.RepDetail_Fragment.updateEListener;
 public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, updateEListener {
     
 	List<Exercise> Exercises;
-	int iDayID, e;
+	int iDayID, e, iExerID;
 	DBHelper_activity db;
 	Exercise eFirstExercise;
 	String sDate;
@@ -72,6 +72,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		}
 		if(tab.getPosition() == 1){
 			History_Fragment fHistory = new History_Fragment();
+			Bundle bArgs = new Bundle();
+			bArgs.putInt("kExerID", iExerID);
+			fHistory.setArguments(bArgs);
 			ft.replace(android.R.id.content, fHistory);
 		}
 	}
@@ -87,9 +90,10 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 
 
 	@Override
-	public void updateE(int e, String sDate) {
+	public void updateE(int e, String sDate, int iExerID) {
 		this.e = e;
 		this.sDate = sDate;
+		this.iExerID = iExerID;
 		
 	}
 

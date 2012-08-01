@@ -391,7 +391,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
 
 	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
 	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
-	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC", null);
+	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC", null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

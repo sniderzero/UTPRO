@@ -51,18 +51,15 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	saDate = getArguments().getString("kDate");  //date
    	 	ae = getArguments().getInt("kE");  //value of e
    	 	//setting current date to the date select button
-   	 	if(saDate == ""){
-   	 	bDate.setText(DateHelper.getDate());
-   	 	}
-   	 	else{
-   	 		bDate.setText(saDate);
-   	 	}
+
+   	 		bDate.setText(DateHelper.getDate());
+   	 	
    	 	//setting variable of e for exercise navigation
-   	 	if( ae== -1){
-   	 	e=0;
+   	 	if( ae == -1){
+   	 	e = 0;
    	 	}
    	 	else{
-   	 		e=ae;
+   	 		e = ae;
    	 	}
    	 	//telling it that it has an actionbar
    	 	setHasOptionsMenu(true);
@@ -137,13 +134,13 @@ public class RepDetail_Fragment extends SherlockFragment{
         bMinusRep.setOnClickListener(bMinusListener);
         bPlusWeight.setOnClickListener(bPlusWeightListener);
         bMinusWeight.setOnClickListener(bMinusWeightListener);
-	
+        updateEListener.updateE(e,sDate, Exercises.get(e).getExerID());
    	 	return vExercises;
 	}
 	
 	//declaring fragment listener for updating e in the activity
 	public interface updateEListener{
-	public void updateE(int e, String sDate);
+	public void updateE(int e, String sDate, int iExerID);
 
 	}
 	
@@ -311,17 +308,19 @@ public class RepDetail_Fragment extends SherlockFragment{
 					onSave();
 					onNext();
 					getLastStat();
-					updateEListener.updateE(e,sDate);
+					updateEListener.updateE(e,sDate, Exercises.get(e).getExerID());
 				}
 				
 				break;
 			case R.id.miPrev:
 				onPrev();
 				getLastStat();
+				updateEListener.updateE(e,sDate, Exercises.get(e).getExerID());
 				break;
 			case R.id.miSkip:
 				onSkip();
 				getLastStat();
+				updateEListener.updateE(e,sDate, Exercises.get(e).getExerID());
 				break;
 			default:
 				break;
