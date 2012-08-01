@@ -279,7 +279,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 			//getting the stats for the current exercise
 			Stats = db.getExerciseStats(Exercises.get(e).getExerID());
 			int s = Stats.size() -1 ;
-			if (s > 0){
+			if (s >= 0){
 			//setting the appropriate fields to the last user stat
 			etRep.setText(String.valueOf(Stats.get(0).getReps()));
 			etWeight.setText(String.valueOf(Stats.get(0).getWeight()));
