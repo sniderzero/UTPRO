@@ -46,8 +46,8 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	getSupportActionBar().addTab(tHistory);
     	
     	//initializine e and sDate
-    	e = -1;
-    	sDate = "";
+    	updateE(-1, "balls", -1);
+    	
     
 
     	
@@ -61,7 +61,6 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		toastText("tab " + String.valueOf(tab.getText()) + " clicked");
 		if(tab.getPosition() == 0){
 			RepDetail_Fragment fRepDetail = new RepDetail_Fragment();
 			Bundle bArgs = new Bundle();
@@ -82,12 +81,6 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}
-
-	private void toastText(String message){
-		Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-	}
-
-
 
 	@Override
 	public void updateE(int e, String sDate, int iExerID) {

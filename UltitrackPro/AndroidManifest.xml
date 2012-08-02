@@ -24,6 +24,7 @@
         </activity>
         <activity android:name="ExerDetail_Activity"
         android:uiOptions="splitActionBarWhenNarrow"
+        android:windowSoftInputMode="stateHidden"
         >
         </activity>
         <activity android:name="Splash_Activity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">

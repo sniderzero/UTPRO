@@ -6,13 +6,15 @@
 
 
 <PreferenceCategory android:title="Builtin Hide from USER"><EditTextPreference android:title="Active Program" android:key="kActiveProgram" android:summary="Stores the users active program" /><CheckBoxPreference android:key="kFirstLaunch" android:title="First Launch" android:summary="Stores the user state for first launch" /><EditTextPreference android:key="kNagScreen" android:title="Nag Screen" android:summary="Stores the number of runs so the user can be nagged to upgrade" /></PreferenceCategory><PreferenceCategory android:title="Real Settings">
-    <Preference android:key="kPrograms" android:title="Select Program"> 
+    <Preference android:key="kPrograms" android:title="Select Program" android:summary="Select a Program"> 
     <intent
      android:action="android.intent.action.VIEW"
      android:targetPackage="com.appsmarttech.utpro"
      android:targetClass="com.appsmarttech.utpro.Programs_Activity" />
         </Preference>
-    <ListPreference android:entries="@array/aryGender" android:title="Gender" android:key="kGender" android:entryValues="@array/aryValues" /><ListPreference android:entries="@array/aryKGLBS" android:title="Weight Type" android:summary="Pounds or Kilograms?" android:key="kWeightType" android:entryValues="@array/aryValues" /></PreferenceCategory>
+    <ListPreference android:entries="@array/aryGender" android:title="Gender" android:key="kGender" android:entryValues="@array/aryValues" android:summary="Penis or Vagina?"/><ListPreference android:entries="@array/aryKGLBS" android:title="Weight Type" android:summary="Pounds or Kilograms?" android:key="kWeightType" android:entryValues="@array/aryValues" android:dialogTitle="Pick your Poison"/>
+    <Preference android:key="kBands" android:title="Bands" android:summary="Choose a set or build your own"/>
+</PreferenceCategory>
 
 
 
