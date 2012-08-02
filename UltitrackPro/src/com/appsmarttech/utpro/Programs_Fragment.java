@@ -144,6 +144,8 @@ public class Programs_Fragment extends SherlockFragment {
 	 
 			View rowView = inflater.inflate(R.layout.programs_row, parent, false);
 			TextView tvProgramName = (TextView)rowView.findViewById(R.id.tvProgramName);
+			TextView tvComplete = (TextView)rowView.findViewById(R.id.tvComplete);
+			TextView tvTotal = (TextView)rowView.findViewById(R.id.tvTotal);
 	 
 			//grab current program
 			pSelected = getItem(position);
@@ -159,6 +161,12 @@ public class Programs_Fragment extends SherlockFragment {
 			else{
 				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.INVISIBLE);
 			}
+			//getting completed days and total days for the program
+			int[] aryCount = db.getDaysCount(iProgramID);
+			
+			tvComplete.setText(String.valueOf(aryCount[0]));
+			tvTotal.setText(String.valueOf(aryCount[1]));
+			
 
 			return rowView;
 		}

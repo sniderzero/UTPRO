@@ -19,8 +19,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginTop="12sp"
         android:text="@string/sHome"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/tvComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvProgramName"
+        android:layout_below="@+id/tvActive"
+        android:text="1"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvOf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvComplete"
+        android:layout_marginLeft="5sp"
+        android:layout_toRightOf="@+id/tvComplete"
+        android:text="@string/sOf"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvOf"
+        android:layout_alignBottom="@+id/tvOf"
+        android:layout_marginLeft="5sp"
+        android:layout_toRightOf="@+id/tvOf"
+        android:text="1"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvExercisesComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvTotal"
+        android:layout_alignBottom="@+id/tvTotal"
+        android:layout_marginLeft="5sp"
+        android:layout_toRightOf="@+id/tvTotal"
+        android:text="@string/sDaysCompleted"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

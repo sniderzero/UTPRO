@@ -334,6 +334,31 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         db.close();
     }
     
+    public int[] getDaysCount(int iProgramID){
+    	int[] aryCount;
+    	aryCount = new int[2];
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	//grabbing total count
+    	Cursor count = db.rawQuery("SELECT COUNT(*) FROM DayOrder WHERE programID = " + iProgramID, null);
+    	//moving to first record
+    	count.moveToFirst();
+    	//assigning total count to an int
+    	int iTotal = count.getInt(0);
+    	//closing cursor
+    	count.close();
+    	//grabbing completed count
+    	count = db.rawQuery("SELECT COUNT(*) FROM DayOrder WHERE programID = " + iProgramID + " AND dayCompleted != 0", null);
+    	//moving to first
+    	count.moveToFirst();
+    	//assigning completed to an int
+    	int iCompleted = count.getInt(0);
+
+    	aryCount[0] = iCompleted;
+    	aryCount[1] = iTotal;
+
+    	return aryCount;
+    	}
+    
  // Getting All Exercises for a certain day
     public List<Exercise> getAllDayExercises(int dayID) {
         List<Exercise> ExerciseList = new ArrayList<Exercise>();

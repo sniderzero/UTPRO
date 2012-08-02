@@ -51,5 +51,7 @@
     <string name="sPrevious">Previous</string>
     <string name="sSaveNext">Save/Next</string>
     <string name="sViewAll">View All</string>
+    <string name="sOf">of</string>
+    <string name="sDaysCompleted">Days Completed</string>
 
 </resources>
