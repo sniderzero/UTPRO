@@ -8,6 +8,8 @@ import com.actionbarsherlock.view.MenuItem;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 public class Preferences_Activity extends SherlockPreferenceActivity{
@@ -16,12 +18,12 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	        //Used to put dark icons on light action bar
 	        
 
-	        menu.add("Share")
+	        menu.add("Share UltiTrack 90")
 	            .setIcon(R.drawable.ic_share)
 	            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 	        	
 
-	        menu.add("Email")
+	        menu.add("Email Support")
 	            .setIcon(R.drawable.ic_email)
 	            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
@@ -36,18 +38,22 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	    protected void onCreate(Bundle savedInstanceState) {
 	        
 	        super.onCreate(savedInstanceState);
-
+	        //add preference file
 	        addPreferencesFromResource(R.xml.utpro_preferences);
+	        //declare the preference category hidden, and hide it from the user
+	        Preference pHiddenPreferences = findPreference("kHide");
+	        PreferenceScreen preferenceScreen = getPreferenceScreen();
+	        preferenceScreen.removePreference(pHiddenPreferences);
 	    }
 	
 	//setting the actions for the actionbar icons
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getTitle() == "Share")
+		if(item.getTitle() == "Share UltiTrack 90")
 		{
 			shareApp();
 		}
-		if(item.getTitle() == "Email")
+		if(item.getTitle() == "Email Support")
 		{
 			sendEmail();
 		}
