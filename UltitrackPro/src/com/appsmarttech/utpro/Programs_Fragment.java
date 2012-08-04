@@ -42,7 +42,7 @@ public class Programs_Fragment extends SherlockFragment {
 		OnItemClickListener lvProgramListener;
 		OnItemLongClickListener lvProgramLongListener;
 		Boolean bActionPresent;
-		Intent inDays;
+		Intent inDays, inDashboard;
 		ListAdapter lvProgramsAdapter;
 		Program pSelected;
 		
@@ -60,6 +60,7 @@ public class Programs_Fragment extends SherlockFragment {
         
         //declaring intents
         inDays = new Intent(getActivity(), Days_Activity.class);
+        inDashboard = new Intent(getActivity(), Preferences_Activity.class);
         
 
         //grabbing the active program from preferences
@@ -110,6 +111,8 @@ public class Programs_Fragment extends SherlockFragment {
     	        ePreferences.commit(); 
     	        //refreshing the listview
     	        lvPrograms.invalidateViews();
+    	        //going to list of days
+    	        startActivity(inDays);
     			
     		}
       	  
@@ -186,13 +189,7 @@ public class Programs_Fragment extends SherlockFragment {
 			switch (item.getItemId()) {
 			case R.id.miSettings:
 				//launch settings preference
-				Toast.makeText(getActivity(), "You called settings", Toast.LENGTH_SHORT)
-						.show();
-				break;
-
-			case R.id.miGetFit:
-				//launch days activity
-				startActivity(inDays);
+				startActivity(inDashboard);
 				break;
 				
 			default:

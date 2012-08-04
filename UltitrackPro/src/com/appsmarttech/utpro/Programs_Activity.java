@@ -11,7 +11,7 @@ public class Programs_Activity extends SherlockFragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //sets an transition animation
-        overridePendingTransition(R.anim.slidel2r, R.anim.slider2l);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         setContentView(R.layout.programs_activity);
         
     }
