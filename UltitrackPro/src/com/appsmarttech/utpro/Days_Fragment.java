@@ -104,12 +104,20 @@ public class Days_Fragment extends SherlockFragment{
     		@Override
     		public void onItemClick(AdapterView<?> parent, View view, int position,
     				long id) {
-    			//grabbing the selected day object
-    			dSelected = (Day) (lvDays.getItemAtPosition(position));
-    			//putting the dayID of the selected day in a bundle to send to the next activity
-    			inExerDetails.putExtra("DAY_ID", dSelected.getDayID());
-    			//launching the exercise details activity
-    			startActivity(inExerDetails);
+    			if(bActionPresent){  //if the action bar is up, just update the selected day
+    				//grabbing the selected item from lvPrograms
+        			dSelected = (Day) (lvDays.getItemAtPosition(position));
+        			mActionMode.setTitle(dSelected.getName());
+    			}
+    			else
+    			{
+    				//grabbing the selected day object
+        			dSelected = (Day) (lvDays.getItemAtPosition(position));
+        			//putting the dayID of the selected day in a bundle to send to the next activity
+        			inExerDetails.putExtra("DAY_ID", dSelected.getDayID());
+        			//launching the exercise details activity
+        			startActivity(inExerDetails);
+    			}
     		}
       	  
         };
