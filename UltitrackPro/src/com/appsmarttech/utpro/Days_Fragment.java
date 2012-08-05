@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -52,6 +53,7 @@ public class Days_Fragment extends SherlockFragment{
 	List<Day> Days;
 	List<Exercise> Exercises;
 	Intent inExerDetails;
+	CheckBox cbDays;
 	
 	
     @Override
@@ -59,6 +61,7 @@ public class Days_Fragment extends SherlockFragment{
         Bundle savedInstanceState) {
     	// Inflate the layout for this fragment
    	 	View vDays = inflater.inflate(R.layout.days_fragment, container, false);
+   	 	
    	 	
         //open preferences
         spPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -225,6 +228,12 @@ public class Days_Fragment extends SherlockFragment{
 				((BaseAdapter) lvDaysAdapter).notifyDataSetChanged();
 				break;
 				
+			case R.id.miSettings:
+				Intent inDashboard = new Intent(getActivity(), Preferences_Activity.class);
+				startActivity(inDashboard);
+				
+				break;
+				
 			default:
 				Toast.makeText(getActivity(), "You pressed some other shit", Toast.LENGTH_SHORT)
 				.show();
@@ -244,6 +253,7 @@ public class Days_Fragment extends SherlockFragment{
 				// Assumes that you have "contexual.xml" menu resources
 				inflater.inflate(R.menu.days_cab, menu);
 				mode.setTitle(sDayName);
+				
 				bActionPresent = true;
 				return true;
 			}

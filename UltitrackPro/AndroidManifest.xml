@@ -18,8 +18,7 @@
 
         </activity>
         <activity android:name="Programs_Activity"></activity>
-        <activity android:name="Days_Activity"
-        android:uiOptions="splitActionBarWhenNarrow">
+        <activity android:name="Days_Activity">
         </activity>
         <activity android:name="ExerDetail_Activity"
         android:uiOptions="splitActionBarWhenNarrow"
