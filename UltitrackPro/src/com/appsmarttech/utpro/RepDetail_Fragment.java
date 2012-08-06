@@ -52,8 +52,8 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	saDate = bArgs.getString("kDate");  //date
    	 	ae = bArgs.getInt("kE");  //value of e
    	 	//setting current date to the date select button
-   	 	bDate.setText(DateHelper.getDate());
-
+   	 	//bDate.setText(DateHelper.getDate());
+   	 	bDate.setText(saDate);
    	 	//setting variable of e for exercise navigation
    	 	if( ae == -1){
    	 	e = 0;

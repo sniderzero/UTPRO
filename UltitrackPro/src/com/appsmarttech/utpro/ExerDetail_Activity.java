@@ -46,11 +46,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	getSupportActionBar().addTab(tHistory);
     	
     	//initializine e and sDate
-    	updateE(-1, "balls", -1);
-    	
-    
-
-    	
+    	e = -1;
+    	sDate = "date";
+	
     }
     
     
