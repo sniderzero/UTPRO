@@ -287,6 +287,15 @@ public class Days_Fragment extends SherlockFragment{
 					((BaseAdapter) lvDaysAdapter).notifyDataSetChanged();
 					mode.finish(); // Action picked, so close the CAB
 					return true;
+				case R.id.miClear:
+					//marking the day as skipped in the DB
+					db.dayCompleteSkipped(0, dSelected.getID());
+					//marking the object as skipped in the array
+					dSelected.setCompleted(0);
+					//refreshing the listview to reflect the change
+					((BaseAdapter) lvDaysAdapter).notifyDataSetChanged();
+					mode.finish(); // Action picked, so close the CAB
+					return true;
 				default:
 					return false;
 				}

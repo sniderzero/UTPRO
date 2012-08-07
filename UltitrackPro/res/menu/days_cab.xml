@@ -1,5 +1,5 @@
     <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/miSkip" android:title="@string/sSkip"></item><item android:id="@+id/miComplete" android:title="@string/sComplete"></item>
-        <item android:id="@+id/miClear" android:title="@string/sClear" android:showAsAction="always"></item>
+        <item android:id="@+id/miClear" android:title="@string/sClear" android:showAsAction="always"></item><item android:id="@+id/miSkip" android:title="@string/sSkip"></item><item android:id="@+id/miComplete" android:title="@string/sComplete"></item>
+        
         
     </menu>
