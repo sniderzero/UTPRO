@@ -10,6 +10,9 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.appsmarttech.utpro.RepDetail_Fragment.updateEListener;
 
 public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, updateEListener {
@@ -22,6 +25,8 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	FragmentTransaction ft, ftOne;
 	Tab tab;
 	Bundle bArgs;
+	Menu mnuActionBar;
+	MenuItem miSaveNext;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -141,6 +146,49 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		mRepFragment();
 		setTitle(Exercises.get(e).getName());
 	}
+	
+	 //creating the actionbar
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getSupportMenuInflater();
+	    inflater.inflate(R.menu.exer_ab, menu);
+	    return true;
+	}
+	
+	//setting the actions for the actionbar icons
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.miSaveNext:
+			if(miSaveNext.getTitle() == "Done"){
+			//	onDone();
+			}
+			else{
+				//onSave();
+				//onNext();
+			//	getLastStat();
+			//	updateEListener.updateE(1);
+				
+			}
+			
+			break;
+		case R.id.miPrev:
+			//onPrev();
+		//	getLastStat();
+		//	updateEListener.updateE(0);
+			break;
+		case R.id.miSkip:
+			//onSkip();
+		//	getLastStat();
+		//	updateEListener.updateE(1);
+			break;
+		default:
+			break;
+		}
+
+		return true;
+	}
+
 
 
 

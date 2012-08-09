@@ -24,8 +24,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	DBHelper_activity db;
 	int iDayID, iSize, e, ae, iReps, iWeight, iExerID;
 	List<Stat> Stats;
-	Menu mnuActionBar;
-	MenuItem miSaveNext;
+	
 	EditText etRep, etWeight, etNotes;
 	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener;
 	updateEListener updateEListener;
@@ -55,11 +54,7 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	//bDate.setText(DateHelper.getDate());
    	 	bDate.setText(DateHelper.getDate());
 
-   	 	//telling it that it has an actionbar
-   	 	setHasOptionsMenu(true);
    	 	
-   	 	//decalring savenext menuitem so it can be manipulated
-   	 	miSaveNext = (MenuItem) mnuActionBar.findItem(R.id.miSaveNext);
     	
    	 	//declaring db helper class
    	 	db = (new DBHelper_activity(getActivity()));
@@ -135,7 +130,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 		e=e+1;
 			if(e==iSize)
 			{
-			miSaveNext.setTitle("Done");
+			
 			}
 		}
 		
@@ -146,9 +141,9 @@ public class RepDetail_Fragment extends SherlockFragment{
 		{
 		e=e-1;
 			//changing the button name back to Save/Next
-			if(miSaveNext.getTitle() == "Done")
+			
 			{
-			miSaveNext.setTitle("Save/Next");
+			
 			}
 		}
 		else
@@ -165,7 +160,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 		
 			if(e==iSize)
 			{
-			miSaveNext.setTitle("Done");
+			
 			}
 		}
 		else
@@ -270,49 +265,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 		
 		
 	
-	   //creating the actionbar
-		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-			inflater.inflate(R.menu.exer_ab, menu);
-			mnuActionBar = menu;
-			super.onCreateOptionsMenu(menu, inflater);
-			
-		}
-		
-		
-		//setting the actions for the actionbar icons
-		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			switch (item.getItemId()) {
-			case R.id.miSaveNext:
-				if(miSaveNext.getTitle() == "Done"){
-					onDone();
-				}
-				else{
-					onSave();
-					//onNext();
-					getLastStat();
-					updateEListener.updateE(1);
-					
-				}
-				
-				break;
-			case R.id.miPrev:
-				//onPrev();
-				getLastStat();
-				updateEListener.updateE(0);
-				break;
-			case R.id.miSkip:
-				//onSkip();
-				getLastStat();
-				updateEListener.updateE(1);
-				break;
-			default:
-				break;
-			}
-
-			return true;
-		}
-		
+	  		
 		//attaching to the listener in the activity
 	    @Override
 	    public void onAttach(Activity activity) {
