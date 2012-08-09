@@ -118,8 +118,6 @@ public class RepDetail_Fragment extends SherlockFragment{
         bMinusRep.setOnClickListener(bMinusListener);
         bPlusWeight.setOnClickListener(bPlusWeightListener);
         bMinusWeight.setOnClickListener(bMinusWeightListener);
-        Toast.makeText(getActivity(), String.valueOf(iExerID), Toast.LENGTH_SHORT)
-		.show();
    	 	return vExercises;
 	}
 	
