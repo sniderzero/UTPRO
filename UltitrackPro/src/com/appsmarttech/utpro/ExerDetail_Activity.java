@@ -13,9 +13,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.appsmarttech.utpro.RepDetail_Fragment.updateEListener;
 
-public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, updateEListener {
+public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener{
     
 	List<Exercise> Exercises;
 	int iDayID, e, iExerID, iSize;
@@ -85,7 +84,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction unused) {
 		if(tab.getPosition() == 0){
-		mRepFragment();
+		mRepFragment(2);
 		}
 		if(tab.getPosition() == 1){
 			mHistoryFragment();
@@ -98,12 +97,19 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 
 
 	//method for launching the rep fragment
-	public void mRepFragment(){
+	public void mRepFragment(int iNav){
 		FragmentManager fragMgr=getSupportFragmentManager();
 		FragmentTransaction ft = fragMgr.beginTransaction();
 		RepDetail_Fragment fRepDetail = new RepDetail_Fragment();
 		fRepDetail.setArguments(mSetBundle());
-		ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+		switch (iNav){
+		case 0:
+			ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+			break;
+		case 1:
+			ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+			break;
+		}
 		ft.replace(android.R.id.content, fRepDetail);
 		ft.commit();
 		
@@ -125,26 +131,58 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		
 		return bArgs;
 	}
-	
-	@Override
+	//navigation for the Rep Detail screen
 	public void updateE(int iNav) {
-		if(iNav == 0)
-		{
-			e=e-1;
+		switch(iNav){
+		case 0:
+			onPrev();
+			mRepFragment(0);
+			break;
+		case 1:
+			onNext();
+			mRepFragment(1);
+			break;
+		case 2:
+			mRepFragment(2);
+			break;
 		}
-		if(iNav == 1)
+		iExerID = Exercises.get(e).getExerID();
+		setTitle(Exercises.get(e).getName());
+	}
+	
+	//actions when user hits save/next
+	public void onNext(){
+			if(e<iSize)
+			{
+			e=e+1;
+			}
+			if(e==iSize)
+			{
+			miSaveNext.setTitle("Done");
+			}
+	}
+	//actions when user hits prev
+	public void onPrev(){
+		if(e>0)
 		{
-			e=e+1;;
+		e=e-1;
+			//changing the button name back to Save/Next
+			if(miSaveNext.getTitle() == "Done");
+			{
+			miSaveNext.setTitle("Save/Next");
+			}
 		}
 		else
 		{
-			
+			Toast.makeText(this, "You're at the beginning", Toast.LENGTH_SHORT)
+			.show();
 		}
-		
-		iExerID = Exercises.get(e).getExerID();
-		
-		mRepFragment();
-		setTitle(Exercises.get(e).getName());
+	}
+	
+	//actions when the user hits done
+	public void onDone(){
+		Toast.makeText(this, "You're at the end", Toast.LENGTH_SHORT)
+		.show();
 	}
 	
 	 //creating the actionbar
@@ -152,35 +190,32 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getSupportMenuInflater();
 	    inflater.inflate(R.menu.exer_ab, menu);
+	    this.mnuActionBar = menu;
 	    return true;
 	}
 	
 	//setting the actions for the actionbar icons
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		miSaveNext = (MenuItem) mnuActionBar.findItem(R.id.miSaveNext);
 		switch (item.getItemId()) {
 		case R.id.miSaveNext:
-			if(miSaveNext.getTitle() == "Done"){
-			//	onDone();
+		if(miSaveNext.getTitle() == "Done"){
+			onDone();
 			}
-			else{
-				//onSave();
-				//onNext();
-			//	getLastStat();
-			//	updateEListener.updateE(1);
+			else{ 
+				RepDetail_Fragment fragment = 
+						(RepDetail_Fragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
+				fragment.onSave();
 				
+			updateE(1);
 			}
-			
 			break;
 		case R.id.miPrev:
-			//onPrev();
-		//	getLastStat();
-		//	updateEListener.updateE(0);
+		updateE(0);
 			break;
 		case R.id.miSkip:
-			//onSkip();
-		//	getLastStat();
-		//	updateEListener.updateE(1);
+		updateE(1);
 			break;
 		default:
 			break;
