@@ -1,14 +1,8 @@
 package com.appsmarttech.utpro;
 
-import java.util.Calendar;
 import java.util.List;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class RepDetail_Fragment extends SherlockFragment{
-	Calendar cDate;
 	Button bDate , bPlusRep, bMinusRep, bPlusWeight, bMinusWeight;
 	DBHelper_activity db;
 	int iDayID, iSize, e, ae, iReps, iWeight, iExerID;

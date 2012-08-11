@@ -3,6 +3,7 @@ package com.appsmarttech.utpro;
 import java.util.List;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import com.actionbarsherlock.view.MenuItem;
 public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener{
     
 	List<Exercise> Exercises;
-	int iDayID, e, iExerID, iSize;
+	int iDayID, e, iExerID, iSize, iExerType;
 	DBHelper_activity db;
 	Exercise eFirstExercise;
 	String sDate;
@@ -73,8 +74,12 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
         
         //setting the exercise ID
         iExerID = Exercises.get(e).getExerID();
-
-        updateE(2);
+        
+        //setting the exercise type
+        iExerType = Exercises.get(e).getType();
+        
+        //loading the fragment again, because it doesn't work right if I don't... need to fix
+        mChooseFragment(2);
     }
 
 	@Override
@@ -84,15 +89,28 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction unused) {
 		if(tab.getPosition() == 0){
-		mRepFragment(2);
+		mChooseFragment(2);
 		}
 		if(tab.getPosition() == 1){
-			mHistoryFragment();
+		mHistoryFragment(2);
 		}
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	}
+	
+	//method for determine rep or time
+	public void mChooseFragment(int iNav)
+	{
+		switch(iExerType){
+		case 1:
+			mRepFragment(iNav);
+			break;
+		case 2:
+			mTimeFragment(iNav);
+			break;
+		}
 	}
 
 
@@ -102,7 +120,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		FragmentTransaction ft = fragMgr.beginTransaction();
 		RepDetail_Fragment fRepDetail = new RepDetail_Fragment();
 		fRepDetail.setArguments(mSetBundle());
-		switch (iNav){
+		switch (iNav){ //checking if we are going forward or back
 		case 0:
 			ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
 			break;
@@ -114,12 +132,39 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		ft.commit();
 		
 	}
+	
+	//method for launching the time fragment
+	public void mTimeFragment(int iNav){
+		FragmentManager fragMgr=getSupportFragmentManager();
+		FragmentTransaction ft = fragMgr.beginTransaction();
+		TimeDetail_Fragment fTimeDetail = new TimeDetail_Fragment();
+		fTimeDetail.setArguments(mSetBundle());
+		switch (iNav){ //checking if we are going forward or back
+		case 0:
+			ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+			break;
+		case 1:
+			ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+			break;
+		}
+		ft.replace(android.R.id.content, fTimeDetail);
+		ft.commit();
+		
+	}
 	//method for launching the history fragment
-	public void mHistoryFragment(){
+	public void mHistoryFragment(int iNav){
 		FragmentManager fragMgr=getSupportFragmentManager();
 		FragmentTransaction ft = fragMgr.beginTransaction();
 		History_Fragment fHistory = new History_Fragment();
 		fHistory.setArguments(mSetBundle());
+		switch (iNav){ //checking if we are going forward or back
+		case 0:
+			ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+			break;
+		case 1:
+			ft.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+			break;
+		}
 		ft.replace(android.R.id.content, fHistory);
 		ft.commit();
 	}
@@ -132,25 +177,26 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		return bArgs;
 	}
 	//navigation for the Rep Detail screen
-	public void updateE(int iNav) {
+	public void mNavigation(int iNav) {
 		switch(iNav){
 		case 0:
 			onPrev();
-			mRepFragment(0);
+			mChooseFragment(0);
 			break;
 		case 1:
 			onNext();
-			mRepFragment(1);
+			mChooseFragment(1);
 			break;
 		case 2:
-			mRepFragment(2);
+			mChooseFragment(2);
 			break;
 		}
 		iExerID = Exercises.get(e).getExerID();
+		iExerType = Exercises.get(e).getType();
 		setTitle(Exercises.get(e).getName());
 	}
 	
-	//actions when user hits save/next
+	//actions when user hits save/next or skip
 	public void onNext(){
 			if(e<iSize)
 			{
@@ -185,6 +231,18 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		.show();
 	}
 	
+	//action to save a Rep based exercise
+	public void saveRep(){
+		RepDetail_Fragment fragment = 
+		(RepDetail_Fragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
+		fragment.onSave();
+	}
+	
+	//action to save a Time based exercise
+	public void saveTime(){
+		
+	}
+	
 	 //creating the actionbar
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -203,19 +261,16 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		if(miSaveNext.getTitle() == "Done"){
 			onDone();
 			}
-			else{ 
-				RepDetail_Fragment fragment = 
-						(RepDetail_Fragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
-				fragment.onSave();
-				
-			updateE(1);
+			else{
+			saveRep();
+			mNavigation(1);
 			}
 			break;
 		case R.id.miPrev:
-		updateE(0);
+			mNavigation(0);
 			break;
 		case R.id.miSkip:
-		updateE(1);
+			mNavigation(1);
 			break;
 		default:
 			break;
