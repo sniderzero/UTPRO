@@ -69,14 +69,8 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	//getting the count of exercise array items
     	iSize = (Exercises.size() - 1);
         
-    	//setting title to first exercise name
-        setTitle(Exercises.get(e).getName());
-        
-        //setting the exercise ID
-        iExerID = Exercises.get(e).getExerID();
-        
-        //setting the exercise type
-        iExerType = Exercises.get(e).getType();
+    	//setting variables and title
+    	mSetVars();
         
         //loading the fragment again, because it doesn't work right if I don't... need to fix
         mChooseFragment(2);
@@ -86,7 +80,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 	}
 
-	@Override
+	@Override  //what to do when a tab is selected
 	public void onTabSelected(Tab tab, FragmentTransaction unused) {
 		if(tab.getPosition() == 0){
 		mChooseFragment(2);
@@ -181,16 +175,23 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		switch(iNav){
 		case 0:
 			onPrev();
+			mSetVars();
 			mChooseFragment(0);
 			break;
 		case 1:
 			onNext();
+			mSetVars();
 			mChooseFragment(1);
 			break;
 		case 2:
 			mChooseFragment(2);
 			break;
 		}
+		
+	}
+	
+	//setting variables
+	public void mSetVars(){
 		iExerID = Exercises.get(e).getExerID();
 		iExerType = Exercises.get(e).getType();
 		setTitle(Exercises.get(e).getName());
@@ -262,7 +263,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			onDone();
 			}
 			else{
-			saveRep();
+				RepDetail_Fragment fragment = 
+						(RepDetail_Fragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
+						fragment.onSave();
 			mNavigation(1);
 			}
 			break;
