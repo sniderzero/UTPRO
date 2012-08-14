@@ -211,7 +211,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			}
 			else
 			{
-				Toast.makeText(this, "You're at the end", Toast.LENGTH_SHORT)
+				
+				db.dayCompleteSkipped(1, iDayID); //marking the day complete because you are at the end of the day
+				Toast.makeText(this, "I should open a summary view, and mark the day completed.", Toast.LENGTH_SHORT)
 				.show();
 			}
 			
