@@ -212,10 +212,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			{
 			e=e+1;
 			}
-			if(e==iSize)
-			{
-			miSaveRep.setTitle("Done");
-			}
+			
 	}
 	//actions when user hits prev
 	public void onPrev(){
