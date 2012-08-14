@@ -1,8 +1,6 @@
 package com.appsmarttech.utpro;
 
 import java.util.List;
-
-import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -28,7 +26,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	String sDate, saDate;
 	Bundle bArgs;
 	Menu mnuActionBar;
-	navigationListener navigationListener;
+	repNavListener repNavListener;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -117,7 +115,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	}
 	
 	//declaring fragment listener for moving between the fragments inside of the activity
-	public interface navigationListener{
+	public interface repNavListener{
 	public void mNavigation(int iNav);
 
 	}
@@ -128,7 +126,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 		int tRep = Integer.parseInt(etRep.getText().toString());
 		sDate = bDate.getText().toString();
 		String tNotes = etNotes.getText().toString();
-		db.saveStat(1, iExerID, tWeight, tRep, 0, 0, sDate, tNotes);
+		db.saveStat(1, iExerID, tWeight, tRep, 0, "0", sDate, tNotes);
 	}
 	
 	//actions when user clicks the "+" button for reps
@@ -225,13 +223,13 @@ public class RepDetail_Fragment extends SherlockFragment{
 					switch (item.getItemId()) {
 					case R.id.miSaveRep:
 						onSave();
-						navigationListener.mNavigation(1);
+						repNavListener.mNavigation(1);
 						break;
 					case R.id.miPrevRep:
-						navigationListener.mNavigation(0);
+						repNavListener.mNavigation(0);
 						break;
 					case R.id.miSkip:
-						navigationListener.mNavigation(1);
+						repNavListener.mNavigation(1);
 						break;
 					default:
 						break;
@@ -245,7 +243,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 			    public void onAttach(Activity activity) {
 			        super.onAttach(activity);
 			        try {
-			            navigationListener = (navigationListener) activity;
+			            repNavListener = (repNavListener) activity;
 			        } catch (ClassCastException e) {
 			            throw new ClassCastException(activity.toString()
 			                    + " must implement updateEListener");

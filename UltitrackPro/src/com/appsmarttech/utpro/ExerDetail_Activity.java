@@ -3,7 +3,6 @@ package com.appsmarttech.utpro;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
@@ -12,11 +11,11 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.appsmarttech.utpro.RepDetail_Fragment.navigationListener;
+import com.appsmarttech.utpro.RepDetail_Fragment.repNavListener;
+import com.appsmarttech.utpro.TimeDetail_Fragment.timeNavListener;
 
-public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, navigationListener{
+public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, repNavListener, timeNavListener{
     
 	List<Exercise> Exercises;
 	int iDayID, e, iExerID, iSize, iExerType;
@@ -178,19 +177,15 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		
 		return bArgs;
 	}
-	//navigation for the Rep Detail screen
+	//navigation for the fragment area screen
 	@Override
 	public void mNavigation(int iNav) {
 		switch(iNav){
 		case 0:
 			onPrev();
-			mSetVars();
-			mChooseFragment(0);
 			break;
 		case 1:
 			onNext();
-			mSetVars();
-			mChooseFragment(1);
 			break;
 		case 2:
 			mChooseFragment(2);
@@ -211,6 +206,13 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			if(e<iSize)
 			{
 			e=e+1;
+			mSetVars();
+			mChooseFragment(1);
+			}
+			else
+			{
+				Toast.makeText(this, "You're at the end", Toast.LENGTH_SHORT)
+				.show();
 			}
 			
 	}
@@ -219,6 +221,8 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		if(e>0)
 		{
 		e=e-1;
+		mSetVars();
+		mChooseFragment(0);
 		}
 		else
 		{

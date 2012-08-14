@@ -428,7 +428,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
                 Stat.setWeight(cursor.getInt(3));
                 Stat.setReps(cursor.getInt(4));
                 Stat.setBandID(cursor.getInt(5));
-                Stat.setTime(cursor.getInt(6));
+                Stat.setTime(cursor.getString(6));
                 Stat.setDate(cursor.getString(7));
                 Stat.setNotes(cursor.getString(8));
                 Stat.setType(cursor.getInt(9));
@@ -472,7 +472,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
                 Stat.setWeight(cursor.getInt(3));
                 Stat.setReps(cursor.getInt(4));
                 Stat.setBandID(cursor.getInt(5));
-                Stat.setTime(cursor.getInt(6));
+                Stat.setTime(cursor.getString(6));
                 Stat.setDate(cursor.getString(7));
                 Stat.setNotes(cursor.getString(8));
                 Stat.setType(cursor.getInt(9));
@@ -489,21 +489,21 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     }
 
     // Update a Stat - when the user makes a change to a history item
-    public void updateUserStat(int iWeight, int iReps, int iBandID, int iTime, String sDate, String sNotes, int _id) { 
+    public void updateUserStat(int iWeight, int iReps, int iBandID, int sTime, String sDate, String sNotes, int _id) { 
         SQLiteDatabase db = this.getWritableDatabase();
  
         db.execSQL("UPDATE userStats SET weight=" + iWeight + ", reps= " +  iReps + ", bandID= " + iBandID + ",time= " + 
-	iTime + ",date= " + "'" + sDate + "'" + ",notes=" + "'" + sNotes + "'" + " WHERE _id=" + _id);
+	sTime + ",date= " + "'" + sDate + "'" + ",notes=" + "'" + sNotes + "'" + " WHERE _id=" + _id);
         
         db.close();
     }
 
 //Save a stat - when user presses save/next
-public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, int iTime, String sDate, String sNotes){
+public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sTime, String sDate, String sNotes){
         SQLiteDatabase db = this.getWritableDatabase();
 
 	db.execSQL("INSERT INTO userStats (userID, exerID, weight, reps, bandID, time, date, notes) VALUES(" + 
-	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + iTime + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" + ")");
+	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + "'" +sTime+"'" + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" + ")");
 }
 
  

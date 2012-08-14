@@ -8,8 +8,8 @@ public class Stat {
 
 
 //private variables
-int _id, iUserID, iExerID, iWeight, iReps, iBandID, iTime, iExerType;
-String sName, sNotes;
+int _id, iUserID, iExerID, iWeight, iReps, iBandID, iExerType;
+String sName, sNotes, sTime;
 String sDate;
 
 // Empty constructor
@@ -18,7 +18,7 @@ public Stat(){
 }
 
 // constructor with id for saving
-public Stat(int _id, int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sDate, int iTime){
+public Stat(int _id, int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sDate, String sTime){
 this._id = _id;
 this.iUserID = iUserID;
 this.iExerID = iExerID;
@@ -27,11 +27,11 @@ this.iReps = iReps;
 this.iBandID = iBandID;
 this.sNotes = sNotes;
 this.sDate = sDate;
-this.iTime = iTime;
+this.sTime = sTime;
 }
 
 // constructor without id for saving
-public Stat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sDate, int iTime){
+public Stat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sDate, String sTime){
 this._id = -1;
 this.iUserID = iUserID;
 this.iExerID = iExerID;
@@ -40,11 +40,11 @@ this.iReps = iReps;
 this.iBandID = iBandID;
 this.sNotes = sNotes;
 this.sDate = sDate;
-this.iTime = iTime;
+this.sTime = sTime;
 }
 
 // constructor with id for retrieving - includes the name from the exercisekey and exertype
-public Stat(int _id, int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sName, String sDate, int iTime, int iExerType){
+public Stat(int _id, int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sName, String sDate, String sTime, int iExerType){
 this._id = _id;
 this.iUserID = iUserID;
 this.iExerID = iExerID;
@@ -54,7 +54,7 @@ this.iBandID = iBandID;
 this.sNotes = sNotes;
 this.sName = sName;
 this.sDate = sDate;
-this.iTime = iTime;
+this.sTime = sTime;
 this.iExerType = iExerType;
 }
 
@@ -119,13 +119,13 @@ this.iBandID = iBandID;
 }
 
 // getting Time
-public int getTime(){
-return this.iTime;
+public String getTime(){
+return this.sTime;
 }
 
 // setting Time
-public void setTime(int iTime){
-this.iTime = iTime;
+public void setTime(String sTime){
+this.sTime = sTime;
 }
 
 // getting Type
