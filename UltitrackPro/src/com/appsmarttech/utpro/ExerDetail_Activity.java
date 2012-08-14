@@ -14,8 +14,9 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.appsmarttech.utpro.RepDetail_Fragment.navigationListener;
 
-public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener{
+public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, navigationListener{
     
 	List<Exercise> Exercises;
 	int iDayID, e, iExerID, iSize, iExerType;
@@ -26,7 +27,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	Tab tab;
 	Bundle bArgs;
 	Menu mnuActionBar;
-	MenuItem miSaveNext;
+	MenuItem miSaveRep, miPrevRep, miSkip, miPrevHistory, miNextHistory, miSaveTime, miDone;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -83,6 +84,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	@Override  //what to do when a tab is selected
 	public void onTabSelected(Tab tab, FragmentTransaction unused) {
 		if(tab.getPosition() == 0){
+
 		mChooseFragment(2);
 		}
 		if(tab.getPosition() == 1){
@@ -90,8 +92,11 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		}
 	}
 
-	@Override
+	@Override //what to do when a tab is unselected
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+		if(tab.getPosition() == 1){
+			
+		}
 	}
 	
 	//method for determine rep or time
@@ -124,6 +129,8 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		}
 		ft.replace(android.R.id.content, fRepDetail);
 		ft.commit();
+		//setting the fragment save button as visible
+		
 		
 	}
 	
@@ -143,6 +150,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		}
 		ft.replace(android.R.id.content, fTimeDetail);
 		ft.commit();
+		
 		
 	}
 	//method for launching the history fragment
@@ -171,6 +179,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		return bArgs;
 	}
 	//navigation for the Rep Detail screen
+	@Override
 	public void mNavigation(int iNav) {
 		switch(iNav){
 		case 0:
@@ -205,7 +214,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			}
 			if(e==iSize)
 			{
-			miSaveNext.setTitle("Done");
+			miSaveRep.setTitle("Done");
 			}
 	}
 	//actions when user hits prev
@@ -213,11 +222,6 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		if(e>0)
 		{
 		e=e-1;
-			//changing the button name back to Save/Next
-			if(miSaveNext.getTitle() == "Done");
-			{
-			miSaveNext.setTitle("Save/Next");
-			}
 		}
 		else
 		{
@@ -232,55 +236,6 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		.show();
 	}
 	
-	//action to save a Rep based exercise
-	public void saveRep(){
-		RepDetail_Fragment fragment = 
-		(RepDetail_Fragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
-		fragment.onSave();
-	}
-	
-	//action to save a Time based exercise
-	public void saveTime(){
-		
-	}
-	
-	 //creating the actionbar
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getSupportMenuInflater();
-	    inflater.inflate(R.menu.exer_ab, menu);
-	    this.mnuActionBar = menu;
-	    return true;
-	}
-	
-	//setting the actions for the actionbar icons
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		miSaveNext = (MenuItem) mnuActionBar.findItem(R.id.miSaveNext);
-		switch (item.getItemId()) {
-		case R.id.miSaveNext:
-		if(miSaveNext.getTitle() == "Done"){
-			onDone();
-			}
-			else{
-				RepDetail_Fragment fragment = 
-						(RepDetail_Fragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
-						fragment.onSave();
-			mNavigation(1);
-			}
-			break;
-		case R.id.miPrev:
-			mNavigation(0);
-			break;
-		case R.id.miSkip:
-			mNavigation(1);
-			break;
-		default:
-			break;
-		}
-
-		return true;
-	}
 
 
 

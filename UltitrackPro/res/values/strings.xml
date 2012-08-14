@@ -54,5 +54,9 @@
     <string name="sOf">of</string>
     <string name="sDaysCompleted">Days Completed</string>
     <string name="sClear">Clear</string>
+    <string name="sTime">Time</string>
+    <string name="sDate">Date</string>
+    <string name="sNotes">Notes</string>
+    <string name="sNext">Next</string>
 
 </resources>

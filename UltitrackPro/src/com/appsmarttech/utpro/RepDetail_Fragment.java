@@ -2,7 +2,13 @@ package com.appsmarttech.utpro;
 
 import java.util.List;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +27,8 @@ public class RepDetail_Fragment extends SherlockFragment{
 	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener;
 	String sDate, saDate;
 	Bundle bArgs;
+	Menu mnuActionBar;
+	navigationListener navigationListener;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -50,6 +58,9 @@ public class RepDetail_Fragment extends SherlockFragment{
 
         //grabbing last stats
         getLastStat();
+        
+        //has action bar
+        setHasOptionsMenu(true);
         
         //building onclick listeners
         bPlusListener = new OnClickListener() {
@@ -100,7 +111,15 @@ public class RepDetail_Fragment extends SherlockFragment{
         bMinusRep.setOnClickListener(bMinusListener);
         bPlusWeight.setOnClickListener(bPlusWeightListener);
         bMinusWeight.setOnClickListener(bMinusWeightListener);
+        
+
    	 	return vExercises;
+	}
+	
+	//declaring fragment listener for moving between the fragments inside of the activity
+	public interface navigationListener{
+	public void mNavigation(int iNav);
+
 	}
 	
 	//actions when the user hits save/next
@@ -190,4 +209,46 @@ public class RepDetail_Fragment extends SherlockFragment{
 			etNotes.setText(Stats.get(0).getNotes());
 			}
 		}
+		
+		//creating the actionbar
+				public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+					inflater.inflate(R.menu.exer_ab, menu);
+					mnuActionBar = menu;
+					super.onCreateOptionsMenu(menu, inflater);
+
+				}
+
+
+				//setting the actions for the actionbar icons
+				@Override
+				public boolean onOptionsItemSelected(MenuItem item) {
+					switch (item.getItemId()) {
+					case R.id.miSaveRep:
+						onSave();
+						navigationListener.mNavigation(1);
+						break;
+					case R.id.miPrevRep:
+						navigationListener.mNavigation(0);
+						break;
+					case R.id.miSkip:
+						navigationListener.mNavigation(1);
+						break;
+					default:
+						break;
+					}
+
+					return true;
+				}
+
+				//attaching to the listener in the activity
+			    @Override
+			    public void onAttach(Activity activity) {
+			        super.onAttach(activity);
+			        try {
+			            navigationListener = (navigationListener) activity;
+			        } catch (ClassCastException e) {
+			            throw new ClassCastException(activity.toString()
+			                    + " must implement updateEListener");
+			        }
+			}
 }

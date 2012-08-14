@@ -1,5 +1,6 @@
     <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/miPrev" android:showAsAction="always" android:title="@string/btn_Prev"></item>
+        <item android:id="@+id/miPrevRep" android:showAsAction="always" android:title="@string/btn_Prev"></item>
         
-		<item android:id="@+id/miSkip" android:showAsAction="always" android:title="@string/btn_Skip"></item><item android:id="@+id/miSaveNext" android:showAsAction="always" android:title="@string/sSaveNext"></item>
+		<item android:id="@+id/miSkip" android:showAsAction="always" android:title="@string/btn_Skip"></item><item android:id="@+id/miSaveRep" android:showAsAction="always" android:title="@string/sSaveNext"></item>
+		<item android:id="@+id/miDone" android:showAsAction="always" android:title="@string/sDone"></item>
     		</menu>

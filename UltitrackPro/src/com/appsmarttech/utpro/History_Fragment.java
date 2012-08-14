@@ -38,9 +38,14 @@ public class History_Fragment extends SherlockFragment{
    	 	Stats = db.getExerciseStats(e); //using 1 for testing purposes
    	 	//setting up adapter
         lvHistoryAdapter = new HistoryArrayAdapter(getActivity(),Stats);
+
+   	 	//inflating header to use it
+   	 	LayoutInflater iHeader = (LayoutInflater) getActivity()
+  				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+   	 	View header = iHeader.inflate(R.layout.history_rowheader, lvHistory, false);
+   	 	lvHistory.addHeaderView(header);
    	 	//setting adapter to lvHistory
    	 	lvHistory.setAdapter(lvHistoryAdapter);
-
    	 	
    	 	return vHistory;
    	 	
