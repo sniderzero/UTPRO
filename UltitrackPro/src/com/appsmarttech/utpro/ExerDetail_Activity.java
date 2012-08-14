@@ -226,8 +226,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		}
 		else
 		{
-			Toast.makeText(this, "You're at the beginning", Toast.LENGTH_SHORT)
-			.show();
+			this.onBackPressed();
 		}
 	}
 	
