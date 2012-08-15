@@ -15,6 +15,9 @@
     
     <ListPreference android:title="Age Range" android:key="kAge"/>
 </PreferenceCategory>
+<PreferenceCategory android:key="kAboutUT" android:title="About UltiTrack 90">
+    <Preference android:key="kRateUs" android:title="Rate UltiTrack 90" android:summary="Rate us so more people will get it"/>
+</PreferenceCategory>
 
 
 
