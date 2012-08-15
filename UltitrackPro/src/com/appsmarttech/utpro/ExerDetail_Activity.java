@@ -14,9 +14,10 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.appsmarttech.utpro.RepDetail_Fragment.repNavListener;
+import com.appsmarttech.utpro.RepDetail_Fragment.setDateListener;
 import com.appsmarttech.utpro.TimeDetail_Fragment.timeNavListener;
 
-public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, repNavListener, timeNavListener{
+public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, setDateListener, repNavListener, timeNavListener{
     
 	List<Exercise> Exercises;
 	int iDayID, e, iExerID, iSize, iExerType;
@@ -76,6 +77,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	
     	//declaring intents
    	 	inDays = new Intent(this, Days_Activity.class);
+   	 	
+   	 	//setting date
+   	 	sDate = DateHelper.getDate();
         
         //loading the fragment again, because it doesn't work right if I don't... need to fix
         mChooseFragment(2);
@@ -197,6 +201,11 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			break;
 		}
 		
+	}
+	//listener for setting the date
+	@Override
+	public void mSetDate(String Date){
+		this.sDate = Date;
 	}
 	
 	//setting variables

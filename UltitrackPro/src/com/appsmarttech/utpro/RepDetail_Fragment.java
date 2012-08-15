@@ -32,6 +32,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	Bundle bArgs;
 	Menu mnuActionBar;
 	repNavListener repNavListener;
+	setDateListener setDateListener;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -55,7 +56,7 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	iExerID = bArgs.getInt("kExerID", 1);
    	 	
    	 	//setting current date to the date select button
-   	 	bDate.setText(DateHelper.getDate());
+   	 	bDate.setText(saDate);
 
    	 	//declaring db helper class
    	 	db = (new DBHelper_activity(getActivity()));
@@ -131,6 +132,12 @@ public class RepDetail_Fragment extends SherlockFragment{
 	//declaring fragment listener for moving between the fragments inside of the activity
 	public interface repNavListener{
 	public void mNavigation(int iNav);
+
+	}
+	
+	//declaring fragment listener for setting the date in the activity
+	public interface setDateListener{
+	public void mSetDate(String Date);
 
 	}
 	
@@ -249,7 +256,9 @@ public class RepDetail_Fragment extends SherlockFragment{
 	            String sMonth = "0" + String.valueOf(iMonth + 1);
 	            String sDay = String.valueOf(iDay);
 	            String sDate = sYear + "-" + sMonth + "-" + sDay;
-	            bDate.setText(sDate);        	
+	            bDate.setText(sDate);
+	            //sets date in the activity so it can be used in the next fragment
+	            setDateListener.mSetDate(sDate);
 	        	dialog.dismiss();
 	            }
 	        });
@@ -303,6 +312,12 @@ public class RepDetail_Fragment extends SherlockFragment{
 			        } catch (ClassCastException e) {
 			            throw new ClassCastException(activity.toString()
 			                    + " must implement updateEListener");
+			        }
+			        try {
+			            setDateListener = (setDateListener) activity;
+			        } catch (ClassCastException e) {
+			            throw new ClassCastException(activity.toString()
+			                    + " must implement setDateListener");
 			        }
 			}
 }
