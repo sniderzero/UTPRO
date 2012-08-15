@@ -1,28 +1,33 @@
 package com.appsmarttech.utpro;
 
+import java.util.Calendar;
 import java.util.List;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class RepDetail_Fragment extends SherlockFragment{
 	Button bDate , bPlusRep, bMinusRep, bPlusWeight, bMinusWeight;
 	DBHelper_activity db;
-	int iDayID, iSize, e, ae, iReps, iWeight, iExerID;
+	int iDayID, iSize, e, ae, iReps, iWeight, iExerID, iYear, iMonth, iDay;
 	List<Stat> Stats;
-	
+	int DATE_DIALOG_ID = 99;
 	EditText etRep, etWeight, etNotes;
-	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener;
+	TextView tvDate;
+	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener, bDateListener;
 	String sDate, saDate;
 	Bundle bArgs;
 	Menu mnuActionBar;
@@ -42,13 +47,14 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	etRep = (EditText)vExercises.findViewById(R.id.etRep);
    	 	etWeight = (EditText)vExercises.findViewById(R.id.etWeight);
    	 	etNotes = (EditText)vExercises.findViewById(R.id.etNotes);
+   	 	tvDate = (TextView)vExercises.findViewById(R.id.tvDate);
+   	 	
    	 	//grabbing arguments from the activity
    	 	bArgs = getArguments();
    	 	saDate = bArgs.getString("kDate");  //date
    	 	iExerID = bArgs.getInt("kExerID", 1);
    	 	
    	 	//setting current date to the date select button
-   	 	//bDate.setText(DateHelper.getDate());
    	 	bDate.setText(DateHelper.getDate());
 
    	 	//declaring db helper class
@@ -104,11 +110,19 @@ public class RepDetail_Fragment extends SherlockFragment{
  			}
        	  
          };
+         
+         bDateListener = new OnClickListener() {
+ 			@Override
+ 			public void onClick(View vExercises) {
+ 				diaglogDatePick(vExercises);	
+ 			}
+         };
 		
         bPlusRep.setOnClickListener(bPlusListener);
         bMinusRep.setOnClickListener(bMinusListener);
         bPlusWeight.setOnClickListener(bPlusWeightListener);
         bMinusWeight.setOnClickListener(bMinusWeightListener);
+        bDate.setOnClickListener(bDateListener);
         
 
    	 	return vExercises;
@@ -207,6 +221,48 @@ public class RepDetail_Fragment extends SherlockFragment{
 			etNotes.setText(Stats.get(0).getNotes());
 			}
 		}
+		
+	    //dialog box for choosing exercise date
+	    public void diaglogDatePick(View v){
+	        final Dialog dialog = new Dialog(getActivity());
+	        dialog.setContentView(R.layout.datepicker_dialog);
+	        dialog.setTitle("Choose Exercise Date");
+	        dialog.setCancelable(true);
+	        //declare dialog buttons
+	        Button btnOK = (Button) dialog.findViewById(R.id.btnDateOK);
+	        Button btnCancel = (Button) dialog.findViewById(R.id.btnDateCancel);
+	        final DatePicker datePicker = (DatePicker) dialog.findViewById(R.id.datePicker);
+	        //setting date
+	        final Calendar c = Calendar.getInstance();
+	        iYear = c.get(Calendar.YEAR);
+	        iMonth = c.get(Calendar.MONTH);
+	        iDay = c.get(Calendar.DAY_OF_MONTH);
+	        datePicker.init(iYear, iMonth, iDay, null);
+
+	        btnOK.setOnClickListener(new OnClickListener() {
+	        @Override
+	            public void onClick(View v) {
+	            iYear = datePicker.getYear();
+	            iMonth = datePicker.getMonth();
+	            iDay = datePicker.getDayOfMonth();
+	            String sYear = String.valueOf(iYear);
+	            String sMonth = "0" + String.valueOf(iMonth + 1);
+	            String sDay = String.valueOf(iDay);
+	            String sDate = sYear + "-" + sMonth + "-" + sDay;
+	            bDate.setText(sDate);        	
+	        	dialog.dismiss();
+	            }
+	        });
+	        btnCancel.setOnClickListener(new OnClickListener() {
+	        @Override
+	            public void onClick(View v) {
+	        	dialog.dismiss();
+	            }
+	        });
+
+	    	dialog.show();
+
+	    }
 		
 		//creating the actionbar
 				public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){

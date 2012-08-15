@@ -2,6 +2,7 @@ package com.appsmarttech.utpro;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +28,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	Bundle bArgs;
 	Menu mnuActionBar;
 	MenuItem miSaveRep, miPrevRep, miSkip, miPrevHistory, miNextHistory, miSaveTime, miDone;
+	Intent inDays;
 	
 	/** Called when the activity is first created. */
     @Override
@@ -71,6 +73,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
         
     	//setting variables and title
     	mSetVars();
+    	
+    	//declaring intents
+   	 	inDays = new Intent(this, Days_Activity.class);
         
         //loading the fragment again, because it doesn't work right if I don't... need to fix
         mChooseFragment(2);
@@ -213,8 +218,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			{
 				
 				db.dayCompleteSkipped(1, iDayID); //marking the day complete because you are at the end of the day
-				Toast.makeText(this, "I should open a summary view, and mark the day completed.", Toast.LENGTH_SHORT)
-				.show();
+				startActivity(inDays);
 			}
 			
 	}
