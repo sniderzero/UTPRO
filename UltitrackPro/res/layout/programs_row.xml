@@ -9,17 +9,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="5sp"
+        android:layout_marginRight="12sp"
+        android:layout_marginTop="12sp"
         android:text="@string/sActive"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tvProgramName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="5sp"
         android:layout_marginLeft="5sp"
         android:layout_marginTop="5sp"
         android:text="@string/sHome"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvProgramName"
-        android:layout_below="@+id/tvActive"
+        android:layout_below="@id/tvProgramName"
         android:text="1"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
