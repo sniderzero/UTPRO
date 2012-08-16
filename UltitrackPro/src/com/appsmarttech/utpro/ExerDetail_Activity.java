@@ -180,6 +180,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	public Bundle mSetBundle(){
 		bArgs = new Bundle();
 		bArgs.putInt("kExerID", iExerID);
+		bArgs.putInt("kExerType", iExerType);
 		bArgs.putString("kDate", sDate);
 		
 		return bArgs;

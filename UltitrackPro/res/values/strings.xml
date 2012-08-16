@@ -58,5 +58,6 @@
     <string name="sDate">Date</string>
     <string name="sNotes">Notes</string>
     <string name="sNext">Next</string>
+    <string name="sWgt">Wgt</string>
 
 </resources>

@@ -21,7 +21,8 @@ public class History_Fragment extends SherlockFragment{
 	DBHelper_activity db;
 	Stat sSelected;
 	ListAdapter lvHistoryAdapter;
-	int e;
+	int e, iExerType;
+	TextView tvReps, tvWeight, tvTime, tvBand, tvNotes;
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -30,22 +31,35 @@ public class History_Fragment extends SherlockFragment{
    	 	View vHistory = inflater.inflate(R.layout.history_fragment, container, false);
    	 	//initializing db
    	 	db = (new DBHelper_activity(getActivity()));
-   	 	//initialize listview widget
+   	 	//initialize widgets
    	 	ListView lvHistory = (ListView)vHistory.findViewById(R.id.lvHistory);
-   	 	//grab exerID passed from the activity
+   	 	tvTime = (TextView)vHistory.findViewById(R.id.tvTime);
+   	 	tvReps = (TextView)vHistory.findViewById(R.id.tvRep);
+   	 	tvWeight = (TextView)vHistory.findViewById(R.id.tvWeight);
+   	 	tvBand = (TextView)vHistory.findViewById(R.id.tvBand);
+   	 	tvNotes = (TextView)vHistory.findViewById(R.id.tvNotes);
+   	 	//grab exerID and exerType passed from the activity
    	 	e = getArguments().getInt("kExerID");
+   	 	iExerType = getArguments().getInt("kExerType");
    	 	//grabbing list of stats from exercise passed by activity 
-   	 	Stats = db.getExerciseStats(e); //using 1 for testing purposes
+   	 	Stats = db.getExerciseStats(e); 
    	 	//setting up adapter
         lvHistoryAdapter = new HistoryArrayAdapter(getActivity(),Stats);
 
-   	 	//inflating header to use it
-   	 	LayoutInflater iHeader = (LayoutInflater) getActivity()
-  				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-   	 	View header = iHeader.inflate(R.layout.history_rowheader, lvHistory, false);
-   	 	lvHistory.addHeaderView(header);
    	 	//setting adapter to lvHistory
    	 	lvHistory.setAdapter(lvHistoryAdapter);
+   	 	
+   	 	//hiding certain fields based on the exercise type
+   	 	switch(iExerType){
+   	 	case 1:
+   	 		tvTime.setVisibility(View.GONE);
+   	 		break;
+   	 		
+   	 	case 2:
+   	 		tvReps.setVisibility(View.GONE);
+   	 		tvWeight.setVisibility(View.GONE);
+   	 		tvBand.setVisibility(View.GONE);
+   	 	}
    	 	
    	 	return vHistory;
    	 	
@@ -87,6 +101,18 @@ public class History_Fragment extends SherlockFragment{
   			tvDate.setText(sSelected.getDate());
   			tvBand.setText(String.valueOf(sSelected.getBandID()));
   			tvNotes.setText(sSelected.getNotes());
+  			
+  			//hiding them based on the exercise type
+  			switch(iExerType){
+  			case 1:
+  				tvTime.setVisibility(View.GONE);
+  				break;
+  			case 2:
+  				tvReps.setVisibility(View.GONE);
+  				tvWeight.setVisibility(View.GONE);
+  				tvBand.setVisibility(View.GONE);
+  				break;
+  			}
   			
     	      
   			return rowView;

@@ -23,7 +23,6 @@ public class RepDetail_Fragment extends SherlockFragment{
 	DBHelper_activity db;
 	int iDayID, iSize, e, ae, iReps, iWeight, iExerID, iYear, iMonth, iDay;
 	List<Stat> Stats;
-	int DATE_DIALOG_ID = 99;
 	EditText etRep, etWeight, etNotes;
 	TextView tvDate;
 	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener, bDateListener;

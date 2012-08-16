@@ -53,6 +53,8 @@ public class TimeDetail_Fragment extends SherlockFragment{
         bPause = (Button)vTime.findViewById(R.id.bPause);
         bReset = (Button)vTime.findViewById(R.id.bReset);
         etNotes = (EditText)vTime.findViewById(R.id.etNotes);
+        //clears focus from the notes box so the keyboard will work
+        etNotes.clearFocus();
         
         //declaring db helper class
    	 	db = (new DBHelper_activity(getActivity()));
