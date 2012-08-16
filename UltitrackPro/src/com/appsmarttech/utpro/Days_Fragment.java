@@ -119,6 +119,7 @@ public class Days_Fragment extends SherlockFragment{
         			dSelected = (Day) (lvDays.getItemAtPosition(position));
         			//putting the dayID of the selected day in a bundle to send to the next activity
         			inExerDetails.putExtra("DAY_ID", dSelected.getDayID());
+        			inExerDetails.putExtra("ROW_ID", dSelected.getID());
         			//launching the exercise details activity
         			startActivity(inExerDetails);
     			}

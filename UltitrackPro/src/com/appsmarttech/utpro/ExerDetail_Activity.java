@@ -1,13 +1,11 @@
 package com.appsmarttech.utpro;
 
 import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
-
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -20,7 +18,7 @@ import com.appsmarttech.utpro.TimeDetail_Fragment.timeNavListener;
 public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, setDateListener, repNavListener, timeNavListener{
     
 	List<Exercise> Exercises;
-	int iDayID, e, iExerID, iSize, iExerType;
+	int iDayID, e, iExerID, iSize, iExerType, iDayRow;
 	DBHelper_activity db;
 	Exercise eFirstExercise;
 	String sDate;
@@ -62,6 +60,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	
    	 	//grabbing the DayID passed by the day list activity
     	iDayID = getIntent().getIntExtra("DAY_ID", 0);
+    	iDayRow = getIntent().getIntExtra("ROW_ID", 1);
     	
     	//initializing e, used to track where we are in the array
     	e = 0;
@@ -75,7 +74,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	//setting variables and title
     	mSetVars();
     	
-    	//declaring intents
+    	//declaring day intent
    	 	inDays = new Intent(this, Days_Activity.class);
    	 	
    	 	//setting date
@@ -92,11 +91,10 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	@Override  //what to do when a tab is selected
 	public void onTabSelected(Tab tab, FragmentTransaction unused) {
 		if(tab.getPosition() == 0){
-
-		mChooseFragment(2);
+		mChooseFragment(2); //open either the rep or time fragment
 		}
 		if(tab.getPosition() == 1){
-		mHistoryFragment(2);
+		mHistoryFragment(2);  //open the history fragment
 		}
 	}
 
@@ -107,7 +105,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		}
 	}
 	
-	//method for determine rep or time
+	//method for determining rep or time
 	public void mChooseFragment(int iNav)
 	{
 		switch(iExerType){
@@ -226,7 +224,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			else
 			{
 				
-				db.dayCompleteSkipped(1, iDayID); //marking the day complete because you are at the end of the day
+				db.dayCompleteSkipped(1, iDayRow); //marking the day complete because you are at the end of the day
 				startActivity(inDays);
 			}
 			
