@@ -29,25 +29,19 @@
                 android:text="@string/sStart" />
 
             <Button
+                android:id="@+id/bStop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/sStop"
+                android:visibility="gone" />
+
+            <Button
                 android:id="@+id/bReset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/sReset" />
-
-            <Button
-                android:id="@+id/bStop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sStop" />
-
-            <Button
-                android:id="@+id/bPause"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sPause" />
 
         </LinearLayout>
 

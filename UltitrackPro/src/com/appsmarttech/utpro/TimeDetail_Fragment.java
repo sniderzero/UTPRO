@@ -28,7 +28,7 @@ public class TimeDetail_Fragment extends SherlockFragment{
 	int iExerID;
 	Bundle bArgs;
 	private TextView tvTimer;
-	private Button bStart, bReset, bStop, bSave, bPause;
+	private Button bStart, bReset, bStop, bSave;
 	private Handler mHandler = new Handler();
 	private long startTime;
 	private long elapsedTime;
@@ -50,7 +50,6 @@ public class TimeDetail_Fragment extends SherlockFragment{
         tvTimer = (TextView)vTime.findViewById(R.id.tvTimer);
         bStart = (Button)vTime.findViewById(R.id.bStart);
         bStop = (Button)vTime.findViewById(R.id.bStop);
-        bPause = (Button)vTime.findViewById(R.id.bPause);
         bReset = (Button)vTime.findViewById(R.id.bReset);
         etNotes = (EditText)vTime.findViewById(R.id.etNotes);
         //clears focus from the notes box so the keyboard will work
@@ -88,7 +87,6 @@ public class TimeDetail_Fragment extends SherlockFragment{
         bStart.setOnClickListener(bStartListener);
         bStop.setOnClickListener(bStopListener);
         bReset.setOnClickListener(bResetListener);
-        bPause.setOnClickListener(bStopListener);
    	 	
    	 	return vTime;
 
@@ -118,11 +116,17 @@ public class TimeDetail_Fragment extends SherlockFragment{
     	}
     	mHandler.removeCallbacks(startTimer);
         mHandler.postDelayed(startTimer, 0);
+        bStart.setVisibility(View.GONE);
+        bReset.setVisibility(View.GONE);
+        bStop.setVisibility(View.VISIBLE);
     }
     //actions when clicking the stop button
     public void stopClick (){
     	mHandler.removeCallbacks(startTimer);
     	stopped = true;
+    	bStart.setVisibility(View.VISIBLE);
+        bReset.setVisibility(View.VISIBLE);
+        bStop.setVisibility(View.GONE);
     }
     //actions when clicking the reset button
     public void resetClick (){
