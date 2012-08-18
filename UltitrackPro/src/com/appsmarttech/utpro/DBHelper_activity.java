@@ -510,7 +510,7 @@ public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBand
 public List<BandSet> getAllBandSets() {
     List<BandSet> BandSetList = new ArrayList<BandSet>();
     // Select All Query
-    String selectQuery = "SELECT  * FROM bandKey";
+    String selectQuery = "SELECT * FROM bandKey";
 
     SQLiteDatabase db = this.getWritableDatabase();
     Cursor cursor = db.rawQuery(selectQuery, null);

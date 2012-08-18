@@ -1,0 +1,6 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.appsmarttech.utpro.BandSet_Fragment"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:layout="@layout/bandset_fragment" />
