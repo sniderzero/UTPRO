@@ -40,10 +40,10 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	        super.onCreate(savedInstanceState);
 	        //add preference file
 	        addPreferencesFromResource(R.xml.utpro_preferences);
-	        //declare the preference category hidden, and hide it from the user
+	    /*    //declare the preference category hidden, and hide it from the user
 	        Preference pHiddenPreferences = findPreference("kHide");
 	        PreferenceScreen preferenceScreen = getPreferenceScreen();
-	        preferenceScreen.removePreference(pHiddenPreferences);
+	        preferenceScreen.removePreference(pHiddenPreferences); */  //commented out for testing.
 	    }
 	
 	//setting the actions for the actionbar icons
