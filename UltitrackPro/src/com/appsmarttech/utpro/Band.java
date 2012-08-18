@@ -39,12 +39,12 @@ this._id = _id;
 }
 
 // getting name
-public String getSetName(){
+public String getColor(){
 return this.sColor;
 }
 
 // setting name
-public void setName(String sColor){
+public void setColor(String sColor){
 this.sColor = sColor;
 }
 

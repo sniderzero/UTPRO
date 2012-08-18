@@ -243,7 +243,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     }
  
     // Deleting single program
-    public void deleteContact(Program Program) {
+    public void deleteProgram(Program Program) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_PROGRAMS, KEY_ID + " = ?",
                 new String[] { String.valueOf(Program.getID()) });
@@ -251,7 +251,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     }
  
     // Getting programs Count
-    public int getContactsCount() {
+    public int getProgramsCount() {
         String countQuery = "SELECT  * FROM " + TABLE_PROGRAMS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
@@ -506,5 +506,57 @@ public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBand
 	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + "'" +sTime+"'" + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" + ")");
 }
 
+// Getting All Band Sets
+public List<BandSet> getAllBandSets() {
+    List<BandSet> BandSetList = new ArrayList<BandSet>();
+    // Select All Query
+    String selectQuery = "SELECT  * FROM bandKey";
+
+    SQLiteDatabase db = this.getWritableDatabase();
+    Cursor cursor = db.rawQuery(selectQuery, null);
+
+    // looping through all rows and adding to list
+    if (cursor.moveToFirst()) {
+        do {
+            BandSet BandSet = new BandSet();
+            BandSet.setID(cursor.getInt(0));
+            BandSet.setSetName(cursor.getString(1));
+            BandSet.setEditable(Boolean.valueOf(cursor.getString(2)));
+            BandSet.setSetID(cursor.getInt(3));
+            // Adding BandSet to list
+            BandSetList.add(BandSet);
+        } while (cursor.moveToNext());
+    }
+
+    // return BandSet list
+    return BandSetList;
+}
+// Getting All Bands for a certain Program
+public List<Band> getAllSetBands(int iSetID) {
+    List<Band> BandList = new ArrayList<Band>();
+
+    SQLiteDatabase db = this.getWritableDatabase();
+    Cursor cursor = db.rawQuery("SELECT * FROM bandOrder WHERE setID =" +  iSetID, null);
+
+    // looping through all rows and adding to list
+    if (cursor.moveToFirst()) {
+        do {
+            Band Band = new Band();
+            Band.setID(cursor.getInt(0));
+            Band.setColor(cursor.getString(1));
+            Band.setSetID(cursor.getInt(2));
+            Band.setWeight(cursor.getInt(3));
+            Band.setEditable(Boolean.valueOf(cursor.getString(4)));
+            
+            // Adding Band to list
+            BandList.add(Band);
+        } while (cursor.moveToNext());
+    }
+		
+		cursor.close();
+		db.close();
+    // return Band list
+    return BandList;
+}
  
 }

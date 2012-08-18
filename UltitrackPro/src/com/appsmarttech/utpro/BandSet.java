@@ -42,7 +42,7 @@ return this.sSetName;
 }
 
 // setting name
-public void setName(String sSetName){
+public void setSetName(String sSetName){
 this.sSetName = sSetName;
 }
 
