@@ -1,8 +1,10 @@
-package com.appsmarttech.utpro;
+package com.appsmarttech.ut90;
 
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.appsmarttech.utpro.R;
 
 import android.app.Activity;
 import android.content.Intent;

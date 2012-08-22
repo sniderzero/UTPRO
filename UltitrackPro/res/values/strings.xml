@@ -59,5 +59,7 @@
     <string name="sNotes">Notes</string>
     <string name="sNext">Next</string>
     <string name="sWgt">Wgt</string>
+    <string name="sColor">Color</string>
+    <string name="sOK">OK</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.appsmarttech.utpro;
+package com.appsmarttech.ut90;
 
 import java.util.List;
 
@@ -8,6 +8,9 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.appsmarttech.utpro.R;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,7 +49,8 @@ public class Programs_Fragment extends SherlockFragment {
 		ListAdapter lvProgramsAdapter;
 		Program pSelected;
 		
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
     	// Inflate the layout for this fragment

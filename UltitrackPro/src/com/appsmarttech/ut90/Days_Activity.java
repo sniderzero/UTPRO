@@ -1,7 +1,9 @@
-package com.appsmarttech.utpro;
+package com.appsmarttech.ut90;
 
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.appsmarttech.utpro.R;
+
 import android.os.Bundle;
 
 public class Days_Activity extends SherlockFragmentActivity{

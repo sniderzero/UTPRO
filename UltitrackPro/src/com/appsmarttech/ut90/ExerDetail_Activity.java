@@ -1,4 +1,4 @@
-package com.appsmarttech.utpro;
+package com.appsmarttech.ut90;
 
 import java.util.List;
 import android.content.Intent;
@@ -11,9 +11,10 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.appsmarttech.utpro.RepDetail_Fragment.repNavListener;
-import com.appsmarttech.utpro.RepDetail_Fragment.setDateListener;
-import com.appsmarttech.utpro.TimeDetail_Fragment.timeNavListener;
+import com.appsmarttech.ut90.RepDetail_Fragment.repNavListener;
+import com.appsmarttech.ut90.RepDetail_Fragment.setDateListener;
+import com.appsmarttech.ut90.TimeDetail_Fragment.timeNavListener;
+import com.appsmarttech.utpro.R;
 
 public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, setDateListener, repNavListener, timeNavListener{
     

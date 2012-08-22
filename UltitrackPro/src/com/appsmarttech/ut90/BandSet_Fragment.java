@@ -1,18 +1,14 @@
-package com.appsmarttech.utpro;
+package com.appsmarttech.ut90;
 
-import java.util.Calendar;
 import java.util.List;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import com.appsmarttech.utpro.R;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -27,12 +23,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class BandSet_Fragment extends SherlockFragment {
 	
@@ -98,15 +92,7 @@ public class BandSet_Fragment extends SherlockFragment {
     			//grabbing the selected item from lvPrograms
     			bsSelected = (BandSet) (lvBandSet.getItemAtPosition(position));
     			View v = null;
-				/* //setting iActiveProgram to the selected item ID
-    			iActiveBand = bsSelected.getSetID();
-    	        //converting to a string
-    	        sActiveBand = String.valueOf(iActiveBand);
-    	        //storing in preferences
-    	        ePreferences.putString("kActiveBandSet", sActiveBand);
-    	        ePreferences.commit(); 
-    	        //refreshing the listview
-    	        lvBandSet.invalidateViews(); */
+				
     	        //going to list of days
     	        //startActivity(inDays);
     			diaglogBands(v);
@@ -174,13 +160,22 @@ public class BandSet_Fragment extends SherlockFragment {
         //declaring the listview
         ListView lvBands = (ListView) dialog.findViewById(R.id.lvBands);
         //declare dialog buttons
-        /*Button btnOK = (Button) dialog.findViewById(R.id.btnDateOK);
-        Button btnCancel = (Button) dialog.findViewById(R.id.btnDateCancel);
+        Button btnOK = (Button) dialog.findViewById(R.id.btnOK);
+        Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
         
         btnOK.setOnClickListener(new OnClickListener() {
         @Override
             public void onClick(View v) {
-           
+        	//setting iActiveProgram to the selected item ID
+			iActiveBand = bsSelected.getSetID();
+	        //converting to a string
+	        sActiveBand = String.valueOf(iActiveBand);
+	        //storing in preferences
+	        ePreferences.putString("kActiveBandSet", sActiveBand);
+	        ePreferences.commit(); 
+	        //refreshing the listview
+	        lvBandSet.invalidateViews(); 
+	        dialog.dismiss();
             }
         });
         btnCancel.setOnClickListener(new OnClickListener() {
@@ -188,7 +183,7 @@ public class BandSet_Fragment extends SherlockFragment {
             public void onClick(View v) {
         	dialog.dismiss();
             }
-        }); */
+        }); 
         
         
         
@@ -209,7 +204,6 @@ public class BandSet_Fragment extends SherlockFragment {
     				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     	 
     			View rowView = inflater.inflate(R.layout.bands_row, parent, false);
-    			TextView tvBandColor = (TextView)rowView.findViewById(R.id.tvColor);
     			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
     			ImageView ivColor = (ImageView)rowView.findViewById(R.id.ivColor);
     	 
@@ -217,14 +211,10 @@ public class BandSet_Fragment extends SherlockFragment {
     			 Band bSelected = getItem(position);
     			
     			//setting text of bands
-    			tvBandColor.setText(bSelected.getColor());
     			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
     			ivColor.setImageResource(R.drawable.pink);
     			
-    			if(tvBandColor.getText()=="nothing"){
-    				tvBandColor.setVisibility(View.GONE);
-    				tvBandWeight.setVisibility(View.GONE);
-    			}
+
     			
     		    return rowView;
     		}

@@ -1,4 +1,4 @@
-package com.appsmarttech.utpro;
+package com.appsmarttech.ut90;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.appsmarttech.utpro.R;
 
 public class History_Fragment extends SherlockFragment{
 	//declarations

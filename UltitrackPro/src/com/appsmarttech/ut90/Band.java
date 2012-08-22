@@ -1,29 +1,31 @@
-package com.appsmarttech.utpro; 
+package com.appsmarttech.ut90; 
 
-public class BandSet {
+public class Band {
 
 //private variables
-int _id, iSetID;
-String sSetName;
+int _id, iSetID, iWeight;
+String sColor;
 Boolean bEditable;
 
 // Empty constructor
-public BandSet(){
+public Band(){
 
 }
 // constructor
-public BandSet(int id, String sSetName, Boolean bEditable, int iSetID){
+public Band(int id, String sColor, Boolean bEditable, int iSetID, int iWeight){
 this._id = id;
 this.iSetID = iSetID;
-this.sSetName = sSetName;
+this.sColor = sColor;
 this.bEditable = bEditable;
+this.iWeight = iWeight;
 }
 
 //constructor
-public BandSet(String sSetName, Boolean bEditable, int iSetID){
+public Band(String sColor, Boolean bEditable, int iSetID, int iWeight){
 this.iSetID = iSetID;
-this.sSetName = sSetName;
+this.sColor = sColor;
 this.bEditable = bEditable;
+this.iWeight = iWeight;
 }
 
 // getting ID
@@ -37,13 +39,13 @@ this._id = _id;
 }
 
 // getting name
-public String getSetName(){
-return this.sSetName;
+public String getColor(){
+return this.sColor;
 }
 
 // setting name
-public void setSetName(String sSetName){
-this.sSetName = sSetName;
+public void setColor(String sColor){
+this.sColor = sColor;
 }
 
 // getting times completed
@@ -54,6 +56,16 @@ return this.iSetID;
 // setting setting times completed
 public void setSetID(int iSetID){
 this.iSetID = iSetID;
+}
+
+//getting band weight
+public int getWeight(){
+return this.iWeight;
+}
+
+//setting setting band weight
+public void setWeight(int iWeight){
+this.iWeight = iWeight;
 }
 
 //getting editable boolean
