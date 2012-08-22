@@ -1,5 +1,6 @@
 package com.appsmarttech.utpro;
 
+import java.util.Calendar;
 import java.util.List;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -8,6 +9,8 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,10 +21,14 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,7 +43,7 @@ public class BandSet_Fragment extends SherlockFragment {
 		SharedPreferences spPreferences;
 		Editor ePreferences;
 		String sActiveBand, sProgramName;
-		Integer iActiveBand, iProgramID;
+		Integer iActiveBand, iBandSetID;
 		ActionMode mActionMode;
 		ActionBar actionBar;
 		OnItemClickListener lvBandSetListener;
@@ -58,7 +65,7 @@ public class BandSet_Fragment extends SherlockFragment {
         ePreferences = spPreferences.edit();
         
         //grabbing the active program from preferences
-        sActiveBand = spPreferences.getString("kActiveBand", "0");
+        sActiveBand = spPreferences.getString("kActiveBandSet", "0");
         
         //converting it to Integer
         iActiveBand = Integer.valueOf(sActiveBand);
@@ -90,18 +97,19 @@ public class BandSet_Fragment extends SherlockFragment {
 
     			//grabbing the selected item from lvPrograms
     			bsSelected = (BandSet) (lvBandSet.getItemAtPosition(position));
-    			//setting iActiveProgram to the selected item ID
+    			View v = null;
+				/* //setting iActiveProgram to the selected item ID
     			iActiveBand = bsSelected.getSetID();
     	        //converting to a string
     	        sActiveBand = String.valueOf(iActiveBand);
     	        //storing in preferences
-    	        ePreferences.putString("kActiveProgram", sActiveBand);
+    	        ePreferences.putString("kActiveBandSet", sActiveBand);
     	        ePreferences.commit(); 
     	        //refreshing the listview
-    	        lvBandSet.invalidateViews();
+    	        lvBandSet.invalidateViews(); */
     	        //going to list of days
     	        //startActivity(inDays);
-    			
+    			diaglogBands(v);
     		}
       	  
         };
@@ -117,7 +125,7 @@ public class BandSet_Fragment extends SherlockFragment {
     }
 
 	
-	//creating custom listview adapter for programs
+	//creating custom listview adapter for the bandsets
 	public class BandSetArrayAdapter extends ArrayAdapter<BandSet> {
 		private final Context context;
 		
@@ -136,15 +144,15 @@ public class BandSet_Fragment extends SherlockFragment {
 			View rowView = inflater.inflate(R.layout.bandset_row, parent, false);
 			TextView tvBandSetName = (TextView)rowView.findViewById(R.id.tvBandSetName);
 	 
-			//grab current program
+			//grab current bandset
 			bsSelected = getItem(position);
 			
-			//setting text of program name
+			//setting text of bandset
 			tvBandSetName.setText(bsSelected.getSetName());
 			
 			//retrieving the program ID from the object
-			iProgramID = bsSelected.getID();
-			if(iProgramID == iActiveBand){
+			iBandSetID = bsSelected.getID();
+			if(iBandSetID == iActiveBand){
 				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);
 			}
 			else{
@@ -154,4 +162,77 @@ public class BandSet_Fragment extends SherlockFragment {
 			return rowView;
 		}
 	}
+	
+	//dialog box for choosing exercise date
+    public void diaglogBands(View v){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.bandset_dialog);
+        dialog.setTitle("Bands in " + bsSelected.getSetName());
+        dialog.setCancelable(true);
+        //grabbing the list of bands
+        List<Band> Bands = db.getAllSetBands(bsSelected.getSetID());
+        //declaring the listview
+        ListView lvBands = (ListView) dialog.findViewById(R.id.lvBands);
+        //declare dialog buttons
+        /*Button btnOK = (Button) dialog.findViewById(R.id.btnDateOK);
+        Button btnCancel = (Button) dialog.findViewById(R.id.btnDateCancel);
+        
+        btnOK.setOnClickListener(new OnClickListener() {
+        @Override
+            public void onClick(View v) {
+           
+            }
+        });
+        btnCancel.setOnClickListener(new OnClickListener() {
+        @Override
+            public void onClick(View v) {
+        	dialog.dismiss();
+            }
+        }); */
+        
+        
+        
+      //creating custom listview adapter for the bandsets
+    	class BandArrayAdapter extends ArrayAdapter<Band> {
+    		private final Context context;
+    		
+    	 
+    		public BandArrayAdapter(Context context, List<Band> values) {
+    			super(context, R.layout.bands_row, values);
+    			this.context = context;
+    			
+    		}
+    	 
+    		@Override
+    		public View getView(int position, View convertView, ViewGroup parent) {
+    			LayoutInflater inflater = (LayoutInflater) context
+    				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	 
+    			View rowView = inflater.inflate(R.layout.bands_row, parent, false);
+    			TextView tvBandColor = (TextView)rowView.findViewById(R.id.tvColor);
+    			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
+    			ImageView ivColor = (ImageView)rowView.findViewById(R.id.ivColor);
+    	 
+    			//grab current band
+    			 Band bSelected = getItem(position);
+    			
+    			//setting text of bands
+    			tvBandColor.setText(bSelected.getColor());
+    			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
+    			ivColor.setImageResource(R.drawable.pink);
+    			
+    			if(tvBandColor.getText()=="nothing"){
+    				tvBandColor.setVisibility(View.GONE);
+    				tvBandWeight.setVisibility(View.GONE);
+    			}
+    			
+    		    return rowView;
+    		}
+    	}
+    	BandArrayAdapter lvBandAdapter = new BandArrayAdapter(getActivity(),Bands);
+    	lvBands.setAdapter(lvBandAdapter); 
+    	dialog.show();
+
+    }
+
 }
