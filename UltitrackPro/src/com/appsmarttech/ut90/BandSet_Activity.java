@@ -3,7 +3,6 @@ package com.appsmarttech.ut90;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.appsmarttech.utpro.R;
 
 public class BandSet_Activity extends SherlockFragmentActivity {
 

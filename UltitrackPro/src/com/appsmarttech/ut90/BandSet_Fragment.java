@@ -5,7 +5,6 @@ import java.util.List;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
-import com.appsmarttech.utpro.R;
 
 import android.app.Dialog;
 import android.content.Context;

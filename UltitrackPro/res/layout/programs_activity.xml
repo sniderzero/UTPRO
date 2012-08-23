@@ -1,6 +1,6 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="com.appsmarttech.utpro.Programs_Fragment"
+    android:name="com.appsmarttech.ut90.Programs_Fragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:layout="@layout/programs_fragment" />

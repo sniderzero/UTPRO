@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.appsmarttech.utpro"
+    package="com.appsmarttech.ut90"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -17,24 +17,24 @@
              >
 
         </activity>
-        <activity android:name="Programs_Activity"></activity>
-        <activity android:name="Days_Activity"
+        <activity android:name=".Programs_Activity"></activity>
+        <activity android:name=".Days_Activity"
             android:uiOptions="splitActionBarWhenNarrow">
         </activity>
-        <activity android:name="ExerDetail_Activity"
+        <activity android:name=".ExerDetail_Activity"
         android:uiOptions="splitActionBarWhenNarrow"
         android:windowSoftInputMode="stateHidden"
         >
         </activity>
-        <activity android:name="Splash_Activity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <activity android:name=".Splash_Activity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
                         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Preferences_Activity" android:theme="@style/Theme.Sherlock.Light" android:label='Dashboard'></activity>
-        <activity android:name="BandSet_Activity"></activity>
+        <activity android:name=".Preferences_Activity" android:theme="@style/Theme.Sherlock.Light" android:label='Dashboard'></activity>
+        <activity android:name=".BandSet_Activity"></activity>
     </application>
 
 </manifest>

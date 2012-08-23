@@ -2,16 +2,11 @@ package com.appsmarttech.ut90;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.appsmarttech.utpro.R;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
-import android.widget.Toast;
 
 public class Preferences_Activity extends SherlockPreferenceActivity{
 	    @Override

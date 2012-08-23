@@ -1,6 +1,6 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:name="com.appsmarttech.utpro.Days_Fragment"
+    android:name="com.appsmarttech.ut90.Days_Fragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:layout="@layout/daylist_fragment" />

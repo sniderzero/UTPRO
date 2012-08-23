@@ -31,7 +31,6 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.appsmarttech.utpro.R;
 
 
 public class Days_Fragment extends SherlockFragment{

@@ -14,7 +14,6 @@ import com.actionbarsherlock.view.MenuItem;
 import com.appsmarttech.ut90.RepDetail_Fragment.repNavListener;
 import com.appsmarttech.ut90.RepDetail_Fragment.setDateListener;
 import com.appsmarttech.ut90.TimeDetail_Fragment.timeNavListener;
-import com.appsmarttech.utpro.R;
 
 public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, setDateListener, repNavListener, timeNavListener{
     

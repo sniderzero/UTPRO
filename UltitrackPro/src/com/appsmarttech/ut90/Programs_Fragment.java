@@ -8,7 +8,6 @@ import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.appsmarttech.utpro.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.appsmarttech.utpro.R;
 
 public class History_Fragment extends SherlockFragment{
 	//declarations

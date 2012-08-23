@@ -7,8 +7,8 @@
 
 <PreferenceCategory android:title="Builtin Hide from USER" android:key="kHide"><EditTextPreference android:title="Active Program" android:key="kActiveProgram" android:summary="Stores the users active program" /><EditTextPreference android:key="kActiveBandSet" android:title="Active Band Set" /><CheckBoxPreference android:key="kFirstLaunch" android:title="First Launch" android:summary="Stores the user state for first launch" /><EditTextPreference android:key="kNagScreen" android:title="Nag Screen" android:summary="Stores the number of runs so the user can be nagged to upgrade" /></PreferenceCategory>
 <PreferenceCategory android:key="kGetFit" android:title="Get Fit!"><Preference android:key="kPrograms" android:title="Select Program" android:summary="Select a Program"> 
-    <intent android:action="android.intent.action.VIEW" android:targetPackage="com.appsmarttech.utpro" android:targetClass="com.appsmarttech.utpro.Programs_Activity" />
-        </Preference><Preference android:key="kBands" android:title="Bands" android:summary="Choose a set or build your own" ><intent android:action="android.intent.action.VIEW" android:targetPackage="com.appsmarttech.utpro" android:targetClass="com.appsmarttech.utpro.BandSet_Activity" /></Preference>
+    <intent android:action="android.intent.action.VIEW" android:targetPackage="com.appsmarttech.ut90" android:targetClass="com.appsmarttech.ut90.Programs_Activity" />
+        </Preference><Preference android:key="kBands" android:title="Bands" android:summary="Choose a set or build your own" ><intent android:action="android.intent.action.VIEW" android:targetPackage="com.appsmarttech.ut90" android:targetClass="com.appsmarttech.ut90.BandSet_Activity" /></Preference>
         <Preference android:key="kMeasurements" android:title="Measurements" android:summary="Track your measurements"/>
 </PreferenceCategory><PreferenceCategory android:title="Preferences" android:key="kPreferences">
     
