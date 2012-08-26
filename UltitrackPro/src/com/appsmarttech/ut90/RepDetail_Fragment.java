@@ -85,9 +85,6 @@ public class RepDetail_Fragment extends SherlockFragment{
 
    	 	//declaring db helper class
    	 	db = (new DBHelper_activity(getActivity()));
-
-        //grabbing last stats
-        getLastStat();
         
         //grabbing list of bands
         Bands = db.getAllSetBands(iActiveBandSet);
@@ -175,6 +172,8 @@ public class RepDetail_Fragment extends SherlockFragment{
 			}
 
         });
+      //grabbing last stats
+        getLastStat();
 
    	 	return vExercises;
 	}

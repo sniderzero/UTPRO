@@ -10,7 +10,7 @@
     <intent android:action="android.intent.action.VIEW" android:targetPackage="com.appsmarttech.ut90" android:targetClass="com.appsmarttech.ut90.Programs_Activity" />
         </Preference><Preference android:key="kBands" android:title="Bands" android:summary="Choose a set or build your own" ><intent android:action="android.intent.action.VIEW" android:targetPackage="com.appsmarttech.ut90" android:targetClass="com.appsmarttech.ut90.BandSet_Activity" /></Preference>
         <Preference android:key="kMeasurements" android:title="Measurements" android:summary="Track your measurements"/>
-</PreferenceCategory><PreferenceCategory android:title="Preferences" android:key="kPreferences">
+</PreferenceCategory><PreferenceCategory android:title="About You" android:key="kPreferences">
     
     <ListPreference android:entries="@array/aryGender" android:title="Gender" android:key="kGender" android:entryValues="@array/aryValues" android:summary="Male or Female?"/><ListPreference android:entries="@array/aryKGLBS" android:title="Weight Type" android:summary="Pounds or Kilograms?" android:key="kWeightType" android:entryValues="@array/aryValues"/>
     

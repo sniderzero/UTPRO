@@ -7,6 +7,8 @@ import com.actionbarsherlock.view.MenuItem;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 
 public class Preferences_Activity extends SherlockPreferenceActivity{
 	    @Override
@@ -34,12 +36,14 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	    protected void onCreate(Bundle savedInstanceState) {
 	        
 	        super.onCreate(savedInstanceState);
+	        //change the animation
+	        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_top);
 	        //add preference file
 	        addPreferencesFromResource(R.xml.utpro_preferences);
-	    /*    //declare the preference category hidden, and hide it from the user
+	    //declare the preference category hidden, and hide it from the user
 	        Preference pHiddenPreferences = findPreference("kHide");
 	        PreferenceScreen preferenceScreen = getPreferenceScreen();
-	        preferenceScreen.removePreference(pHiddenPreferences); */  //commented out for testing.
+	        preferenceScreen.removePreference(pHiddenPreferences); 
 	    }
 	
 	//setting the actions for the actionbar icons
@@ -78,7 +82,7 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
     }
     
     public void launchWebPage(){
-    	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+    	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ultitrack.net"));
     	startActivity(browserIntent);
     }
 }
