@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,6 +36,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	int iDayID, iSize, e, ae, iReps, iWeight, iExerID, iYear, iMonth, iDay, iActiveBandSet;
 	List<Stat> Stats;
 	List<Band> Bands;
+	Band bSelected;
 	EditText etRep, etWeight, etNotes;
 	TextView tvDate;
 	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener, bDateListener;
@@ -155,6 +158,23 @@ public class RepDetail_Fragment extends SherlockFragment{
         bDate.setOnClickListener(bDateListener);
         //assigning adapter to spinner
         spBands.setAdapter(spBandsAdapter);
+        spBands.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				etWeight.setText(String.valueOf(bSelected.getWeight()));
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+        });
 
    	 	return vExercises;
 	}
@@ -280,7 +300,7 @@ public class RepDetail_Fragment extends SherlockFragment{
     			ImageView ivColor = (ImageView)rowView.findViewById(R.id.ivColor);
     	 
     			//grab current band
-    			 Band bSelected = getItem(position);
+    			bSelected = getItem(position);
     			
     			//setting text of bands
     			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
