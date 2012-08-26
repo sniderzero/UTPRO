@@ -2,7 +2,9 @@ package com.appsmarttech.ut90;
 
 import java.util.List;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
@@ -28,7 +30,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 	Menu mnuActionBar;
 	MenuItem miSaveRep, miPrevRep, miSkip, miPrevHistory, miNextHistory, miSaveTime, miDone;
 	Intent inDays;
-	
+
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	getSupportActionBar().setDisplayShowTitleEnabled(true);
     	getSupportActionBar().setDisplayShowHomeEnabled(true);
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
     	//creating the action bar tab Workout
     	ActionBar.Tab tWorkout = getSupportActionBar().newTab();
     	tWorkout.setText("Exercise");
@@ -249,9 +252,6 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		Toast.makeText(this, "You're at the end", Toast.LENGTH_SHORT)
 		.show();
 	}
+
 	
-
-
-
-
 }

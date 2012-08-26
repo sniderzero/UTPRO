@@ -6,32 +6,45 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.appsmarttech.ut90.Days_Fragment.DayArrayAdapter;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 public class RepDetail_Fragment extends SherlockFragment{
 	Button bDate , bPlusRep, bMinusRep, bPlusWeight, bMinusWeight;
 	DBHelper_activity db;
-	int iDayID, iSize, e, ae, iReps, iWeight, iExerID, iYear, iMonth, iDay;
+	int iDayID, iSize, e, ae, iReps, iWeight, iExerID, iYear, iMonth, iDay, iActiveBandSet;
 	List<Stat> Stats;
+	List<Band> Bands;
 	EditText etRep, etWeight, etNotes;
 	TextView tvDate;
 	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener, bDateListener;
-	String sDate, saDate;
+	String sDate, saDate, sActiveBandSet;
 	Bundle bArgs;
 	Menu mnuActionBar;
 	repNavListener repNavListener;
 	setDateListener setDateListener;
+	SharedPreferences spPreferences;
+	Spinner spBands;
+	SpinnerAdapter spBandsAdapter;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -48,11 +61,21 @@ public class RepDetail_Fragment extends SherlockFragment{
    	 	etWeight = (EditText)vExercises.findViewById(R.id.etWeight);
    	 	etNotes = (EditText)vExercises.findViewById(R.id.etNotes);
    	 	tvDate = (TextView)vExercises.findViewById(R.id.tvDate);
+   	 	spBands = (Spinner)vExercises.findViewById(R.id.spBand);
    	 	
    	 	//grabbing arguments from the activity
    	 	bArgs = getArguments();
    	 	saDate = bArgs.getString("kDate");  //date
    	 	iExerID = bArgs.getInt("kExerID", 1);
+   	 	
+    	//open preferences
+        spPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        
+        //grabbing the active program from preferences
+        sActiveBandSet = spPreferences.getString("kActiveProgram", "0");
+        
+        //converting it to Integer
+        iActiveBandSet = Integer.valueOf(sActiveBandSet);
    	 	
    	 	//setting current date to the date select button
    	 	bDate.setText(saDate);
@@ -62,6 +85,13 @@ public class RepDetail_Fragment extends SherlockFragment{
 
         //grabbing last stats
         getLastStat();
+        
+        //grabbing list of bands
+        Bands = db.getAllSetBands(iActiveBandSet);
+        
+        //setting up the adatper for the spinner
+      //setting up days adapter
+        spBandsAdapter = new BandArrayAdapter(getActivity(),Bands);
         
         //has action bar
         setHasOptionsMenu(true);
@@ -117,13 +147,14 @@ public class RepDetail_Fragment extends SherlockFragment{
  				diaglogDatePick(vExercises);	
  			}
          };
-		
+		//assigning onclicklisteners
         bPlusRep.setOnClickListener(bPlusListener);
         bMinusRep.setOnClickListener(bMinusListener);
         bPlusWeight.setOnClickListener(bPlusWeightListener);
         bMinusWeight.setOnClickListener(bMinusWeightListener);
         bDate.setOnClickListener(bDateListener);
-        
+        //assigning adapter to spinner
+        spBands.setAdapter(spBandsAdapter);
 
    	 	return vExercises;
 	}
@@ -228,6 +259,57 @@ public class RepDetail_Fragment extends SherlockFragment{
 			}
 		}
 		
+		//creating custom listview adapter for the bandsets
+    	class BandArrayAdapter extends ArrayAdapter<Band> {
+    		private final Context context;
+    		
+    	 
+    		public BandArrayAdapter(Context context, List<Band> values) {
+    			super(context, R.layout.bands_row, values);
+    			this.context = context;
+    			
+    		}
+    	 
+    		@Override
+    		public View getView(int position, View convertView, ViewGroup parent) {
+    			LayoutInflater inflater = (LayoutInflater) context
+    				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	 
+    			View rowView = inflater.inflate(R.layout.bands_row, parent, false);
+    			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
+    			ImageView ivColor = (ImageView)rowView.findViewById(R.id.ivColor);
+    	 
+    			//grab current band
+    			 Band bSelected = getItem(position);
+    			
+    			//setting text of bands
+    			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
+    			ivColor.setImageResource(R.drawable.pink);
+    			
+
+    			
+    		    return rowView;
+    		}
+    		
+    	    @Override
+    	    public View getDropDownView(int position, View convertView,
+    	            ViewGroup parent) {
+    	    	LayoutInflater inflater = (LayoutInflater) context
+        				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	    	View rowView = inflater.inflate(R.layout.bands_row, parent, false);
+    			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
+    			ImageView ivColor = (ImageView)rowView.findViewById(R.id.ivColor);
+    	 
+    			//grab current band
+    			 Band bSelected = getItem(position);
+    			
+    			//setting text of bands
+    			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
+    			ivColor.setImageResource(R.drawable.pink);
+
+    	        return rowView;
+    	    }
+    	}
 	    //dialog box for choosing exercise date
 	    public void diaglogDatePick(View v){
 	        final Dialog dialog = new Dialog(getActivity());

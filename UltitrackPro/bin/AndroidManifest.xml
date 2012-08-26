@@ -35,6 +35,15 @@
         </activity>
         <activity android:name=".Preferences_Activity" android:theme="@style/Theme.Sherlock.Light" android:label='Dashboard'></activity>
         <activity android:name=".BandSet_Activity"></activity>
+        
+        <activity android:name="com.google.ads.AdActivity"
+android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+
+        
     </application>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+		<uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+
 
 </manifest>

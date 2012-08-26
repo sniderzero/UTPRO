@@ -144,7 +144,7 @@ public class Days_Fragment extends SherlockFragment{
         	
         };
         
-        //setting up adapter
+        //setting up days adapter
         lvDaysAdapter = new DayArrayAdapter(getActivity(),Days);
         
         //setting click listener, long click listener, and adapter to the listview
