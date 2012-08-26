@@ -268,7 +268,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 		//method for getting the last exercise stats
 		public void getLastStat(){
 			//getting the stats for the current exercise
-			Stats = db.getExerciseStats(iExerID);
+			Stats = db.getExerciseLastStat(iExerID);
 			int s = Stats.size() -1 ;
 			if (s >= 0){
 			//setting the appropriate fields to the last user stat

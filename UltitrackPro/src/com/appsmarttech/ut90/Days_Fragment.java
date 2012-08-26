@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -62,7 +63,12 @@ public class Days_Fragment extends SherlockFragment{
         Bundle savedInstanceState) {
     	// Inflate the layout for this fragment
    	 	View vDays = inflater.inflate(R.layout.days_fragment, container, false);
-   	 	
+   	 	//setting actionbar details
+   	 	actionBar = getSherlockActivity().getSupportActionBar();
+   	 	actionBar.setDisplayUseLogoEnabled(true);
+   	 	actionBar.setDisplayShowTitleEnabled(true);
+   	 	actionBar.setDisplayShowHomeEnabled(true);
+   	 	actionBar.setDisplayHomeAsUpEnabled(true);
    	 	
         //open preferences
         spPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -237,8 +243,8 @@ public class Days_Fragment extends SherlockFragment{
 				break;
 				
 			default:
-				Toast.makeText(getActivity(), "You pressed some other shit", Toast.LENGTH_SHORT)
-				.show();
+				Intent inPrograms = new Intent(getActivity(), Programs_Activity.class);
+				startActivity(inPrograms);
 				break;
 			}
 

@@ -443,6 +443,43 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         // return Stat list
         return StatList;
     }
+    
+ // Getting All Last Stat for a certain exerciseID
+    public List<Stat> getExerciseLastStat(int iExerID) {
+        List<Stat> StatList = new ArrayList<Stat>();
+ 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
+	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
+	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC LIMIT 1", null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Stat Stat = new Stat();
+                Stat.setID(cursor.getInt(0));
+                Stat.setUserID(cursor.getInt(1));
+                Stat.setExerciseID(cursor.getInt(2));
+                Stat.setWeight(cursor.getInt(3));
+                Stat.setReps(cursor.getInt(4));
+                Stat.setBandID(cursor.getInt(5));
+                Stat.setTime(cursor.getString(6));
+                Stat.setDate(cursor.getString(7));
+                Stat.setNotes(cursor.getString(8));
+                Stat.setType(cursor.getInt(9));
+
+                // Adding Day to list
+                StatList.add(Stat);
+            } while (cursor.moveToNext());
+        }
+ 
+  	cursor.close();
+  	db.close();
+        // return Stat list
+        return StatList;
+    }
+
 
   // Getting All Stats for the last day
     public List<Stat> getDayStats() {
