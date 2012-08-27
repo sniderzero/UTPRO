@@ -58,8 +58,7 @@ public class Splash_Activity extends Activity {
 			@Override
 			public void run() {
 				finish();
-				//goWhere(); taken out for testing
-				goSettings();
+				goWhere(); 
 			}
         	
         };

@@ -75,7 +75,7 @@ public class RepDetail_Fragment extends SherlockFragment{
         spPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         
         //grabbing the active program from preferences
-        sActiveBandSet = spPreferences.getString("kActiveProgram", "0");
+        sActiveBandSet = spPreferences.getString("kActiveBandSet", "1");
         
         //converting it to Integer
         iActiveBandSet = Integer.valueOf(sActiveBandSet);

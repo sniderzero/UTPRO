@@ -11,7 +11,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    ads:adSize="IAB_MRECT"
+    ads:adSize="SMART_BANNER"
     ads:adUnitId="a1503920cba69e9"
     ads:loadAdOnCreate="true"
      />

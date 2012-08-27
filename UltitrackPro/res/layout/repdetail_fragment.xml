@@ -22,7 +22,7 @@
             <Button
                 android:id="@+id/bMinusRep"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
@@ -45,7 +45,7 @@
             <Button
                 android:id="@+id/bPlusRep"
                 android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
@@ -70,7 +70,7 @@
             <Button
                 android:id="@+id/bMinusWeight"
                 android:layout_width="48dp"
-                android:layout_height="48sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
@@ -90,7 +90,7 @@
             <Button
                 android:id="@+id/bPlusWeight"
                 android:layout_width="48dp"
-                android:layout_height="48sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
@@ -116,8 +116,8 @@
 
             <Spinner
                 android:id="@+id/spBand"
-                android:layout_width="wrap_content"
-                android:layout_height="48sp"
+                android:layout_width="120sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
                 android:layout_weight="1" />
         </LinearLayout>
