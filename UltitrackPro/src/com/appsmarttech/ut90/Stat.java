@@ -1,7 +1,5 @@
 package com.appsmarttech.ut90;
 
-import java.util.Date;
-
 public class Stat {
 
 //need to look into the necessity of bandID and how to handle time (eff)
@@ -9,7 +7,7 @@ public class Stat {
 
 //private variables
 int _id, iUserID, iExerID, iWeight, iReps, iBandID, iExerType;
-String sName, sNotes, sTime;
+String sName, sNotes, sTime, sColor;
 String sDate;
 
 // Empty constructor
@@ -43,8 +41,8 @@ this.sDate = sDate;
 this.sTime = sTime;
 }
 
-// constructor with id for retrieving - includes the name from the exercisekey and exertype
-public Stat(int _id, int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sName, String sDate, String sTime, int iExerType){
+// constructor with id for retrieving - includes the name from the exercisekey and exertype and the band color
+public Stat(int _id, int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sNotes, String sName, String sDate, String sTime, int iExerType, String sColor){
 this._id = _id;
 this.iUserID = iUserID;
 this.iExerID = iExerID;
@@ -56,6 +54,7 @@ this.sName = sName;
 this.sDate = sDate;
 this.sTime = sTime;
 this.iExerType = iExerType;
+this.sColor = sColor;
 }
 
 // getting ID
@@ -166,6 +165,16 @@ return this.sDate;
 // setting Date
 public void setDate(String sDate){
 this.sDate = sDate;
+}
+
+//getting Color
+public String getColor(){
+return this.sColor;
+}
+
+//setting Time
+public void setColor(String sColor){
+this.sColor = sColor;
 }
 
 }

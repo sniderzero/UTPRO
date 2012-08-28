@@ -27,20 +27,13 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     
     //table names
     private static final String TABLE_PROGRAMS = "ProgramKey";
-    private static final String TABLE_DAYORDER = "DayOrder";
     
     //program table field names
     private static final String KEY_ID = "_id";
     private static final String KEY_PROG_NAME = "programName";
     private static final String KEY_EDITABLE = "isEditable";
     private static final String KEY_TIMES_COMPLETED = "timesCompleted";
-    private static final String KEY_PROG_ID = "programID";
-    private static final String KEY_DAY_ID = "dayID";
-    private static final String KEY_WEEK_NUM = "weekNumber";
-    private static final String KEY_DAY_NUM = "dayNumber";
-    private static final String KEY_DAY_COMPLETED = "dayCompleted";
-    private static final String KEY_DAY_NAME = "dayName";
- 
+
     /**
      * Constructor
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
@@ -451,8 +444,8 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
 	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
-	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
-	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC LIMIT 1", null);
+	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType,  bandOrder.bandColor FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
+	" JOIN bandOrder ON UserStats.bandID = bandOrder._id WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC LIMIT 1", null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -468,6 +461,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
                 Stat.setDate(cursor.getString(7));
                 Stat.setNotes(cursor.getString(8));
                 Stat.setType(cursor.getInt(9));
+                Stat.setColor(cursor.getString(10));
 
                 // Adding Day to list
                 StatList.add(Stat);
