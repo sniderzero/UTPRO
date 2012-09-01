@@ -541,7 +541,7 @@ public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBand
 public List<BandSet> getAllBandSets() {
     List<BandSet> BandSetList = new ArrayList<BandSet>();
     // Select All Query
-    String selectQuery = "SELECT * FROM bandKey";
+    String selectQuery = "SELECT * FROM bSetKey";
 
     SQLiteDatabase db = this.getWritableDatabase();
     Cursor cursor = db.rawQuery(selectQuery, null);
@@ -550,7 +550,6 @@ public List<BandSet> getAllBandSets() {
     if (cursor.moveToFirst()) {
         do {
             BandSet BandSet = new BandSet();
-            BandSet.setID(cursor.getInt(0));
             BandSet.setSetName(cursor.getString(1));
             BandSet.setEditable(Boolean.valueOf(cursor.getString(2)));
             BandSet.setSetID(cursor.getInt(3));
@@ -562,7 +561,7 @@ public List<BandSet> getAllBandSets() {
     // return BandSet list
     return BandSetList;
 }
-// Getting All Bands for a certain Program
+// Getting All Bands for a certain set a bands
 public List<Band> getAllSetBands(int iSetID) {
     List<Band> BandList = new ArrayList<Band>();
 

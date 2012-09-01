@@ -3,7 +3,7 @@ package com.appsmarttech.ut90;
 public class BandSet {
 
 //private variables
-int _id, iSetID;
+int _id, isID;
 String sSetName;
 Boolean bEditable;
 
@@ -12,16 +12,16 @@ public BandSet(){
 
 }
 // constructor
-public BandSet(int id, String sSetName, Boolean bEditable, int iSetID){
+public BandSet(int id, String sSetName, Boolean bEditable, int isID){
 this._id = id;
-this.iSetID = iSetID;
+this.isID = isID;
 this.sSetName = sSetName;
 this.bEditable = bEditable;
 }
 
 //constructor
-public BandSet(String sSetName, Boolean bEditable, int iSetID){
-this.iSetID = iSetID;
+public BandSet(String sSetName, Boolean bEditable, int isID){
+this.isID = isID;
 this.sSetName = sSetName;
 this.bEditable = bEditable;
 }
@@ -36,24 +36,24 @@ public void setID(int _id){
 this._id = _id;
 }
 
-// getting name
+// getting band set name
 public String getSetName(){
 return this.sSetName;
 }
 
-// setting name
+// setting band set name
 public void setSetName(String sSetName){
 this.sSetName = sSetName;
 }
 
-// getting times completed
+// getting band set ID
 public int getSetID(){
-return this.iSetID;
+return this.isID;
 }
 
-// setting setting times completed
-public void setSetID(int iSetID){
-this.iSetID = iSetID;
+// setting band set ID
+public void setSetID(int isID){
+this.isID = isID;
 }
 
 //getting editable boolean
@@ -61,7 +61,7 @@ public boolean getEditable(){
 return this.bEditable;
 }
 
-//setting setting times completed
+//setting editable boolean
 public void setEditable(boolean bEditable){
 this.bEditable = bEditable;
 }
