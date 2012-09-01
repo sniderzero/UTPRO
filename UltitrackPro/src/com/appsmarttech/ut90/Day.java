@@ -3,7 +3,7 @@ package com.appsmarttech.ut90;
 public class Day {
 
 //private variables
-int _id, iCompleted, iDayNumber, iProgramID, iDayID, iWeekNumber, iType;
+int _id, iCompleted, iDayNumber, iDayID;
 String sName;
 
 // Empty constructor
@@ -11,23 +11,19 @@ public Day(){
 
 }
 // constructor
-public Day(int id, String sName, int iType, int iCompleted, int iDayID, int iWeekNumber, int iDayNumber){
+public Day(int id, String sName, int iCompleted, int iDayID, int iDayNumber){
 this._id = id;
 this.iCompleted = iCompleted;
 this.sName = sName;
-this.iType = iType;
 this.iDayID = iDayID;
-this.iWeekNumber = iWeekNumber;
 this.iDayNumber = iDayNumber;
 }
 
 //constructor
-public Day(String sName, int iType, int iCompleted, int iDayID, int iWeekNumber, int iDayNumber){
+public Day(String sName, int iCompleted, int iDayID, int iDayNumber){
 this.iCompleted = iCompleted;
 this.sName = sName;
-this.iType = iType;
 this.iDayID = iDayID;
-this.iWeekNumber = iWeekNumber;
 this.iDayNumber = iDayNumber;
 }
 
@@ -61,16 +57,6 @@ public void setCompleted(int iCompleted){
 this.iCompleted = iCompleted;
 }
 
-//getting Type 
-public int getType(){
-return this.iType;
-}
-
-//setting setting type
-public void setType(int iType){
-this.iType = iType;
-}
-
 //getting DayID
 public int getDayID(){
 return this.iDayID;
@@ -81,15 +67,6 @@ public void setDayID(int iDayID){
 this.iDayID = iDayID;
 }
 
-//getting week number
-public int getWeekNumber(){
-return this.iWeekNumber;
-}
-
-//setting week number
-public void setWeekNumber(int iWeekNumber){
-this.iWeekNumber = iWeekNumber;
-}
 
 //getting day number
 public int getDayNumber(){
