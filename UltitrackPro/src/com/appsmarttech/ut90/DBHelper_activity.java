@@ -567,18 +567,16 @@ public List<Band> getAllSetBands(int iSetID) {
     List<Band> BandList = new ArrayList<Band>();
 
     SQLiteDatabase db = this.getWritableDatabase();
-    Cursor cursor = db.rawQuery("SELECT * FROM bandOrder WHERE setID =" +  iSetID, null);
+    Cursor cursor = db.rawQuery("SELECT bOrder._id, bOrder.bID, bOrder.bWeight, bColorKey.bColor " +
+    		"FROM bOrder JOIN bColorKey ON bOrder.bColorID = bColorKey.bColorID WHERE sID =" + iSetID, null);
 
     // looping through all rows and adding to list
     if (cursor.moveToFirst()) {
         do {
             Band Band = new Band();
-            Band.setID(cursor.getInt(0));
-            Band.setColor(cursor.getString(1));
-            Band.setSetID(cursor.getInt(2));
-            Band.setWeight(cursor.getInt(3));
-            Band.setEditable(Boolean.valueOf(cursor.getString(4)));
-            
+            Band.setbID(cursor.getInt(1));
+            Band.setWeight(cursor.getInt(2));
+            Band.setColor(cursor.getString(3));
             // Adding Band to list
             BandList.add(Band);
         } while (cursor.moveToNext());
