@@ -164,55 +164,21 @@ public class DBHelper_activity extends SQLiteOpenHelper{
      * All CRUD(Create, Read, Update, Delete) Operations for Programs
      */
  
-    // Adding new program - not necessary for UT90 and UT92
-	// inserts a new program into the programkey table
-    void addProgram(Program Program) {
-        db = this.getWritableDatabase();
- 
-        ContentValues values = new ContentValues();
-        values.put(KEY_PROG_NAME, Program.getName()); // Program Name
-        values.put(KEY_TIMES_COMPLETED, Program.getTimesCompleted()); // Program Times Completed
-        values.put(KEY_EDITABLE, Program.getEditable()); // Program is editable
-        
-        
-        // Inserting Row
-        db.insert(TABLE_PROGRAMS, null, values);
-        db.close(); // Closing database connection
-    }
- 
-    // Getting a single program
-    Program getProgram(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
- 
-        Cursor cursor = db.query(TABLE_PROGRAMS, new String[] { KEY_ID,
-                KEY_PROG_NAME, KEY_EDITABLE, KEY_TIMES_COMPLETED }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
- 
-        Program Program = new Program(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), Boolean.valueOf(cursor.getString(2)), cursor.getInt(3));
-        // return contact
-        return Program;
-    }
- 
     // Getting All Programs
     public List<Program> getAllPrograms() {
         List<Program> programList = new ArrayList<Program>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_PROGRAMS;
+        
  
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Programs", null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Program Program = new Program();
-                Program.setID(Integer.parseInt(cursor.getString(0)));
-                Program.setName(cursor.getString(1));
-                Program.setEditable(Boolean.valueOf(cursor.getString(2)));
-                Program.setTimesCompleted(cursor.getInt(3));
+                Program.setProgramID(cursor.getInt(1));
+                Program.setName(cursor.getString(2));
+                Program.setTimesCompleted(cursor.getInt(4));
                 // Adding program to list
                 programList.add(Program);
             } while (cursor.moveToNext());
@@ -221,38 +187,22 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         // return program list
         return programList;
     }
- 
-    // Updating single program
-    public int updateProgram(Program Program) {
-        SQLiteDatabase db = this.getWritableDatabase();
- 
-        ContentValues values = new ContentValues();
-        values.put(KEY_PROG_NAME, Program.getName());
-        values.put(KEY_EDITABLE, Program.getEditable());
- 
-        // updating row
-        return db.update(TABLE_PROGRAMS, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(Program.getID()) });
-    }
- 
-    // Deleting single program
-    public void deleteProgram(Program Program) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_PROGRAMS, KEY_ID + " = ?",
-                new String[] { String.valueOf(Program.getID()) });
-        db.close();
-    }
- 
-    // Getting programs Count
-    public int getProgramsCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_PROGRAMS;
+    
+    // Getting a single program
+    Program getProgram(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        cursor.close();
+        Cursor cursor = db.rawQuery("SELECT * FROM Programs WHERE ProgramID = " + id, null);
+        if (cursor != null)
+            cursor.moveToFirst();
  
-        // return count
-        return cursor.getCount();
+        Program Program = new Program();
+        Program.setProgramID(cursor.getInt(1));
+        Program.setName(cursor.getString(2));
+        Program.setTimesCompleted(cursor.getInt(4));
+        // return program
+        return Program;
     }
+
  
 	/**
      * All CRUD(Create, Read, Update, Delete) Operations for Days
@@ -396,7 +346,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     public void dayClearFlags(int dayID) {
         SQLiteDatabase db = this.getWritableDatabase();
  
-        db.execSQL("UPDATE ExerOrder SET exerCompleted= 0 WHERE exerCompleted != null && dayID=" + dayID);
+        db.execSQL("UPDATE ExerciseOrderDetails SET ExerciseCompleted= 0 WHERE ExerciseCompleted != null && DayID=" + dayID);
         
         db.close();
     }
@@ -407,24 +357,24 @@ public class DBHelper_activity extends SQLiteOpenHelper{
  
         SQLiteDatabase db = this.getWritableDatabase();
 
-	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
-	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
-	" WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC", null);
+	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.ExerciseID, UserStats.StatWeight, UserStats.StatReps, " +
+	" UserStats.StatTime, UserStats.StatDate, UserStats.StatNotes, UserStats.BandID, Exercises.ExerciseType, BandColors.BandColorName FROM UserStats JOIN Exercises ON Exercises.ExerciseID = UserStats.ExerciseID" + 
+	" JOIN BandColors ON UserStat.BandColorID = BandColors.BandColorID WHERE UserStats.ExerciseID = " + iExerID + " ORDER BY StatDate DESC, UserStats._id DESC", null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Stat Stat = new Stat();
                 Stat.setID(cursor.getInt(0));
-                Stat.setUserID(cursor.getInt(1));
-                Stat.setExerciseID(cursor.getInt(2));
-                Stat.setWeight(cursor.getInt(3));
-                Stat.setReps(cursor.getInt(4));
-                Stat.setBandID(cursor.getInt(5));
-                Stat.setTime(cursor.getString(6));
-                Stat.setDate(cursor.getString(7));
-                Stat.setNotes(cursor.getString(8));
-                Stat.setType(cursor.getInt(9));
+                Stat.setExerciseID(cursor.getInt(1));
+                Stat.setWeight(cursor.getInt(2));
+                Stat.setReps(cursor.getInt(3));
+                Stat.setTime(cursor.getString(4));
+                Stat.setDate(cursor.getString(5));
+                Stat.setNotes(cursor.getString(6));
+                Stat.setBandID(cursor.getInt(7));
+                Stat.setType(cursor.getInt(8));
+                Stat.setColor(cursor.getString(9));
 
                 // Adding Day to list
                 StatList.add(Stat);
@@ -443,35 +393,34 @@ public class DBHelper_activity extends SQLiteOpenHelper{
  
         SQLiteDatabase db = this.getWritableDatabase();
 
-	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
-	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType,  banDayOrderDetailsDetails.bandColor FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
-	" JOIN banDayOrderDetailsDetails ON UserStats.bandID = banDayOrderDetailsDetails._id WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC LIMIT 1", null);
- 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Stat Stat = new Stat();
-                Stat.setID(cursor.getInt(0));
-                Stat.setUserID(cursor.getInt(1));
-                Stat.setExerciseID(cursor.getInt(2));
-                Stat.setWeight(cursor.getInt(3));
-                Stat.setReps(cursor.getInt(4));
-                Stat.setBandID(cursor.getInt(5));
-                Stat.setTime(cursor.getString(6));
-                Stat.setDate(cursor.getString(7));
-                Stat.setNotes(cursor.getString(8));
-                Stat.setType(cursor.getInt(9));
-                Stat.setColor(cursor.getString(10));
+    	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.ExerciseID, UserStats.StatWeight, UserStats.StatReps, " +
+    			" UserStats.StatTime, UserStats.StatDate, UserStats.StatNotes, UserStats.BandID, Exercises.ExerciseType, BandColors.BandColorName FROM UserStats JOIN Exercises ON Exercises.ExerciseID = UserStats.ExerciseID" + 
+    			" JOIN BandColors ON UserStat.BandColorID = BandColors.BandColorID WHERE UserStats.ExerciseID = " + iExerID + " ORDER BY StatDate DESC, UserStats._id DESC LIMIT 1", null);
+    		 
+    		        // looping through all rows and adding to list
+    		        if (cursor.moveToFirst()) {
+    		            do {
+    		                Stat Stat = new Stat();
+    		                Stat.setID(cursor.getInt(0));
+    		                Stat.setExerciseID(cursor.getInt(1));
+    		                Stat.setWeight(cursor.getInt(2));
+    		                Stat.setReps(cursor.getInt(3));
+    		                Stat.setTime(cursor.getString(4));
+    		                Stat.setDate(cursor.getString(5));
+    		                Stat.setNotes(cursor.getString(6));
+    		                Stat.setBandID(cursor.getInt(7));
+    		                Stat.setType(cursor.getInt(8));
+    		                Stat.setColor(cursor.getString(9));
 
-                // Adding Day to list
-                StatList.add(Stat);
-            } while (cursor.moveToNext());
-        }
- 
-  	cursor.close();
-  	db.close();
-        // return Stat list
-        return StatList;
+    		                // Adding Day to list
+    		                StatList.add(Stat);
+    		            } while (cursor.moveToNext());
+    		        }
+    		 
+    		  	cursor.close();
+    		  	db.close();
+    		        // return Stat list
+    		        return StatList;
     }
 
 
@@ -530,11 +479,11 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     }
 
 //Save a stat - when user presses save/next
-public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sTime, String sDate, String sNotes){
+public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sTime, String sDate, String sNotes, int bandColorID){
         SQLiteDatabase db = this.getWritableDatabase();
 
-	db.execSQL("INSERT INTO userStats (userID, exerID, weight, reps, bandID, time, date, notes) VALUES(" + 
-	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + "'" +sTime+"'" + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" + ")");
+	db.execSQL("INSERT INTO userStats (userID, exerID, weight, reps, bandID, time, date, notes, bandColorID) VALUES(" + 
+	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + "'" +sTime+"'" + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" +","+ bandColorID + ")");
 }
 
 // Getting All Band Sets
@@ -566,7 +515,7 @@ public List<Band> getAllSetBands(int iSetID) {
     List<Band> BandList = new ArrayList<Band>();
 
     SQLiteDatabase db = this.getWritableDatabase();
-    Cursor cursor = db.rawQuery("SELECT BandDetails._id, BandDetails.BandID, BandDetails.BandWeight, BandColors.BandColorName " +
+    Cursor cursor = db.rawQuery("SELECT BandDetails._id, BandDetails.BandID, BandDetails.BandWeight, BandDetails.BandColorID, BandColors.BandColorName " +
     		"FROM BandDetails JOIN BandColors ON BandDetails.BandColorID = BandColors.BandColorID WHERE BandSetID =" + iSetID, null);
 
     // looping through all rows and adding to list
@@ -575,7 +524,8 @@ public List<Band> getAllSetBands(int iSetID) {
             Band Band = new Band();
             Band.setBandID(cursor.getInt(1));
             Band.setWeight(cursor.getInt(2));
-            Band.setColor(cursor.getString(3));
+            Band.setColorID(cursor.getInt(3));
+            Band.setColor(cursor.getString(4));
             // Adding Band to list
             BandList.add(Band);
         } while (cursor.moveToNext());

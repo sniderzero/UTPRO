@@ -197,7 +197,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 		int tRep = Integer.parseInt(etRep.getText().toString());
 		sDate = bDate.getText().toString();
 		String tNotes = etNotes.getText().toString();
-		db.saveStat(1, iExerID, tWeight, tRep, 0, "0", sDate, tNotes);
+		db.saveStat(1, iExerID, tWeight, tRep, 0, "0", sDate, tNotes, bSelected.getColorID());
 	}
 	
 	//actions when user clicks the "+" button for reps

@@ -97,7 +97,7 @@ public class TimeDetail_Fragment extends SherlockFragment{
 			sDate = DateHelper.getDate();
 			sNotes = etNotes.getText().toString();
 			sTime = tvTimer.getText().toString();
-			db.saveStat(1, iExerID, 0, 0, 0, sTime, sDate, sNotes);
+			db.saveStat(1, iExerID, 0, 0, 0, sTime, sDate, sNotes, 0);
 		}
 	
 	//declaring fragment listener for moving between the fragments inside of the activity

@@ -3,27 +3,26 @@ package com.appsmarttech.ut90;
 public class Program {
 
 //private variables
-int _id, iTimesCompleted;
+int _id, iTimesCompleted, iProgramID, iEditable;
 String sName;
-Boolean bEditable;
 
 // Empty constructor
 public Program(){
 
 }
 // constructor
-public Program(int id, String sName, Boolean bEditable, int iTimesCompleted){
+public Program(int id, String sName, int iEditable, int iTimesCompleted){
 this._id = id;
 this.iTimesCompleted = iTimesCompleted;
 this.sName = sName;
-this.bEditable = bEditable;
+this.iEditable = iEditable;
 }
 
 //constructor
-public Program(String sName, Boolean bEditable, int iTimesCompleted){
+public Program(String sName, int iEditable, int iTimesCompleted){
 this.iTimesCompleted = iTimesCompleted;
 this.sName = sName;
-this.bEditable = bEditable;
+this.iEditable = iEditable;
 }
 
 // getting ID
@@ -34,6 +33,16 @@ return this._id;
 // setting id
 public void setID(int _id){
 this._id = _id;
+}
+
+//getting ProgramID
+public int getProgramID(){
+return this.iProgramID;
+}
+
+//setting id
+public void setProgramID(int iProgramID){
+this.iProgramID = iProgramID;
 }
 
 // getting name
@@ -56,14 +65,14 @@ public void setTimesCompleted(int iTimesCompleted){
 this.iTimesCompleted = iTimesCompleted;
 }
 
-//getting editable boolean
-public boolean getEditable(){
-return this.bEditable;
+//getting editable int
+public int getEditable(){
+return this.iEditable;
 }
 
 //setting setting times completed
-public void setEditable(boolean bEditable){
-this.bEditable = bEditable;
+public void setEditable(int iEditable){
+this.iEditable = iEditable;
 }
 
 }
