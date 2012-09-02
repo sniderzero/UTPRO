@@ -333,7 +333,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     	aryCount = new int[2];
     	SQLiteDatabase db = this.getReadableDatabase();
     	//grabbing total count
-    	Cursor count = db.rawQuery("SELECT COUNT(*) FROM DayOrderDetails WHERE programID = " + iProgramID, null);
+    	Cursor count = db.rawQuery("SELECT COUNT(*) FROM DayOrderDetails WHERE ProgramID = " + iProgramID, null);
     	//moving to first record
     	count.moveToFirst();
     	//assigning total count to an int
@@ -341,7 +341,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     	//closing cursor
     	count.close();
     	//grabbing completed count
-    	count = db.rawQuery("SELECT COUNT(*) FROM DayOrderDetails WHERE programID = " + iProgramID + " AND dayCompleted != 0", null);
+    	count = db.rawQuery("SELECT COUNT(*) FROM DayOrderDetails WHERE ProgramID = " + iProgramID + " AND DayCompleted != 0", null);
     	//moving to first
     	count.moveToFirst();
     	//assigning completed to an int
@@ -359,20 +359,19 @@ public class DBHelper_activity extends SQLiteOpenHelper{
  
         SQLiteDatabase db = this.getWritableDatabase();
 
-	Cursor cursor = db.rawQuery("SELECT ExerOrder._id, ExerOrder.dayID, ExerOrder.exerOrder, ExerOrder.exerID, ExerOrder.exerCompleted, " +
-	"ExerKey.exerName, ExerKey.exerType FROM ExerOrder JOIN ExerKey ON ExerKey.exerID = ExerOrder.exerID WHERE ExerOrder.dayID = " + dayID, null);
+	Cursor cursor = db.rawQuery("SELECT ExerciseOrderDetails._id, ExerciseOrderDetails.ExerciseOrder, ExerciseOrderDetails.ExerciseID, ExerciseOrderDetails.ExerciseCompleted, " +
+	"Exercises.ExerciseName, Exercises.ExerciseType FROM ExerciseOrderDetails JOIN Exercises ON Exercises.ExerciseID = ExerciseOrderDetails.ExerciseID WHERE ExerciseOrderDetails.DayID = " + dayID, null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Exercise Exercise = new Exercise();
-                Exercise.setID(Integer.parseInt(cursor.getString(0)));
-                Exercise.setName(cursor.getString(5));
-                Exercise.setType(cursor.getInt(6));
-                Exercise.setExerCompleted(cursor.getInt(4));
-                Exercise.setExerOrder(cursor.getInt(2));
-                Exercise.setExerID(cursor.getInt(3));
-
+                Exercise.setID(cursor.getInt(0));
+                Exercise.setExerOrder(cursor.getInt(1));
+                Exercise.setExerID(cursor.getInt(2));
+                Exercise.setExerCompleted(cursor.getInt(3));
+                Exercise.setName(cursor.getString(4));
+                Exercise.setType(cursor.getInt(5));
                 // Adding Day to list
                 ExerciseList.add(Exercise);
             } while (cursor.moveToNext());
@@ -388,7 +387,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     public void exerciseCompleteSkipped(int iStatus, int _id) { //iStatus is 1 for complete 2 for skipped, _id is the _id in the exerciseOrder table
         SQLiteDatabase db = this.getWritableDatabase();
  
-        db.execSQL("UPDATE ExerOrder SET exerCompleted=" + iStatus + " WHERE _id=" + _id);
+        db.execSQL("UPDATE ExerciseOrderDetails SET ExerciseCompleted=" + iStatus + " WHERE _id=" + _id);
         
         db.close();
     }
