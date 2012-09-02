@@ -3,7 +3,7 @@ package com.appsmarttech.ut90;
 public class Band {
 
 //private variables
-int _id, iWeight, ibID;
+int _id, iWeight, iBandID;
 String sColor;
 Boolean bEditable;
 
@@ -12,17 +12,17 @@ public Band(){
 
 }
 // constructor
-public Band(int id, String sColor, Boolean bEditable, int ibID, int iWeight){
+public Band(int id, String sColor, Boolean bEditable, int iBandID, int iWeight){
 this._id = id;
-this.ibID = ibID;
+this.iBandID = iBandID;
 this.sColor = sColor;
 this.bEditable = bEditable;
 this.iWeight = iWeight;
 }
 
 //constructor
-public Band(String sColor, Boolean bEditable, int ibID, int iWeight){
-this.ibID = ibID;
+public Band(String sColor, Boolean bEditable, int iBandID, int iWeight){
+this.iBandID = iBandID;
 this.sColor = sColor;
 this.bEditable = bEditable;
 this.iWeight = iWeight;
@@ -49,13 +49,13 @@ this.sColor = sColor;
 }
 
 // getting band ID
-public int getbID(){
-return this.ibID;
+public int getBandID(){
+return this.iBandID;
 }
 
 // setting setting band ID
-public void setbID(int ibID){
-this.ibID = ibID;
+public void setBandID(int iBandID){
+this.iBandID = iBandID;
 }
 
 //getting band weight

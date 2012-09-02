@@ -263,15 +263,18 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     Day getDay(int dayID) {
         SQLiteDatabase db = this.getReadableDatabase();
  
-        Cursor cursor = db.rawQuery("SELECT DayOrder._id, DayOrder.programID, DayOrder.dayID, DayOrder.dayCompleted, " +
-        		"DayKey.dayName, DayOrder.dayNumber, DayOrder.weekNumber, DayKey.type FROM DayOrder JOIN DayKey ON " +
-        		"DayOrder.dayID=DayKey._id WHERE dayID = " + dayID, null);
+        Cursor cursor = db.rawQuery("SELECT dOrder._id, dOrder.dID, dOrder.dCompleted, " +
+        		"dKey.dName, dOrder.dNumber FROM dOrder JOIN dKey ON " +
+        		"dOrder.dID=dKey.dID WHERE dID = " + dayID, null);
         if (cursor != null)
             cursor.moveToFirst();
  
-        Day Day = new Day(Integer.parseInt(cursor.getString(0)), cursor.getString(4),cursor.getInt(7), cursor.getInt(3), 
-        cursor.getInt(2), cursor.getInt(6), cursor.getInt(5));
-        
+        Day Day = new Day();
+        Day.setID(cursor.getInt(0));
+        Day.setDayID(cursor.getInt(1));
+        Day.setCompleted(cursor.getInt(2));
+        Day.setName(cursor.getString(3));
+        Day.setDayNumber(cursor.getInt(5));
         cursor.close();
         db.close();
         // return Day
@@ -566,14 +569,14 @@ public List<Band> getAllSetBands(int iSetID) {
     List<Band> BandList = new ArrayList<Band>();
 
     SQLiteDatabase db = this.getWritableDatabase();
-    Cursor cursor = db.rawQuery("SELECT bOrder._id, bOrder.bID, bOrder.bWeight, bColorKey.bColor " +
-    		"FROM bOrder JOIN bColorKey ON bOrder.bColorID = bColorKey.bColorID WHERE sID =" + iSetID, null);
+    Cursor cursor = db.rawQuery("SELECT BandDetails._id, BandDetails.BandID, BandDetails.BandWeight, BandColors.BandColorName " +
+    		"FROM BandDetails JOIN BandColors ON BandDetails.BandColorID = BandColors.BandColorID WHERE BandSetID =" + iSetID, null);
 
     // looping through all rows and adding to list
     if (cursor.moveToFirst()) {
         do {
             Band Band = new Band();
-            Band.setbID(cursor.getInt(1));
+            Band.setBandID(cursor.getInt(1));
             Band.setWeight(cursor.getInt(2));
             Band.setColor(cursor.getString(3));
             // Adding Band to list

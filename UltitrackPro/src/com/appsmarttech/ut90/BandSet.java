@@ -3,7 +3,7 @@ package com.appsmarttech.ut90;
 public class BandSet {
 
 //private variables
-int _id, isID;
+int _id, iSetID;
 String sSetName;
 Boolean bEditable;
 
@@ -12,16 +12,16 @@ public BandSet(){
 
 }
 // constructor
-public BandSet(int id, String sSetName, Boolean bEditable, int isID){
+public BandSet(int id, String sSetName, Boolean bEditable, int iSetID){
 this._id = id;
-this.isID = isID;
+this.iSetID = iSetID;
 this.sSetName = sSetName;
 this.bEditable = bEditable;
 }
 
 //constructor
-public BandSet(String sSetName, Boolean bEditable, int isID){
-this.isID = isID;
+public BandSet(String sSetName, Boolean bEditable, int iSetID){
+this.iSetID = iSetID;
 this.sSetName = sSetName;
 this.bEditable = bEditable;
 }
@@ -48,12 +48,12 @@ this.sSetName = sSetName;
 
 // getting band set ID
 public int getSetID(){
-return this.isID;
+return this.iSetID;
 }
 
 // setting band set ID
-public void setSetID(int isID){
-this.isID = isID;
+public void setSetID(int iSetID){
+this.iSetID = iSetID;
 }
 
 //getting editable boolean
