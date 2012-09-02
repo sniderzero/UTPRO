@@ -61,5 +61,6 @@
     <string name="sWgt">Wgt</string>
     <string name="sColor">Color</string>
     <string name="sOK">OK</string>
+    <string name="sTotalCompletions">Total Completions:</string>
 
 </resources>

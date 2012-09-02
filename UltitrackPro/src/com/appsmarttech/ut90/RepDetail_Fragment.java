@@ -304,7 +304,9 @@ public class RepDetail_Fragment extends SherlockFragment{
     			
     			//setting text of bands
     			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
-    			ivColor.setImageResource(R.drawable.pink);
+    			String mDrawableName = bSelected.getColor();
+    			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
+    			ivColor.setImageResource(resID);
     			
 
     			
@@ -325,7 +327,9 @@ public class RepDetail_Fragment extends SherlockFragment{
     			
     			//setting text of bands
     			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
-    			ivColor.setImageResource(R.drawable.pink);
+    			String mDrawableName = bSelected.getColor();
+    			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
+    			ivColor.setImageResource(resID);
 
     	        return rowView;
     	    }

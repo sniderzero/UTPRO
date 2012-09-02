@@ -66,4 +66,23 @@
         android:text="@string/sDaysCompleted"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
+    <TextView
+        android:id="@+id/tvTotalCompletesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvComplete"
+        android:layout_marginLeft="5sp"
+        android:layout_marginRight="5sp"
+        android:text="@string/sTotalCompletions" />
+
+    <TextView
+        android:id="@+id/tvTotalCompletions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvTotalCompletesLabel"
+        android:layout_alignBottom="@+id/tvTotalCompletesLabel"
+        android:layout_toRightOf="@+id/tvTotalCompletesLabel"
+        android:text="1" />
+
 </RelativeLayout>

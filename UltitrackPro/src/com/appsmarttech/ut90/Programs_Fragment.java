@@ -106,7 +106,7 @@ public class Programs_Fragment extends SherlockFragment {
     			//grabbing the selected item from lvPrograms
     			pSelected = (Program) (lvPrograms.getItemAtPosition(position));
     			//setting iActiveProgram to the selected item ID
-    			iActiveProgram = pSelected.getID();
+    			iActiveProgram = pSelected.getProgramID();
     	        //converting to a string
     	        sActiveProgram = String.valueOf(iActiveProgram);
     	        //storing in preferences
@@ -152,6 +152,7 @@ public class Programs_Fragment extends SherlockFragment {
 			TextView tvProgramName = (TextView)rowView.findViewById(R.id.tvProgramName);
 			TextView tvComplete = (TextView)rowView.findViewById(R.id.tvComplete);
 			TextView tvTotal = (TextView)rowView.findViewById(R.id.tvTotal);
+			TextView tvTotalCompletions = (TextView)rowView.findViewById(R.id.tvTotalCompletions);
 	 
 			//grab current program
 			pSelected = getItem(position);
@@ -160,7 +161,7 @@ public class Programs_Fragment extends SherlockFragment {
 			tvProgramName.setText(pSelected.getName());
 			
 			//retrieving the program ID from the object
-			iProgramID = pSelected.getID();
+			iProgramID = pSelected.getProgramID();
 			if(iProgramID == iActiveProgram){
 				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);
 			}
@@ -169,9 +170,11 @@ public class Programs_Fragment extends SherlockFragment {
 			}
 			//getting completed days and total days for the program
 			int[] aryCount = db.getDaysCount(iProgramID);
-			
+			//setting the days completed counts
 			tvComplete.setText(String.valueOf(aryCount[0]));
 			tvTotal.setText(String.valueOf(aryCount[1]));
+			//setting teh total program completions
+			tvTotalCompletions.setText(String.valueOf(pSelected.getTimesCompleted()));
 			
 
 			return rowView;

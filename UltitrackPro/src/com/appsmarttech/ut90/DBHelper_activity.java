@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -21,19 +20,10 @@ public class DBHelper_activity extends SQLiteOpenHelper{
  
     private static String DB_NAME = "UT90";
  
-    private SQLiteDatabase myDataBase, db; 
+    private SQLiteDatabase myDataBase; 
  
     private final Context myContext;
     
-    //table names
-    private static final String TABLE_PROGRAMS = "ProgramKey";
-    
-    //program table field names
-    private static final String KEY_ID = "_id";
-    private static final String KEY_PROG_NAME = "programName";
-    private static final String KEY_EDITABLE = "isEditable";
-    private static final String KEY_TIMES_COMPLETED = "timesCompleted";
-
     /**
      * Constructor
      * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
@@ -237,7 +227,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT DayOrderDetails._id, DayOrderDetails.DayID, DayOrderDetails.DayCompleted, " +
-        		"Days.DayName, DayOrderDetails.DayNumberFROM DayOrderDetails JOIN Days ON " +
+        		"Days.DayName, DayOrderDetails.DayNumber FROM DayOrderDetails JOIN Days ON " +
         		"DayOrderDetails.DayID=Days.DayID WHERE ProgramID = " + programID, null);
  
         // looping through all rows and adding to list
@@ -359,7 +349,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
 
 	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.ExerciseID, UserStats.StatWeight, UserStats.StatReps, " +
 	" UserStats.StatTime, UserStats.StatDate, UserStats.StatNotes, UserStats.BandID, Exercises.ExerciseType, BandColors.BandColorName FROM UserStats JOIN Exercises ON Exercises.ExerciseID = UserStats.ExerciseID" + 
-	" JOIN BandColors ON UserStat.BandColorID = BandColors.BandColorID WHERE UserStats.ExerciseID = " + iExerID + " ORDER BY StatDate DESC, UserStats._id DESC", null);
+	" JOIN BandColors ON UserStats.BandColorID = BandColors.BandColorID WHERE UserStats.ExerciseID = " + iExerID + " ORDER BY StatDate DESC, UserStats._id DESC", null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -395,7 +385,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
 
     	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.ExerciseID, UserStats.StatWeight, UserStats.StatReps, " +
     			" UserStats.StatTime, UserStats.StatDate, UserStats.StatNotes, UserStats.BandID, Exercises.ExerciseType, BandColors.BandColorName FROM UserStats JOIN Exercises ON Exercises.ExerciseID = UserStats.ExerciseID" + 
-    			" JOIN BandColors ON UserStat.BandColorID = BandColors.BandColorID WHERE UserStats.ExerciseID = " + iExerID + " ORDER BY StatDate DESC, UserStats._id DESC LIMIT 1", null);
+    			" JOIN BandColors ON UserStats.BandColorID = BandColors.BandColorID WHERE UserStats.ExerciseID = " + iExerID + " ORDER BY StatDate DESC, UserStats._id DESC LIMIT 1", null);
     		 
     		        // looping through all rows and adding to list
     		        if (cursor.moveToFirst()) {
@@ -482,7 +472,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
 public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBandID, String sTime, String sDate, String sNotes, int bandColorID){
         SQLiteDatabase db = this.getWritableDatabase();
 
-	db.execSQL("INSERT INTO userStats (userID, exerID, weight, reps, bandID, time, date, notes, bandColorID) VALUES(" + 
+	db.execSQL("INSERT INTO UserStats (UserID, ExerciseID, StatWeight, StatReps, BandID, StatTime, StatDate, StatNotes, BandColorID) VALUES(" + 
 	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + "'" +sTime+"'" + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" +","+ bandColorID + ")");
 }
 
