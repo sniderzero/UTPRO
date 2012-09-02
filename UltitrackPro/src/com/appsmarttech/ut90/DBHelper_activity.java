@@ -263,9 +263,9 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     Day getDay(int dayID) {
         SQLiteDatabase db = this.getReadableDatabase();
  
-        Cursor cursor = db.rawQuery("SELECT dOrder._id, dOrder.dID, dOrder.dCompleted, " +
-        		"dKey.dName, dOrder.dNumber FROM dOrder JOIN dKey ON " +
-        		"dOrder.dID=dKey.dID WHERE dID = " + dayID, null);
+        Cursor cursor = db.rawQuery("SELECT DayOrderDetailsDetails._id, DayOrderDetailsDetails.DayID, DayOrderDetailsDetails.DayCompleted, " +
+        		"Days.DayName, DayOrderDetailsDetails.DayNumber FROM DayOrderDetailsDetails JOIN Days ON " +
+        		"DayOrderDetailsDetails.DayID=Days.DayID WHERE Days.DayID = " + dayID, null);
         if (cursor != null)
             cursor.moveToFirst();
  
@@ -286,21 +286,19 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         List<Day> DayList = new ArrayList<Day>();
  
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT DayOrder._id, DayOrder.programID, DayOrder.dayID, DayOrder.dayCompleted, " +
-        		"DayKey.dayName, DayOrder.dayNumber, DayOrder.weekNumber, DayKey.type FROM DayOrder JOIN DayKey ON " +
-        		"DayOrder.dayID=DayKey._id WHERE programID = " + programID, null);
+        Cursor cursor = db.rawQuery("SELECT DayOrderDetails._id, DayOrderDetails.DayID, DayOrderDetails.DayCompleted, " +
+        		"Days.DayName, DayOrderDetails.DayNumberFROM DayOrderDetails JOIN Days ON " +
+        		"DayOrderDetails.DayID=Days.DayID WHERE ProgramID = " + programID, null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Day Day = new Day();
-                Day.setID(Integer.parseInt(cursor.getString(0)));
-                Day.setName(cursor.getString(4));
-                Day.setType(cursor.getInt(7));
-                Day.setCompleted(cursor.getInt(3));
-                Day.setDayID(cursor.getInt(2));
-                Day.setWeekNumber(cursor.getInt(6));
-                Day.setDayNumber(cursor.getInt(5));
+                Day.setID(cursor.getInt(0));
+                Day.setDayID(cursor.getInt(1));
+                Day.setCompleted(cursor.getInt(2));
+                Day.setName(cursor.getString(3));
+                Day.setDayNumber(cursor.getInt(4));
                 // Adding Day to list
                 DayList.add(Day);
             } while (cursor.moveToNext());
@@ -313,10 +311,10 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     }
  
     // Mark a Day Complete or skipped
-    public void dayCompleteSkipped(int iStatus, int _id) { //iStatus is 1 for complete 2 for skipped, _id is the _id in the dayOrder table
+    public void dayCompleteSkipped(int iStatus, int _id) { //iStatus is 1 for complete 2 for skipped, _id is the _id in the DayOrderDetails table
         SQLiteDatabase db = this.getWritableDatabase();
  
-        db.execSQL("UPDATE dayOrder SET dayCompleted=" + iStatus + " WHERE _id=" + _id);
+        db.execSQL("UPDATE DayOrderDetails SET dayCompleted=" + iStatus + " WHERE _id=" + _id);
         
         db.close();
     }
@@ -325,7 +323,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     public void progClearFlags(int programID) { 
         SQLiteDatabase db = this.getWritableDatabase();
  
-        db.execSQL("UPDATE dayOrder SET dayCompleted= 0  WHERE programID=" + programID);
+        db.execSQL("UPDATE DayOrderDetails SET dayCompleted= 0  WHERE programID=" + programID);
         
         db.close();
     }
@@ -335,7 +333,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     	aryCount = new int[2];
     	SQLiteDatabase db = this.getReadableDatabase();
     	//grabbing total count
-    	Cursor count = db.rawQuery("SELECT COUNT(*) FROM DayOrder WHERE programID = " + iProgramID, null);
+    	Cursor count = db.rawQuery("SELECT COUNT(*) FROM DayOrderDetails WHERE programID = " + iProgramID, null);
     	//moving to first record
     	count.moveToFirst();
     	//assigning total count to an int
@@ -343,7 +341,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     	//closing cursor
     	count.close();
     	//grabbing completed count
-    	count = db.rawQuery("SELECT COUNT(*) FROM DayOrder WHERE programID = " + iProgramID + " AND dayCompleted != 0", null);
+    	count = db.rawQuery("SELECT COUNT(*) FROM DayOrderDetails WHERE programID = " + iProgramID + " AND dayCompleted != 0", null);
     	//moving to first
     	count.moveToFirst();
     	//assigning completed to an int
@@ -447,8 +445,8 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
 	Cursor cursor = db.rawQuery("SELECT UserStats._id, UserStats.userID, UserStats.exerID, UserStats.weight, UserStats.reps, " +
-	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType,  bandOrder.bandColor FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
-	" JOIN bandOrder ON UserStats.bandID = bandOrder._id WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC LIMIT 1", null);
+	"UserStats.bandID, UserStats.time, UserStats.date, UserStats.notes, ExerKey.exerType,  banDayOrderDetailsDetails.bandColor FROM UserStats JOIN ExerKey ON ExerKey.exerID = UserStats.exerID" + 
+	" JOIN banDayOrderDetailsDetails ON UserStats.bandID = banDayOrderDetailsDetails._id WHERE UserStats.exerID = " + iExerID + " ORDER BY date DESC, UserStats._id DESC LIMIT 1", null);
  
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
