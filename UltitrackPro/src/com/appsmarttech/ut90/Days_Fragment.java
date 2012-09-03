@@ -10,9 +10,11 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -158,6 +160,9 @@ public class Days_Fragment extends SherlockFragment{
         lvDays.setOnItemLongClickListener(lvDaysLongListener);
         lvDays.setAdapter(lvDaysAdapter);
         
+        lvDays.setSelection(db.getNextDay(iActiveProgram) - 2);
+        //lvDays.smoothScrollToPosition(db.getNextDay(iActiveProgram) + 3);
+        
    	 	return vDays;
     }
     
@@ -233,7 +238,9 @@ public class Days_Fragment extends SherlockFragment{
 		        for (Day d : Days) {
 		            d.setCompleted(0);
 		        }
+		        lvDays.setSelection(0);
 				((BaseAdapter) lvDaysAdapter).notifyDataSetChanged();
+				
 				break;
 				
 			case R.id.miSettings:

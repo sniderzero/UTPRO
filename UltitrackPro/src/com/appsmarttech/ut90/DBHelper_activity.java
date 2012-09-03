@@ -249,6 +249,19 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         // return Day list
         return DayList;
     }
+    
+    public int getNextDay(int programID){
+		int iPOS;
+		SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT DayOrderDetails._id, DayOrderDetails.DayID, DayOrderDetails.DayCompleted, " +
+        		"Days.DayName, DayOrderDetails.DayNumber FROM DayOrderDetails JOIN Days ON " +
+        		"DayOrderDetails.DayID=Days.DayID WHERE ProgramID = " + programID + " AND DayOrderDetails.DayCompleted = 0 LIMIT 1", null);
+        cursor.moveToFirst();
+        iPOS = cursor.getInt(0);
+        
+    	return iPOS;
+    	
+    }
  
     // Mark a Day Complete or skipped
     public void dayCompleteSkipped(int iStatus, int _id) { //iStatus is 1 for complete 2 for skipped, _id is the _id in the DayOrderDetails table

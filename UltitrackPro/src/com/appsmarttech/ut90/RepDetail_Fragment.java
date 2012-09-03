@@ -12,6 +12,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -298,7 +300,6 @@ public class RepDetail_Fragment extends SherlockFragment{
     	 
     			View rowView = inflater.inflate(R.layout.bands_row, parent, false);
     			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
-    			ImageView ivColor = (ImageView)rowView.findViewById(R.id.ivColor);
     	 
     			//grab current band
     			bSelected = getItem(position);
@@ -307,7 +308,9 @@ public class RepDetail_Fragment extends SherlockFragment{
     			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
     			String mDrawableName = bSelected.getColor();
     			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
-    			ivColor.setImageResource(resID);
+    			Drawable myIcon = getResources().getDrawable(resID);
+    			myIcon.setBounds(0,0,45,45);
+    			tvBandWeight.setCompoundDrawables(myIcon, null, null, null);
     			
 
     			
@@ -321,7 +324,6 @@ public class RepDetail_Fragment extends SherlockFragment{
         				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     	    	View rowView = inflater.inflate(R.layout.bands_row, parent, false);
     			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
-    			ImageView ivColor = (ImageView)rowView.findViewById(R.id.ivColor);
     	 
     			//grab current band
     			 Band bSelected = getItem(position);
@@ -330,7 +332,9 @@ public class RepDetail_Fragment extends SherlockFragment{
     			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
     			String mDrawableName = bSelected.getColor();
     			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
-    			ivColor.setImageResource(resID);
+    			Drawable myIcon = getResources().getDrawable(resID);
+    			myIcon.setBounds(0,0,45,45);
+    			tvBandWeight.setCompoundDrawables(myIcon, null, null, null);
 
     	        return rowView;
     	    }

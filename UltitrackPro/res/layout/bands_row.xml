@@ -2,22 +2,18 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/llhBands"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-         >
-
-        <ImageView
-            android:id="@+id/ivColor"
-            android:layout_width="70sp"
-            android:layout_height="30sp"
-            android:layout_marginBottom="5sp"
-            android:src="@drawable/ic_email" />
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/tvWeight"
-            android:layout_width="70sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="5sp"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="32sp"
             android:gravity="center"
-            android:text="w"
-            android:textSize="20sp" />
+            android:text="100"
+            android:textSize="30sp" />
 
     </LinearLayout>

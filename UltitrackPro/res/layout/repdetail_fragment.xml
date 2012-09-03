@@ -1,148 +1,147 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlRepDetail"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/rlRepDetail"
+    <LinearLayout
+        android:id="@+id/llhRep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/llhHeader" >
+
+        <TextView
+            android:id="@+id/tvRep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sReps"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/bMinusRep"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_weight="1"
+            android:gravity="center|center_vertical"
+            android:text="@string/sMinusSign"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/etRep"
+            android:layout_width="48dp"
+            android:layout_height="48sp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="0" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/bPlusRep"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_weight="1"
+            android:gravity="center|center_vertical"
+            android:text="@string/sPlusSign"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llhWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llhRep" >
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.57"
+            android:text="@string/sWeight"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/bMinusWeight"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_weight="1"
+            android:gravity="center|center_vertical"
+            android:text="@string/sMinusSign"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="48dp"
+            android:layout_height="48sp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/bPlusWeight"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_weight="1"
+            android:gravity="center|center_vertical"
+            android:text="@string/sPlusSign"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llhBands"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="false"
+        android:layout_below="@id/llhWeight" >
+
+        <TextView
+            android:id="@+id/tvBands"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.28"
+            android:text="@string/sBand"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/spBand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:listitem="@android:layout/simple_spinner_item" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llhHeader"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
 
-        <LinearLayout
-            android:id="@+id/llhRep"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/bDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/llhHeader" >
+            android:text="@string/btn_Date" />
 
-            <TextView
-                android:id="@+id/tvRep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/sReps"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <EditText
+            android:id="@+id/etNotes"
+            android:layout_width="0dip"
+            android:layout_height="50sp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/sNotesHint"
+            android:inputType="textMultiLine"
+            android:textSize="12sp" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/bMinusRep"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:layout_weight="1"
-                android:gravity="center|center_vertical"
-                android:text="@string/sMinusSign"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/etRep"
-                android:layout_width="48dp"
-                android:layout_height="48sp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0" >
-
-                <requestFocus />
-            </EditText>
-
-            <Button
-                android:id="@+id/bPlusRep"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:layout_weight="1"
-                android:gravity="center|center_vertical"
-                android:text="@string/sPlusSign"
-                android:textSize="30sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llhWeight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/llhRep" >
-
-            <TextView
-                android:id="@+id/tvWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.57"
-                android:text="@string/sWeight"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <Button
-                android:id="@+id/bMinusWeight"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:layout_weight="1"
-                android:gravity="center|center_vertical"
-                android:text="@string/sMinusSign"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/etWeight"
-                android:layout_width="48dp"
-                android:layout_height="48sp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="center"
-                android:inputType="number"
-                android:text="0" />
-
-            <Button
-                android:id="@+id/bPlusWeight"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:layout_weight="1"
-                android:gravity="center|center_vertical"
-                android:text="@string/sPlusSign"
-                android:textSize="30sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llhBands"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_below="@id/llhWeight" >
-
-            <TextView
-                android:id="@+id/tvBands"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.28"
-                android:text="@string/sBand"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <Spinner
-                android:id="@+id/spBand"
-                android:layout_width="120sp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5sp"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llhHeader"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" >
-
-            <Button
-                android:id="@+id/bDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_Date" />
-
-            <EditText
-                android:id="@+id/etNotes"
-                android:layout_width="0dip"
-                android:layout_height="50sp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/sNotesHint"
-                android:inputType="textMultiLine"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-    </RelativeLayout>
+</RelativeLayout>

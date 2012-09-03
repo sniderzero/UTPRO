@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="lib" path="/eclipse/android-sdk-macosx/platforms/android-7/android.jar">
+	<classpathentry kind="lib" path="/eclipse/android-sdk-macosx/platforms/android-8/android.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/eclipse/android-sdk-macosx/docs/reference"/>
 		</attributes>
