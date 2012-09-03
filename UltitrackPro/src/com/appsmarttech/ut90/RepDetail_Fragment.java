@@ -304,7 +304,7 @@ public class RepDetail_Fragment extends SherlockFragment{
     			String mDrawableName = bSelected.getColor();
     			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
     			Drawable myIcon = getResources().getDrawable(resID);
-    			myIcon.setBounds(0,0,45,45);
+    			myIcon.setBounds(0,0,30,30);
     			tvBandWeight.setCompoundDrawables(myIcon, null, null, null);
     			
 
@@ -328,7 +328,7 @@ public class RepDetail_Fragment extends SherlockFragment{
     			String mDrawableName = bSelected.getColor();
     			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
     			Drawable myIcon = getResources().getDrawable(resID);
-    			myIcon.setBounds(0,0,45,45);
+    			myIcon.setBounds(0,0,30,30);
     			tvBandWeight.setCompoundDrawables(myIcon, null, null, null);
 
     	        return rowView;

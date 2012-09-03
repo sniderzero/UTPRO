@@ -68,17 +68,17 @@ public class Splash_Activity extends Activity {
     }
     
     public void goWhere(){//decides where to go
-    	if(bFirstLaunch == true)  //goes to day list if this is not the first launch
-    	{
-    		goDayList();  
-    	}
-    	else
-    	{
+    //	if(bFirstLaunch == true)  //goes to day list if this is not the first launch
+    	//{
+    		//goDayList();  
+    	//}
+    //	else
+    	//{
     		//set first launch key to true - next launch will go to the day list
     		Editor.putBoolean("kFirstLaunch", true);
     		Editor.commit();
     		goSettings();  //goes to settings if it is the first launch
-    	}
+    	//}
     }
     
     public void goSettings(){  //launches settings screen

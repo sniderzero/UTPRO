@@ -16,7 +16,7 @@
             android:layout_marginLeft="5sp"
             android:layout_marginTop="5sp"
             android:text="@string/sName"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/llhDay_Number"

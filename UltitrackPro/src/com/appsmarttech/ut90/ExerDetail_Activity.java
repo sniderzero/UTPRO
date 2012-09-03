@@ -2,7 +2,9 @@ package com.appsmarttech.ut90;
 
 import java.util.List;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
@@ -19,16 +21,17 @@ import com.appsmarttech.ut90.TimeDetail_Fragment.timeNavListener;
 public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, setDateListener, setDateListenerTime, repNavListener, timeNavListener{
     
 	List<Exercise> Exercises;
-	int iDayID, e, iExerID, iSize, iExerType, iDayRow;
+	int iDayID, e, iExerID, iSize, iExerType, iDayRow, iActiveProgram;
 	DBHelper_activity db;
 	Exercise eFirstExercise;
-	String sDate;
+	String sDate, sActiveProgram;
 	FragmentTransaction ft, ftOne;
 	Tab tab;
 	Bundle bArgs;
 	Menu mnuActionBar;
 	MenuItem miSaveRep, miPrevRep, miSkip, miPrevHistory, miNextHistory, miSaveTime, miDone;
-	Intent inDays;
+	Intent inDays, inPrograms;
+	SharedPreferences spPreferences;
 
 	/** Called when the activity is first created. */
     @Override
@@ -59,6 +62,15 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	
    	 	//declaring db helper class
    	 	db = (new DBHelper_activity(this));
+   	 	
+   	 	//open preferences
+        spPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+   	 	
+        //grabbing the active program from preferences
+        sActiveProgram = spPreferences.getString("kActiveProgram", "0");
+        
+        //converting it to Integer
+        iActiveProgram = Integer.valueOf(sActiveProgram);
     	
    	 	//grabbing the DayID passed by the day list activity
     	iDayID = getIntent().getIntExtra("DAY_ID", 0);
@@ -76,8 +88,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	//setting variables and title
     	mSetVars();
     	
-    	//declaring day intent
+    	//declaring intents
    	 	inDays = new Intent(this, Days_Activity.class);
+   	 	inPrograms = new Intent(this, Programs_Activity.class);
    	 	
    	 	//setting date
    	 	sDate = DateHelper.getDate();
@@ -235,7 +248,15 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 			{
 				
 				db.dayCompleteSkipped(1, iDayRow); //marking the day complete because you are at the end of the day
+				int[] aryCount = db.getDaysCount(iActiveProgram);
+				if(aryCount[0] == aryCount[1]){
+					db.updateProgramCompletion(iActiveProgram);
+					startActivity(inPrograms);
+					
+				}
+				else{
 				startActivity(inDays);
+				}
 			}
 			
 	}

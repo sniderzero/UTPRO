@@ -12,6 +12,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBHelper_activity extends SQLiteOpenHelper{
 	 
@@ -189,8 +190,21 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         Program.setProgramID(cursor.getInt(1));
         Program.setName(cursor.getString(2));
         Program.setTimesCompleted(cursor.getInt(4));
+        db.close();
         // return program
         return Program;
+    }
+    
+    //updating the completions of a single program
+    public void updateProgramCompletion(int iProgramID){
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	Cursor cursor = db.rawQuery("SELECT _id, ProgramCompleted FROM Programs WHERE ProgramID = " + iProgramID, null);
+    	cursor.moveToFirst();
+    	int iCompletions = cursor.getInt(1);
+    	iCompletions = iCompletions + 1;
+    	Log.d("COMPLETES:", String.valueOf(iCompletions));
+    	db.execSQL("UPDATE Programs SET ProgramCompleted = " + iCompletions + " WHERE ProgramID = " + iProgramID);
+    	db.close();
     }
 
  
@@ -256,9 +270,14 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         Cursor cursor = db.rawQuery("SELECT DayOrderDetails._id, DayOrderDetails.DayID, DayOrderDetails.DayCompleted, " +
         		"Days.DayName, DayOrderDetails.DayNumber FROM DayOrderDetails JOIN Days ON " +
         		"DayOrderDetails.DayID=Days.DayID WHERE ProgramID = " + programID + " AND DayOrderDetails.DayCompleted = 0 LIMIT 1", null);
+        //checking if cursor is empty
+        if(cursor.moveToFirst()){
         cursor.moveToFirst();
-        iPOS = cursor.getInt(0);
-        
+        	iPOS = cursor.getInt(0);  //if not empty set the position to the next day
+        }
+        else{
+        	iPOS = 2;  // if empty set it to the first exercise.
+        }
     	return iPOS;
     	
     }
