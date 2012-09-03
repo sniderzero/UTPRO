@@ -32,12 +32,16 @@
             android:gravity="center_horizontal"
             android:text="00.00.00" />
 
-        <TextView
-            android:id="@+id/tvBand"
-            android:layout_width="40sp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="TextView" />
+        <ImageView
+            android:id="@+id/ivBand"
+            android:layout_width="20sp"
+            android:layout_height="15sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginTop="5sp"
+            android:maxHeight="15sp"
+            android:maxWidth="15sp"
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/tvNotes"

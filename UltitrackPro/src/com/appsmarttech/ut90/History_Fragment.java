@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -86,7 +87,7 @@ public class History_Fragment extends SherlockFragment{
   			TextView tvWeight = (TextView)rowView.findViewById(R.id.tvWeight);
   			TextView tvTime = (TextView)rowView.findViewById(R.id.tvTime);
   			TextView tvDate = (TextView)rowView.findViewById(R.id.tvDate);
-  			TextView tvBand = (TextView)rowView.findViewById(R.id.tvBand);
+  			ImageView ivBand = (ImageView)rowView.findViewById(R.id.ivBand);
   			TextView tvNotes = (TextView)rowView.findViewById(R.id.tvNotes);
   	 	 
   	 
@@ -98,8 +99,12 @@ public class History_Fragment extends SherlockFragment{
   			tvWeight.setText(String.valueOf(sSelected.getWeight()));
   			tvTime.setText(String.valueOf(sSelected.getTime()));
   			tvDate.setText(sSelected.getDate());
-  			tvBand.setText(String.valueOf(sSelected.getBandID()));
   			tvNotes.setText(sSelected.getNotes());
+  			
+  			//setting the band color
+  			String mDrawableName = sSelected.getColor();
+			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
+			ivBand.setImageResource(resID);
   			
   			//hiding them based on the exercise type
   			switch(iExerType){
@@ -109,7 +114,7 @@ public class History_Fragment extends SherlockFragment{
   			case 2:
   				tvReps.setVisibility(View.GONE);
   				tvWeight.setVisibility(View.GONE);
-  				tvBand.setVisibility(View.GONE);
+  				ivBand.setVisibility(View.GONE);
   				break;
   			}
   			
