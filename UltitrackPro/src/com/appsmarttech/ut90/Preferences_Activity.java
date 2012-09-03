@@ -43,7 +43,7 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	        //declare the preference category hidden, and hide it from the user
 	        Preference pHiddenPreferences = findPreference("kHide");
 	        PreferenceScreen preferenceScreen = getPreferenceScreen();
-	        //preferenceScreen.removePreference(pHiddenPreferences); 
+	        preferenceScreen.removePreference(pHiddenPreferences); 
 	    }
 	
 	//setting the actions for the actionbar icons

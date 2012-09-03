@@ -14,13 +14,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.appsmarttech.ut90.RepDetail_Fragment.setDateListener;
 
 
 
@@ -34,12 +31,12 @@ public class TimeDetail_Fragment extends SherlockFragment{
 	int iExerID, iYear, iMonth, iDay;
 	Bundle bArgs;
 	private TextView tvTimer;
-	private Button bStart, bReset, bStop, bSave, bDate;
+	private Button bStart, bReset, bStop, bDate;
 	private Handler mHandler = new Handler();
 	private long startTime;
 	private long elapsedTime;
 	private final int REFRESH_RATE = 100;
-	private String hours,minutes,seconds,content, sDate, sNotes, sTime;
+	private String hours,minutes,seconds,sDate, sNotes, sTime;
 	private long secs,mins,hrs;
 	private boolean stopped = false;
 	
@@ -158,21 +155,7 @@ public class TimeDetail_Fragment extends SherlockFragment{
     	stopped = false;
     	tvTimer.setText("00.00.00"); 	
     }
-    //actions when clicking the save button
-    public void saveAction (){
 
-    }
-    
-    public void saveClick (){
-    	content = tvTimer.getText().toString();
-    	if(content.equals("00.00.00")){
-    		Toast.makeText(getActivity(), "Exercise Not Saved, the timer is at 00:00:00", 50).show();
-    	}
-    	else{
-    		saveAction();
-    	}
-    	
-    }
     
     private Runnable startTimer = new Runnable() {
 	 	   public void run() {
