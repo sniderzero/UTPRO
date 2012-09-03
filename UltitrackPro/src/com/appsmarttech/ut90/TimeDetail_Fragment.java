@@ -1,6 +1,9 @@
 package com.appsmarttech.ut90;
 
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,19 +20,21 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.appsmarttech.ut90.RepDetail_Fragment.setDateListener;
 
 
 
 public class TimeDetail_Fragment extends SherlockFragment{
 	timeNavListener timeNavListener;
+	setDateListenerTime setDateListenerTime;
 	Menu mnuActionBar;
-	OnClickListener bStartListener, bStopListener, bResetListener;
+	OnClickListener bStartListener, bStopListener, bResetListener, bDateListener;
 	EditText etNotes;
 	DBHelper_activity db;
-	int iExerID;
+	int iExerID, iYear, iMonth, iDay;
 	Bundle bArgs;
 	private TextView tvTimer;
-	private Button bStart, bReset, bStop, bSave;
+	private Button bStart, bReset, bStop, bSave, bDate;
 	private Handler mHandler = new Handler();
 	private long startTime;
 	private long elapsedTime;
@@ -52,15 +58,20 @@ public class TimeDetail_Fragment extends SherlockFragment{
         bStop = (Button)vTime.findViewById(R.id.bStop);
         bReset = (Button)vTime.findViewById(R.id.bReset);
         etNotes = (EditText)vTime.findViewById(R.id.etNotes);
+        bDate = (Button)vTime.findViewById(R.id.bDate);
         //clears focus from the notes box so the keyboard will work
         etNotes.clearFocus();
         
         //declaring db helper class
    	 	db = (new DBHelper_activity(getActivity()));
    	 	
-   	 	//grabbing exercise ID
+   	 	//grabbing exercise ID and date passed from the activity
    	 	bArgs = getArguments();
    	 	iExerID = bArgs.getInt("kExerID", 1);
+   	 	sDate = bArgs.getString("kDate");  //date
+   	 	
+   	 	//setting the date button to reflect the date
+   	 	bDate.setText(sDate);
    	 	
    	 	//declaring the listeners
         bStartListener = new OnClickListener() {
@@ -84,9 +95,17 @@ public class TimeDetail_Fragment extends SherlockFragment{
 			}
         };
         
+        bDateListener = new OnClickListener() {
+    			@Override
+    			public void onClick(View vExercises) {
+    				diaglogDatePick(vExercises);	
+    			}
+            };
+        
         bStart.setOnClickListener(bStartListener);
         bStop.setOnClickListener(bStopListener);
         bReset.setOnClickListener(bResetListener);
+        bDate.setOnClickListener(bDateListener);
    	 	
    	 	return vTime;
 
@@ -94,7 +113,7 @@ public class TimeDetail_Fragment extends SherlockFragment{
 	
 	//actions when the user hits save/next
 		public void onSave(){
-			sDate = DateHelper.getDate();
+			sDate = (String) bDate.getText();
 			sNotes = etNotes.getText().toString();
 			sTime = tvTimer.getText().toString();
 			db.saveStat(1, iExerID, 0, 0, 0, sTime, sDate, sNotes, 0);
@@ -103,6 +122,12 @@ public class TimeDetail_Fragment extends SherlockFragment{
 	//declaring fragment listener for moving between the fragments inside of the activity
 	public interface timeNavListener{
 	public void mNavigation(int iNav);
+
+	}
+	
+	//declaring fragment listener for setting the date in the activity
+	public interface setDateListenerTime{
+	public void mSetDateTime(String Date);
 
 	}
 	
@@ -199,6 +224,52 @@ public class TimeDetail_Fragment extends SherlockFragment{
 		/* Setting the timer text to the elapsed time */
 		tvTimer.setText(hours + "." + minutes + "." + seconds);
 	}
+	
+
+	
+	//dialog box for choosing exercise date
+    public void diaglogDatePick(View v){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.datepicker_dialog);
+        dialog.setTitle("Choose Exercise Date");
+        dialog.setCancelable(true);
+        //declare dialog buttons
+        Button btnOK = (Button) dialog.findViewById(R.id.btnDateOK);
+        Button btnCancel = (Button) dialog.findViewById(R.id.btnDateCancel);
+        final DatePicker datePicker = (DatePicker) dialog.findViewById(R.id.datePicker);
+        //setting date
+        final Calendar c = Calendar.getInstance();
+        iYear = c.get(Calendar.YEAR);
+        iMonth = c.get(Calendar.MONTH);
+        iDay = c.get(Calendar.DAY_OF_MONTH);
+        datePicker.init(iYear, iMonth, iDay, null);
+
+        btnOK.setOnClickListener(new OnClickListener() {
+        @Override
+            public void onClick(View v) {
+            iYear = datePicker.getYear();
+            iMonth = datePicker.getMonth();
+            iDay = datePicker.getDayOfMonth();
+            String sYear = String.valueOf(iYear);
+            String sMonth = "0" + String.valueOf(iMonth + 1);
+            String sDay = String.valueOf(iDay);
+            String sDate = sYear + "-" + sMonth + "-" + sDay;
+            bDate.setText(sDate);
+            //sets date in the activity so it can be used in the next fragment
+            setDateListenerTime.mSetDateTime(sDate);
+        	dialog.dismiss();
+            }
+        });
+        btnCancel.setOnClickListener(new OnClickListener() {
+        @Override
+            public void onClick(View v) {
+        	dialog.dismiss();
+            }
+        });
+
+    	dialog.show();
+
+    }
 
 	
 	//creating the actionbar
@@ -240,6 +311,13 @@ public class TimeDetail_Fragment extends SherlockFragment{
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement timeNavListener");
+        }
+        
+        try {
+            setDateListenerTime = (setDateListenerTime) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement setDateListener");
         }
 }
 

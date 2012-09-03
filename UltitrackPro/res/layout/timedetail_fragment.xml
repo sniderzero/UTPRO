@@ -44,15 +44,24 @@
                 android:text="@string/sReset" />
 
         </LinearLayout>
+                <Button
+                android:id="@+id/bDate"
+                android:layout_below="@id/llhButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_Date" />
 
         <EditText
             android:id="@+id/etNotes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_alignParentRight="true"
             android:layout_below="@id/llhButtons"
+            android:layout_toRightOf="@id/bDate"
             android:ems="10"
             android:hint="@string/sNotesHint"
-            android:inputType="textMultiLine" >
+            android:inputType="textMultiLine"
+            android:textSize="12sp" >
 
             <requestFocus />
         </EditText>

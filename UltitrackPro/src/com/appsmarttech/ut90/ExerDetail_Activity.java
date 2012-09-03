@@ -13,9 +13,10 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.appsmarttech.ut90.RepDetail_Fragment.repNavListener;
 import com.appsmarttech.ut90.RepDetail_Fragment.setDateListener;
+import com.appsmarttech.ut90.TimeDetail_Fragment.setDateListenerTime;
 import com.appsmarttech.ut90.TimeDetail_Fragment.timeNavListener;
 
-public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, setDateListener, repNavListener, timeNavListener{
+public class ExerDetail_Activity extends SherlockFragmentActivity implements ActionBar.TabListener, setDateListener, setDateListenerTime, repNavListener, timeNavListener{
     
 	List<Exercise> Exercises;
 	int iDayID, e, iExerID, iSize, iExerType, iDayRow;
@@ -202,9 +203,16 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 		}
 		
 	}
-	//listener for setting the date
+	//listener for setting the date from the repdetail
 	@Override
 	public void mSetDate(String Date){
+		this.sDate = Date;
+	}
+	
+
+	//listener for setting the date
+	@Override
+	public void mSetDateTime(String Date){
 		this.sDate = Date;
 	}
 	
