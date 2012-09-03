@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llhRep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,25 +15,15 @@
             android:id="@+id/tvRep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/sReps"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <Button
-            android:id="@+id/bMinusRep"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5sp"
-            android:layout_weight="1"
-            android:gravity="center|center_vertical"
-            android:text="@string/sMinusSign"
-            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/etRep"
             android:layout_width="48dp"
             android:layout_height="48sp"
-            android:layout_weight="1"
+            android:layout_alignTop="@+id/bMinusRep"
+            android:layout_toLeftOf="@+id/bMinusRep"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
@@ -43,15 +33,25 @@
         </EditText>
 
         <Button
-            android:id="@+id/bPlusRep"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/bMinusRep"
+            android:layout_width="48sp"
+            android:layout_height="48sp"
             android:layout_marginTop="5sp"
-            android:layout_weight="1"
-            android:gravity="center|center_vertical"
+            android:layout_toLeftOf="@+id/bPlusRep"
+            android:text="@string/sMinusSign"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bPlusRep"
+            android:layout_width="48sp"
+            android:layout_height="48sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5sp"
             android:text="@string/sPlusSign"
-            android:textSize="30sp" />
-    </LinearLayout>
+            android:textSize="20sp" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/llhWeight"
@@ -63,39 +63,35 @@
             android:id="@+id/tvWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.57"
             android:text="@string/sWeight"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <Button
-            android:id="@+id/bMinusWeight"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5sp"
-            android:layout_weight="1"
-            android:gravity="center|center_vertical"
-            android:text="@string/sMinusSign"
-            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/etWeight"
             android:layout_width="48dp"
             android:layout_height="48sp"
-            android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
             android:text="0" />
 
         <Button
-            android:id="@+id/bPlusWeight"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/bMinusWeight"
+            android:layout_width="48sp"
+            android:layout_height="48sp"
             android:layout_marginTop="5sp"
-            android:layout_weight="1"
+            android:gravity="center|center_vertical"
+            android:text="@string/sMinusSign"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/bPlusWeight"
+            android:layout_width="48sp"
+            android:layout_height="48sp"
+            android:layout_marginTop="5sp"
             android:gravity="center|center_vertical"
             android:text="@string/sPlusSign"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -110,15 +106,13 @@
             android:id="@+id/tvBands"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.28"
             android:text="@string/sBand"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
             android:id="@+id/spBand"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:listitem="@android:layout/simple_spinner_item" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
