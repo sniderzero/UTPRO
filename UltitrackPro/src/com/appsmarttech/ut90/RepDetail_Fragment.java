@@ -276,7 +276,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 			etRep.setText(String.valueOf(Stats.get(0).getReps()));
 			etWeight.setText(String.valueOf(Stats.get(0).getWeight()));
 			etNotes.setText(Stats.get(0).getNotes());
-			spBands.setSelection(Stats.get(0).getBandID() -1);
+			spBands.setSelection(Stats.get(0).getBandID());
 			}
 		}
 		

@@ -136,7 +136,7 @@ public class BandSet_Fragment extends SherlockFragment {
 			tvBandSetName.setText(bsSelected.getSetName());
 			
 			//retrieving the program ID from the object
-			iBandSetID = bsSelected.getID();
+			iBandSetID = bsSelected.getSetID();
 			if(iBandSetID == iActiveBand){
 				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);
 			}
@@ -211,7 +211,10 @@ public class BandSet_Fragment extends SherlockFragment {
     			
     			//setting text of bands
     			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
-    			ivColor.setImageResource(R.drawable.pink);
+    			//setting the band colors
+    			String mDrawableName = bSelected.getColor();
+    			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
+    			ivColor.setImageResource(resID);
     			
 
     			
