@@ -174,7 +174,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
                 programList.add(Program);
             } while (cursor.moveToNext());
         }
- 
+        db.close();
         // return program list
         return programList;
     }
@@ -190,6 +190,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         Program.setProgramID(cursor.getInt(1));
         Program.setName(cursor.getString(2));
         Program.setTimesCompleted(cursor.getInt(4));
+        cursor.close();
         db.close();
         // return program
         return Program;
@@ -204,6 +205,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     	iCompletions = iCompletions + 1;
     	Log.d("COMPLETES:", String.valueOf(iCompletions));
     	db.execSQL("UPDATE Programs SET ProgramCompleted = " + iCompletions + " WHERE ProgramID = " + iProgramID);
+    	cursor.close();
     	db.close();
     }
 
@@ -278,6 +280,8 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         else{
         	iPOS = 2;  // if empty set it to the first exercise.
         }
+        cursor.close();
+        db.close();
     	return iPOS;
     	
     }
@@ -321,7 +325,8 @@ public class DBHelper_activity extends SQLiteOpenHelper{
 
     	aryCount[0] = iCompleted;
     	aryCount[1] = iTotal;
-
+    	count.close();
+    	db.close();
     	return aryCount;
     	}
     
@@ -506,6 +511,7 @@ public void saveStat(int iUserID, int iExerID, int iWeight, int iReps, int iBand
 
 	db.execSQL("INSERT INTO UserStats (UserID, ExerciseID, StatWeight, StatReps, BandID, StatTime, StatDate, StatNotes, BandColorID) VALUES(" + 
 	iUserID + "," + iExerID + "," + iWeight + "," + iReps + "," + iBandID + "," + "'" +sTime+"'" + "," + "'" + sDate + "'" + "," + "'" + sNotes + "'" +","+ bandColorID + ")");
+	db.close();
 }
 
 // Getting All Band Sets
@@ -528,7 +534,8 @@ public List<BandSet> getAllBandSets() {
             BandSetList.add(BandSet);
         } while (cursor.moveToNext());
     }
-
+    cursor.close();
+    db.close();
     // return BandSet list
     return BandSetList;
 }
