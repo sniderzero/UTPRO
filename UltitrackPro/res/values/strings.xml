@@ -62,5 +62,7 @@
     <string name="sColor">Color</string>
     <string name="sOK">OK</string>
     <string name="sTotalCompletions">Total Completions:</string>
+    <string name="sBands">Bands</string>
+    <string name="sWeightRange">Weight Range:</string>
 
 </resources>

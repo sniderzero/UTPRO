@@ -7,35 +7,12 @@
         android:background="@android:color/white"
         >
 
-        <LinearLayout
-            android:id="@+id/llhBandDialogHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" >
-
-            <TextView
-                android:id="@+id/tvColor"
-                android:layout_width="70sp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/sColor"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tvWeight"
-                android:layout_width="70sp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/sWeight"
-                android:textSize="20sp" />
-        </LinearLayout>
-
         <ListView
             android:id="@+id/lvBands"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/llhBandDialogHeader" >
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" >
 
         </ListView>
 
@@ -43,7 +20,8 @@
             android:id="@+id/llhBandDiaglogButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lvBands" >
+            android:layout_below="@id/lvBands"
+            android:layout_marginTop="5sp" >
 
             <Button
                 android:id="@+id/btnCancel"

@@ -24,4 +24,60 @@
         android:text="@string/sHome"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <TextView
+        android:id="@+id/tvNumberOfBands"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvBandSetName"
+        android:layout_marginLeft="5sp"
+        android:text="10" />
+
+    <TextView
+        android:id="@+id/tvBandsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBandSetName"
+        android:layout_marginLeft="5sp"
+        android:layout_toRightOf="@+id/tvNumberOfBands"
+        android:text="@string/sBands" />
+
+    <TextView
+        android:id="@+id/tvWeightRangeLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvNumberOfBands"
+        android:layout_marginLeft="5sp"
+        android:text="@string/sWeightRange" />
+
+    <TextView
+        android:id="@+id/tvFirstWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvWeightRangeLbl"
+        android:layout_alignBottom="@+id/tvWeightRangeLbl"
+        android:layout_marginLeft="5sp"
+        android:layout_toRightOf="@+id/tvWeightRangeLbl"
+        android:text="10" />
+
+    <TextView
+        android:id="@+id/tvDash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvFirstWeight"
+        android:layout_alignBottom="@+id/tvFirstWeight"
+        android:layout_marginLeft="5sp"
+        android:layout_toRightOf="@+id/tvFirstWeight"
+        android:text="@string/sMinusSign" />
+
+    <TextView
+        android:id="@+id/tvLastWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvDash"
+        android:layout_marginLeft="5sp"
+        android:layout_toRightOf="@+id/tvDash"
+        android:text="50" />
+
 </RelativeLayout>
