@@ -33,7 +33,7 @@ public class RepDetail_Fragment extends SherlockFragment{
 	int iDayID, iSize, e, ae, iReps, iWeight, iExerID, iYear, iMonth, iDay, iActiveBandSet;
 	List<Stat> Stats;
 	List<Band> Bands;
-	Band bSelected;
+	Band loadedBand, selectedBand;
 	EditText etRep, etWeight, etNotes;
 	TextView tvDate;
 	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener, bDateListener;
@@ -156,11 +156,13 @@ public class RepDetail_Fragment extends SherlockFragment{
 
 
 			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				if(bSelected.getWeight()!=0){
-				etWeight.setText(String.valueOf(bSelected.getWeight()));
-				}
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int pos, long id) {
+				selectedBand = (Band) parent.getItemAtPosition(pos);
+				
+				if(selectedBand.getWeight()!=0){
+					etWeight.setText(String.valueOf(selectedBand.getWeight()));
+					}
 			}
 
 			@Override
@@ -188,13 +190,15 @@ public class RepDetail_Fragment extends SherlockFragment{
 
 	}
 	
-	//actions when the user hits save/next
+	//save the stat
 	public void onSave(){
 		int tWeight = Integer.parseInt(etWeight.getText().toString());
 		int tRep = Integer.parseInt(etRep.getText().toString());
+		int iColorID = selectedBand.getColorID();
+		int iBandID = selectedBand.getBandID();
 		sDate = bDate.getText().toString();
 		String tNotes = etNotes.getText().toString();
-		db.saveStat(1, iExerID, tWeight, tRep, bSelected.getBandID(), "0", sDate, tNotes, bSelected.getColorID());
+		db.saveStat(1, iExerID, tWeight, tRep, iBandID, "0", sDate, tNotes, iColorID);
 	}
 	
 	//actions when user clicks the "+" button for reps
@@ -297,11 +301,11 @@ public class RepDetail_Fragment extends SherlockFragment{
     			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
     	 
     			//grab current band
-    			bSelected = getItem(position);
+    			loadedBand = getItem(position);
     			
     			//setting text of bands
-    			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
-    			String mDrawableName = bSelected.getColor();
+    			tvBandWeight.setText(String.valueOf(loadedBand.getWeight()));
+    			String mDrawableName = loadedBand.getColor();
     			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
     			Drawable myIcon = getResources().getDrawable(resID);
     			myIcon.setBounds(0,0,30,30);
