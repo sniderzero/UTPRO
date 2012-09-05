@@ -4,18 +4,6 @@
     android:layout_height="fill_parent" >
 
     <TextView
-        android:id="@+id/tvActive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="12sp"
-        android:layout_marginTop="12sp"
-        android:text="@string/sActive"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="15sp" />
-
-    <TextView
         android:id="@+id/tvProgramName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,5 +72,15 @@
         android:layout_alignBottom="@+id/tvTotalCompletesLabel"
         android:layout_toRightOf="@+id/tvTotalCompletesLabel"
         android:text="1" />
+
+    <TextView
+        android:id="@+id/tvActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvExercisesComplete"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5sp"
+        android:text="@string/sActive"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
