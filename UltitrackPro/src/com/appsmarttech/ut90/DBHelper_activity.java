@@ -565,5 +565,26 @@ public List<Band> getAllSetBands(int iSetID) {
     // return Band list
     return BandList;
 }
+
+//getting total bands and weight range
+public int[] getBandInfo(int iSetID){
+	int[] aryInfo;
+	aryInfo = new int[3];
+	SQLiteDatabase db = this.getReadableDatabase();
+	Cursor cursor = db.rawQuery("SELECT BandDetails._id, BandDetails.BandID, BandDetails.BandWeight, BandDetails.BandColorID, BandColors.BandColorName " +
+    		"FROM BandDetails JOIN BandColors ON BandDetails.BandColorID = BandColors.BandColorID WHERE BandSetID =" + iSetID, null);
+	
+	int iSize = cursor.getCount();
+	cursor.moveToPosition(1);
+	int iFirstWeight = cursor.getInt(2);
+	cursor.moveToLast();
+	int iLastWeight = cursor.getInt(2);
+	aryInfo[0] = iSize;
+	aryInfo[1] = iFirstWeight;
+	aryInfo[2] = iLastWeight;
+	cursor.close();
+	db.close();
+	return aryInfo;
+}
  
 }

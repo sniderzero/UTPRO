@@ -128,9 +128,21 @@ public class BandSet_Fragment extends SherlockFragment {
 	 
 			View rowView = inflater.inflate(R.layout.bandset_row, parent, false);
 			TextView tvBandSetName = (TextView)rowView.findViewById(R.id.tvBandSetName);
+			TextView tvNumberOfBands = (TextView)rowView.findViewById(R.id.tvNumberOfBands);
+			TextView tvFirstWeight = (TextView)rowView.findViewById(R.id.tvFirstWeight);
+			TextView tvLastWeight = (TextView)rowView.findViewById(R.id.tvLastWeight);
 	 
 			//grab current bandset
 			bsSelected = getItem(position);
+			
+			 //grab the band details
+			 int[] aryBandInfo = db.getBandInfo(bsSelected.getSetID());
+			 
+			
+			//setting text of bands
+			tvNumberOfBands.setText(String.valueOf(aryBandInfo[0]));
+			tvFirstWeight.setText(String.valueOf(aryBandInfo[1]));
+			tvLastWeight.setText(String.valueOf(aryBandInfo[2]));
 			
 			//setting text of bandset
 			tvBandSetName.setText(bsSelected.getSetName());
@@ -204,12 +216,14 @@ public class BandSet_Fragment extends SherlockFragment {
     	 
     			View rowView = inflater.inflate(R.layout.bands_row, parent, false);
     			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
-    	 
+    			
+    			
     			//grab current band
     			 Band bSelected = getItem(position);
-    			
-    			//setting text of bands
-    			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
+    			 
+    			 //setting band weight
+    			 tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
+
     			//setting the band colors
     			String mDrawableName = bSelected.getColor();
     			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
