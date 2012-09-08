@@ -60,6 +60,19 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	             return true;
 	         }
 	     });
+	        //set onclick listener for the view other apps button
+	        getPreferenceManager()
+	        .findPreference("kOurApps")
+	        .setOnPreferenceClickListener(
+	           new OnPreferenceClickListener() {
+	         @Override
+	         public boolean onPreferenceClick(Preference preference) {
+	             Intent intent = new Intent(Intent.ACTION_VIEW);
+	             intent.setData(Uri.parse("market://search?q=pub:AppSmart+Tech+LLC"));
+	             startActivity(intent);
+	             return true;
+	         }
+	     });
 	    }
 	
 	//setting the actions for the actionbar icons

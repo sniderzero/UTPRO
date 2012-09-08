@@ -17,6 +17,7 @@
 </PreferenceCategory>
 <PreferenceCategory android:key="kAboutUT" android:title="About UltiTrack 90">
     <Preference android:key="kRateUs" android:title="Rate UltiTrack 90" android:summary="Rate us so more people will get it"/>
+    <Preference android:title="AppSmart Apps" android:key="kOurApps" android:summary="Check out our other apps"/>
 </PreferenceCategory>
 
 
