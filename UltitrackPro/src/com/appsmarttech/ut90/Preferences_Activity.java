@@ -1,5 +1,7 @@
 package com.appsmarttech.ut90;
 
+import java.util.prefs.Preferences;
+
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 
 public class Preferences_Activity extends SherlockPreferenceActivity{
@@ -44,6 +47,19 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	        Preference pHiddenPreferences = findPreference("kHide");
 	        PreferenceScreen preferenceScreen = getPreferenceScreen();
 	        preferenceScreen.removePreference(pHiddenPreferences); 
+	        //set onclick listener for the rate UT90 button
+	        getPreferenceManager()
+	        .findPreference("kRateUs")
+	        .setOnPreferenceClickListener(
+	           new OnPreferenceClickListener() {
+	         @Override
+	         public boolean onPreferenceClick(Preference preference) {
+	             Intent intent = new Intent(Intent.ACTION_VIEW);
+	             intent.setData(Uri.parse("market://details?id=com.appsmarttech.ut90"));
+	             startActivity(intent);
+	             return true;
+	         }
+	     });
 	    }
 	
 	//setting the actions for the actionbar icons
