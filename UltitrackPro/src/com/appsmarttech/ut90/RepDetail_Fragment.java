@@ -357,12 +357,12 @@ public class RepDetail_Fragment extends SherlockFragment{
 	        Button btnOK = (Button) dialog.findViewById(R.id.btnDateOK);
 	        Button btnCancel = (Button) dialog.findViewById(R.id.btnDateCancel);
 	        final DatePicker datePicker = (DatePicker) dialog.findViewById(R.id.datePicker);
-	        //setting date
-	        final Calendar c = Calendar.getInstance();
-	        iYear = c.get(Calendar.YEAR);
-	        iMonth = c.get(Calendar.MONTH);
-	        iDay = c.get(Calendar.DAY_OF_MONTH);
-	        datePicker.init(iYear, iMonth, iDay, null);
+	        //setting picker date based on current button date
+	        sDate = bDate.getText().toString();
+	        String delims = "[-]";
+	        String[] datePieces = sDate.split(delims);
+	        
+	        datePicker.init(Integer.parseInt(datePieces[0]), Integer.parseInt(datePieces[1]) - 1, Integer.parseInt(datePieces[2]), null);
 
 	        btnOK.setOnClickListener(new OnClickListener() {
 	        @Override
@@ -371,8 +371,16 @@ public class RepDetail_Fragment extends SherlockFragment{
 	            iMonth = datePicker.getMonth();
 	            iDay = datePicker.getDayOfMonth();
 	            String sYear = String.valueOf(iYear);
-	            String sMonth = "0" + String.valueOf(iMonth + 1);
+	            String sMonth = String.valueOf(iMonth + 1);
 	            String sDay = String.valueOf(iDay);
+	            //adding 0 if the string is only length of 1
+	            if(sMonth.length() == 1){
+	            	sMonth = "0" + sMonth;
+	            }
+	            if(sDay.length() == 1){
+	            	sDay = "0" + sDay;
+	            }
+	            
 	            String sDate = sYear + "-" + sMonth + "-" + sDay;
 	            bDate.setText(sDate);
 	            //sets date in the activity so it can be used in the next fragment
