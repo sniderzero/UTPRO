@@ -156,7 +156,7 @@ public class Days_Fragment extends SherlockFragment{
         lvDays.setAdapter(lvDaysAdapter);
         
 
-        
+        //scrolling to the next day if that day is not 1
         if(db.getNextDay(iActiveProgram) != 1){
         lvDays.smoothScrollToPosition(db.getNextDay(iActiveProgram));
         }
