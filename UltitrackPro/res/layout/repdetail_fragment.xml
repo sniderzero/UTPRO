@@ -9,22 +9,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-         >
+        android:layout_marginTop="5sp" >
 
         <Button
             android:id="@+id/bDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_Date" />
+            android:text="@string/btn_Date"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvRep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sReps"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_alignBaseline="@+id/bMinusRep"
-            android:layout_toLeftOf="@+id/etRep" />
+            android:layout_toLeftOf="@+id/etRep"
+            android:text="@string/sReps"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/etRep"
@@ -44,11 +45,10 @@
             android:id="@+id/bMinusRep"
             android:layout_width="48sp"
             android:layout_height="48sp"
-            android:layout_marginTop="5sp"
             android:layout_toLeftOf="@+id/bPlusRep"
+            android:background="@drawable/metalbutton"
             android:text="@string/sMinusSign"
-            android:textSize="20sp" 
-            android:background="@drawable/metalbutton"/>
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/bPlusRep"
@@ -56,11 +56,9 @@
             android:layout_height="48sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="5sp"
+            android:background="@drawable/bluecirclebutton"
             android:text="@string/sPlusSign"
-            android:textSize="20sp" 
-            android:background="@drawable/bluecirclebutton" />
-
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <RelativeLayout

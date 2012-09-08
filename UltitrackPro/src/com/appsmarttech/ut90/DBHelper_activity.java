@@ -269,13 +269,13 @@ public class DBHelper_activity extends SQLiteOpenHelper{
     public int getNextDay(int programID){
 		int iPOS;
 		SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT DayOrderDetails._id, DayOrderDetails.DayID, DayOrderDetails.DayCompleted, " +
+        Cursor cursor = db.rawQuery("SELECT DayOrderDetails._id, DayOrderDetails.DayOrder, DayOrderDetails.DayID, DayOrderDetails.DayCompleted, " +
         		"Days.DayName, DayOrderDetails.DayNumber FROM DayOrderDetails JOIN Days ON " +
         		"DayOrderDetails.DayID=Days.DayID WHERE ProgramID = " + programID + " AND DayOrderDetails.DayCompleted = 0 LIMIT 1", null);
         //checking if cursor is empty
         if(cursor.moveToFirst()){
         cursor.moveToFirst();
-        	iPOS = cursor.getInt(0);  //if not empty set the position to the next day
+        	iPOS = cursor.getInt(1);  //if not empty set the position to the next day
         }
         else{
         	iPOS = 0;  // if empty set it to the first exercise.

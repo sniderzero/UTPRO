@@ -3,7 +3,7 @@ package com.appsmarttech.ut90;
 public class Day {
 
 //private variables
-int _id, iCompleted, iDayNumber, iDayID;
+int _id, iCompleted, iDayNumber, iDayID, iDayOrder;
 String sName;
 
 // Empty constructor
@@ -11,7 +11,7 @@ public Day(){
 
 }
 // constructor
-public Day(int id, String sName, int iCompleted, int iDayID, int iDayNumber){
+public Day(int id, String sName, int iCompleted, int iDayID, int iDayNumber, int iDayOrder){
 this._id = id;
 this.iCompleted = iCompleted;
 this.sName = sName;
@@ -20,7 +20,7 @@ this.iDayNumber = iDayNumber;
 }
 
 //constructor
-public Day(String sName, int iCompleted, int iDayID, int iDayNumber){
+public Day(String sName, int iCompleted, int iDayID, int iDayNumber, int iDayOrder){
 this.iCompleted = iCompleted;
 this.sName = sName;
 this.iDayID = iDayID;
@@ -76,6 +76,16 @@ return this.iDayNumber;
 //setting day number
 public void setDayNumber(int iDayNumber){
 this.iDayNumber = iDayNumber;
+}
+
+//getting day order
+public int getDayOrder(){
+return this.iDayOrder;
+}
+
+//setting day order
+public void setDayOrder(int iDayOrder){
+this.iDayOrder = iDayOrder;
 }
 
 }

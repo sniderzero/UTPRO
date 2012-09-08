@@ -155,9 +155,11 @@ public class Days_Fragment extends SherlockFragment{
         lvDays.setOnItemLongClickListener(lvDaysLongListener);
         lvDays.setAdapter(lvDaysAdapter);
         
-        //lvDays.setSelection(db.getNextDay(iActiveProgram) - 2);
-        //lvDays.smoothScrollToPosition(db.getNextDay(iActiveProgram));
+
         
+        if(db.getNextDay(iActiveProgram) != 1){
+        lvDays.smoothScrollToPosition(db.getNextDay(iActiveProgram));
+        }
    	 	return vDays;
     }
     
