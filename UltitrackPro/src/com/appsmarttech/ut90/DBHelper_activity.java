@@ -278,7 +278,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         	iPOS = cursor.getInt(0);  //if not empty set the position to the next day
         }
         else{
-        	iPOS = 2;  // if empty set it to the first exercise.
+        	iPOS = 0;  // if empty set it to the first exercise.
         }
         cursor.close();
         db.close();
@@ -303,7 +303,7 @@ public class DBHelper_activity extends SQLiteOpenHelper{
         
         db.close();
     }
-    
+    //grab the total number of workouts, and the total completed thus far
     public int[] getDaysCount(int iProgramID){
     	int[] aryCount;
     	aryCount = new int[2];

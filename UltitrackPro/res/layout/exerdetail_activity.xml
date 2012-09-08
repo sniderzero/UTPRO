@@ -13,7 +13,7 @@
     android:layout_alignParentBottom="true"
     ads:adSize="SMART_BANNER"
     ads:adUnitId="a1503920cba69e9"
-    ads:testDevices="TEST_EMULATOR, TEST_DEVICE_ID"
+    ads:testDevices="TEST_EMULATOR, 9559BFD1B4230703E5389D51414D75E5"
     ads:loadAdOnCreate="true"
      />
 

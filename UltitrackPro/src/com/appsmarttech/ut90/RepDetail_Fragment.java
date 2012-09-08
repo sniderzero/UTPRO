@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -277,7 +278,11 @@ public class RepDetail_Fragment extends SherlockFragment{
 			etRep.setText(String.valueOf(Stats.get(0).getReps()));
 			etWeight.setText(String.valueOf(Stats.get(0).getWeight()));
 			etNotes.setText(Stats.get(0).getNotes());
+			//only set the last band if it's a number less than the number of current bands in the bandset
+			
+			if(Stats.get(0).getBandID() + 1 <= Bands.size()){
 			spBands.setSelection(Stats.get(0).getBandID());
+			}
 			}
 		}
 		
@@ -303,6 +308,10 @@ public class RepDetail_Fragment extends SherlockFragment{
     			//grab current band
     			loadedBand = getItem(position);
     			
+    			if(loadedBand.getWeight() == 0){
+    				tvBandWeight.setVisibility(rowView.GONE);
+    			}
+    			
     			//setting text of bands
     			tvBandWeight.setText(String.valueOf(loadedBand.getWeight()));
     			String mDrawableName = loadedBand.getColor();
@@ -325,11 +334,11 @@ public class RepDetail_Fragment extends SherlockFragment{
     			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
     	 
     			//grab current band
-    			 Band bSelected = getItem(position);
+    			 loadedBand = getItem(position);
     			
     			//setting text of bands
-    			tvBandWeight.setText(String.valueOf(bSelected.getWeight()));
-    			String mDrawableName = bSelected.getColor();
+    			tvBandWeight.setText(String.valueOf(loadedBand.getWeight()));
+    			String mDrawableName = loadedBand.getColor();
     			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
     			Drawable myIcon = getResources().getDrawable(resID);
     			myIcon.setBounds(0,0,30,30);

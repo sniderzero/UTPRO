@@ -138,16 +138,16 @@ public class BandSet_Fragment extends SherlockFragment {
 			 //grab the band details
 			 int[] aryBandInfo = db.getBandInfo(bsSelected.getSetID());
 			 
+
+			//setting text of bandset
+			tvBandSetName.setText(bsSelected.getSetName());
 			
 			//setting text of bands
 			tvNumberOfBands.setText(String.valueOf(aryBandInfo[0]));
 			tvFirstWeight.setText(String.valueOf(aryBandInfo[1]));
 			tvLastWeight.setText(String.valueOf(aryBandInfo[2]));
 			
-			//setting text of bandset
-			tvBandSetName.setText(bsSelected.getSetName());
-			
-			//retrieving the program ID from the object
+			//marking the active bandset 
 			iBandSetID = bsSelected.getSetID();
 			if(iBandSetID == iActiveBand){
 				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);

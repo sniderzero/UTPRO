@@ -9,6 +9,7 @@ import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,8 +155,8 @@ public class Days_Fragment extends SherlockFragment{
         lvDays.setOnItemLongClickListener(lvDaysLongListener);
         lvDays.setAdapter(lvDaysAdapter);
         
-        lvDays.setSelection(db.getNextDay(iActiveProgram) - 2);
-        //lvDays.smoothScrollToPosition(db.getNextDay(iActiveProgram) + 3);
+        //lvDays.setSelection(db.getNextDay(iActiveProgram) - 2);
+        //lvDays.smoothScrollToPosition(db.getNextDay(iActiveProgram));
         
    	 	return vDays;
     }
