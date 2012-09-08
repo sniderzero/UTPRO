@@ -103,6 +103,9 @@ public class History_Fragment extends SherlockFragment{
   			
   			//setting the band color
   			String mDrawableName = sSelected.getColor();
+  			if(mDrawableName.equals("clear")){  //hide the color image if the band is 0
+  				ivBand.setVisibility(rowView.INVISIBLE);
+  			}
 			int resID = getResources().getIdentifier(mDrawableName , "drawable", getActivity().getPackageName());
 			ivBand.setImageResource(resID);
   			
