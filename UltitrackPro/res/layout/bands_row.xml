@@ -16,4 +16,13 @@
             android:text="100"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/tvBands"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:text="@string/sBands"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
     </LinearLayout>

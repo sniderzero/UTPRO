@@ -304,12 +304,14 @@ public class RepDetail_Fragment extends SherlockFragment{
     	 
     			View rowView = inflater.inflate(R.layout.bands_row, parent, false);
     			TextView tvBandWeight = (TextView)rowView.findViewById(R.id.tvWeight);
+    			TextView tvBands = (TextView)rowView.findViewById(R.id.tvBands);
     	 
     			//grab current band
     			loadedBand = getItem(position);
     			
     			if(loadedBand.getWeight() == 0){
     				tvBandWeight.setVisibility(rowView.GONE);
+    				tvBands.setVisibility(rowView.VISIBLE);
     			}
     			
     			//setting text of bands
