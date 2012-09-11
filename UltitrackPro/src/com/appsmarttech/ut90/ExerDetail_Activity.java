@@ -251,6 +251,7 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
 				int[] aryCount = db.getDaysCount(iActiveProgram);
 				if(aryCount[0] == aryCount[1]){
 					db.updateProgramCompletion(iActiveProgram);
+					db.progClearFlags(iActiveProgram);
 					startActivity(inPrograms);
 					
 				}
