@@ -96,11 +96,17 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	}
 	
     public void sendEmail(){
-    	Intent intEmail = new Intent(android.content.Intent.ACTION_SEND);
-    	intEmail.setType("message/rfc822");
-    	intEmail.putExtra(android.content.Intent.EXTRA_EMAIL, "support@appsmarttech.com");
-    	intEmail.putExtra(android.content.Intent.EXTRA_SUBJECT, "UltiTrack 90 - Support");
-    	startActivity(intEmail);
+    	Intent intEmail = new Intent(Intent.ACTION_SENDTO);
+    	String uriText;
+
+    	uriText = "mailto:support@appsmarttech.com" + 
+    	          "?subject=UltiTrack 90 - Support" + 
+    	          "&body=";
+    	uriText = uriText.replace(" ", "%20");
+    	Uri uri = Uri.parse(uriText);
+
+    	intEmail.setData(uri);
+    	startActivity(Intent.createChooser(intEmail, "Get Support"));
     }
     
     public void shareApp(){
