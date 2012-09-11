@@ -12,8 +12,7 @@
 </PreferenceCategory><PreferenceCategory android:title="About You" android:key="kPreferences">
     
     <ListPreference android:entries="@array/aryGender" android:title="Gender" android:key="kGender" android:entryValues="@array/aryGender" android:summary="Male or Female?" android:defaultValue='Male'/>
-    
-    <ListPreference android:title="Age Range" android:key="kAge"/>
+    <EditTextPreference android:title="Age" android:key="kAge" android:summary="Young or Old?" android:defaultValue='24'/>
 </PreferenceCategory>
 <PreferenceCategory android:key="kAboutUT" android:title="About UltiTrack 90">
     <Preference android:key="kRateUs" android:title="Rate UltiTrack 90" android:summary="Rate us so more people will get it"/>
