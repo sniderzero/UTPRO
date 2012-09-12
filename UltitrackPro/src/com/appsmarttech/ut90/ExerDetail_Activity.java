@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -44,6 +45,9 @@ public class ExerDetail_Activity extends SherlockFragmentActivity implements Act
     	getSupportActionBar().setDisplayShowTitleEnabled(true);
     	getSupportActionBar().setDisplayShowHomeEnabled(true);
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    	
+    	//keep screen on
+    	getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         
     	//creating the action bar tab Workout
     	ActionBar.Tab tWorkout = getSupportActionBar().newTab();
