@@ -140,8 +140,6 @@ public class Days_Fragment extends SherlockFragment{
     			dSelected = (Day) (lvDays.getItemAtPosition(position));
 				//grabbing dayname to update the action bar with
 				sDayName = dSelected.getName();
-				//making listview multichoice
-				lvDays.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 				//launching the contextual action bar
 				mActionMode = getSherlockActivity().startActionMode(new mActionModeCallback());
 				return true;
@@ -285,7 +283,6 @@ public class Days_Fragment extends SherlockFragment{
 					dSelected.setCompleted(1);
 					//refreshing the listview to reflect the change
 					((BaseAdapter) lvDaysAdapter).notifyDataSetChanged();
-					lvDays.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 					mode.finish(); // Action picked, so close the CAB
 					return true;
 				case R.id.miSkip:
@@ -295,7 +292,6 @@ public class Days_Fragment extends SherlockFragment{
 					dSelected.setCompleted(2);
 					//refreshing the listview to reflect the change
 					((BaseAdapter) lvDaysAdapter).notifyDataSetChanged();
-					lvDays.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 					mode.finish(); // Action picked, so close the CAB
 					return true;
 				default:
