@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/sStart"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:background="@drawable/metalbutton" />
 
             <Button
                 android:id="@+id/bStop"
@@ -36,7 +37,8 @@
                 android:layout_weight="1"
                 android:text="@string/sStop"
                 android:textSize="20sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:background="@drawable/metalbutton" />
 
             <Button
                 android:id="@+id/bReset"
@@ -44,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/sReset"
-                android:textSize="20sp" />
+                android:textSize="20sp" 
+                android:background="@drawable/metalbutton"/>
         </LinearLayout>
 
                 <Button
@@ -53,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/llhButtons"
                     android:text="@string/btn_Date"
-                    android:textSize="20sp" />
+                    android:textSize="20sp" 
+                    android:background="@drawable/metalbutton"/>
 
         <EditText
             android:id="@+id/etNotes"

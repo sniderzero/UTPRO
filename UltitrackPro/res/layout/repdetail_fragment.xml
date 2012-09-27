@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_Date"
+            android:background="@drawable/metalbutton"
             android:textSize="20sp" />
 
         <TextView
@@ -56,7 +57,7 @@
             android:layout_height="48sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/bluecirclebutton"
+            android:background="@drawable/metalbutton"
             android:text="@string/sPlusSign"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -95,7 +96,7 @@
             android:layout_toLeftOf="@+id/bPlusWeight"
             android:text="@string/sMinusSign"
             android:textSize="20sp" 
-            android:background="@drawable/whitebutton"
+            android:background="@drawable/metalbutton"
             android:scaleType="fitXY"/>
 
         <Button
@@ -104,6 +105,7 @@
             android:layout_height="48sp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="5sp"
+            android:background="@drawable/metalbutton"
             android:text="@string/sPlusSign"
             android:textSize="20sp" />
 
@@ -125,6 +127,7 @@
         android:layout_marginTop="5sp" >
 
         <EditText
+            
             android:id="@+id/etNotes"
             android:layout_width="0dip"
             android:layout_height="50sp"
@@ -132,7 +135,8 @@
             android:ems="10"
             android:hint="@string/sNotesHint"
             android:inputType="textMultiLine"
-            android:textSize="12sp" />
+            android:textSize="12sp" 
+            />
     </LinearLayout>
 
 </RelativeLayout>
