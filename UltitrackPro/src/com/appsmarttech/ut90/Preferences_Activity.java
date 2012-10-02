@@ -55,7 +55,8 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	         @Override
 	         public boolean onPreferenceClick(Preference preference) {
 	             Intent intent = new Intent(Intent.ACTION_VIEW);
-	             intent.setData(Uri.parse("market://details?id=com.appsmarttech.ut90"));
+	            // intent.setData(Uri.parse("market://details?id=com.appsmarttech.ut90")); //Play Store
+	             intent.setData(Uri.parse("amzn://apps/android?p=com.appsmarttech.ut90")); //Amazon App Store
 	             startActivity(intent);
 	             return true;
 	         }
@@ -68,7 +69,8 @@ public class Preferences_Activity extends SherlockPreferenceActivity{
 	         @Override
 	         public boolean onPreferenceClick(Preference preference) {
 	             Intent intent = new Intent(Intent.ACTION_VIEW);
-	             intent.setData(Uri.parse("market://search?q=pub:AppSmart+Tech+LLC"));
+	            // intent.setData(Uri.parse("market://search?q=pub:AppSmart+Tech+LLC")); //Play Store
+	             intent.setData(Uri.parse("amzn://apps/android?p=com.appsmarttech.ut90&showAll=1")); //Amazon App Store
 	             startActivity(intent);
 	             return true;
 	         }
