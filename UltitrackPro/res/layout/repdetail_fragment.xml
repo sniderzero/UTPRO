@@ -119,7 +119,8 @@
             android:layout_height="48sp"
             android:layout_alignParentLeft="true"
             android:layout_alignTop="@id/etWeight"
-            android:layout_marginTop="5sp" />
+            android:layout_marginTop="5sp"
+            android:background="@drawable/spinner_state" />
 
     </RelativeLayout>
 
@@ -148,70 +149,20 @@
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/llhNavBar"
+        android:layout_above="@+id/inNavBar"
         ads:adSize="SMART_BANNER"
         ads:adUnitId="a1503920cba69e9"
         ads:loadAdOnCreate="true"
         ads:testDevices="TEST_EMULATOR, 9559BFD1B4230703E5389D51414D75E5" >
 
     </com.google.ads.AdView>
-    
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/llhNavBar"
-        android:layout_width="fill_parent"
+
+    <include
+        android:id="@+id/inNavBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/ab_bottom" >
-
-        <Button
-            android:id="@+id/btnPrev"
-            android:layout_width="20sp"
-            android:layout_height="48dp"
-            android:layout_weight="1.0"
-            android:background="@drawable/borderless_background"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:text="Prev"
-             />
-
-        <View
-            android:id="@+id/vertical_divider"
-            android:layout_width="1dip"
-            android:layout_height="fill_parent"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btnSkip"
-            android:layout_width="20sp"
-            android:layout_height="48dp"
-            android:layout_weight="1.0"
-            android:background="@drawable/borderless_background"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:text="Skip"
-             />
-        
-        <View
-            android:id="@+id/vertical_divider1"
-            android:layout_width="1dip"
-            android:layout_height="fill_parent"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btnNext"
-            android:layout_width="20sp"
-            android:layout_height="48dp"
-            android:layout_weight="1.0"
-            android:background="@drawable/borderless_background"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:text="Save/Next"
-             />
-    </LinearLayout>
+        android:layout_alignParentLeft="true"
+        layout="@layout/exerdetail_navbar" />
 
 </RelativeLayout>

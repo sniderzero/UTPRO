@@ -2,20 +2,22 @@
 
 
 
-    <LinearLayout
+        <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/llhNavBar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/ab_bottom" >
 
         <Button
             android:id="@+id/btnPrev"
-            android:layout_width="wrap_content"
+            android:layout_width="20sp"
             android:layout_height="48dp"
             android:layout_weight="1.0"
             android:background="@drawable/borderless_background"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:text="Prev"
              />
 
@@ -29,12 +31,12 @@
 
         <Button
             android:id="@+id/btnSkip"
-            android:layout_width="wrap_content"
+            android:layout_width="20sp"
             android:layout_height="48dp"
             android:layout_weight="1.0"
             android:background="@drawable/borderless_background"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:text="Skip"
              />
         
@@ -48,12 +50,12 @@
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
+            android:layout_width="20sp"
             android:layout_height="48dp"
             android:layout_weight="1.0"
             android:background="@drawable/borderless_background"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:text="Save/Next"
              />
     </LinearLayout>

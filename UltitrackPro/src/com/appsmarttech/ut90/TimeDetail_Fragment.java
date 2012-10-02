@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -25,13 +26,14 @@ public class TimeDetail_Fragment extends SherlockFragment{
 	timeNavListener timeNavListener;
 	setDateListenerTime setDateListenerTime;
 	Menu mnuActionBar;
-	OnClickListener bStartListener, bStopListener, bResetListener, bDateListener;
+	OnClickListener bStartListener, bStopListener, bResetListener, bDateListener, bNextListener, bSkipListener, bPrevListener;;
 	EditText etNotes;
 	DBHelper_activity db;
 	int iExerID, iYear, iMonth, iDay;
 	Bundle bArgs;
+	Intent inDays;
 	private TextView tvTimer;
-	private Button bStart, bReset, bStop, bDate;
+	private Button bStart, bReset, bStop, bDate, bPrev, bSkip, bNext;
 	private Handler mHandler = new Handler();
 	private long startTime;
 	private long elapsedTime;
@@ -50,6 +52,9 @@ public class TimeDetail_Fragment extends SherlockFragment{
         setHasOptionsMenu(true);
         
         //declaring the timer and buttons
+   	 	bPrev = (Button)vTime.findViewById(R.id.btnPrev);
+   	 	bNext = (Button)vTime.findViewById(R.id.btnNext);
+   	 	bSkip = (Button)vTime.findViewById(R.id.btnSkip);
         tvTimer = (TextView)vTime.findViewById(R.id.tvTimer);
         bStart = (Button)vTime.findViewById(R.id.bStart);
         bStop = (Button)vTime.findViewById(R.id.bStop);
@@ -98,11 +103,49 @@ public class TimeDetail_Fragment extends SherlockFragment{
     				diaglogDatePick(vExercises);	
     			}
             };
+            
+            bNextListener = new OnClickListener() {
+
+
+     			@Override
+     			public void onClick(View vExercises) {
+     				onSave();
+    				timeNavListener.mNavigation(1);
+     				
+     			}
+           	  
+             };
+             
+             bPrevListener = new OnClickListener() {
+
+
+     			@Override
+     			public void onClick(View vExercises) {
+     				timeNavListener.mNavigation(0);
+     				
+     			}
+           	  
+             };
+             
+             bSkipListener = new OnClickListener() {
+
+
+     			@Override
+     			public void onClick(View vExercises) {
+     				timeNavListener.mNavigation(1);
+     				
+     			}
+           	  
+             };
+             
         
         bStart.setOnClickListener(bStartListener);
         bStop.setOnClickListener(bStopListener);
         bReset.setOnClickListener(bResetListener);
         bDate.setOnClickListener(bDateListener);
+        bNext.setOnClickListener(bNextListener);
+        bSkip.setOnClickListener(bSkipListener);
+        bPrev.setOnClickListener(bPrevListener);
    	 	
    	 	return vTime;
 
@@ -262,31 +305,15 @@ public class TimeDetail_Fragment extends SherlockFragment{
 
     }
 
-	
-	//creating the actionbar
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-		inflater.inflate(R.menu.exer_ab, menu);
-		mnuActionBar = menu;
-		super.onCreateOptionsMenu(menu, inflater);
-
-	}
 
 
 	//setting the actions for the actionbar icons
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.miSaveRep:
-			onSave();
-			timeNavListener.mNavigation(1);
-			break;
-		case R.id.miPrevRep:
-			timeNavListener.mNavigation(0);
-			break;
-		case R.id.miSkip:
-			timeNavListener.mNavigation(1);
-			break;
 		default:
+			inDays = new Intent(getActivity(), Days_Activity.class);
+			startActivity(inDays);
 			break;
 		}
 
