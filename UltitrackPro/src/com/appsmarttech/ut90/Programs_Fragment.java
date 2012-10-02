@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -67,7 +68,7 @@ public class Programs_Fragment extends SherlockFragment {
         
 
         //grabbing the active program from preferences
-        sActiveProgram = spPreferences.getString("kActiveProgram", "0");
+        sActiveProgram = spPreferences.getString("kActiveProgram", "1");
         
         //converting it to Integer
         iActiveProgram = Integer.valueOf(sActiveProgram);
@@ -163,10 +164,10 @@ public class Programs_Fragment extends SherlockFragment {
 			//retrieving the program ID from the object
 			iProgramID = pSelected.getProgramID();
 			if(iProgramID == iActiveProgram){
-				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);
+				((ImageView)rowView.findViewById(R.id.ivActive)).setVisibility(View.VISIBLE);
 			}
 			else{
-				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.INVISIBLE);
+				((ImageView)rowView.findViewById(R.id.ivActive)).setVisibility(View.INVISIBLE);
 			}
 			//getting completed days and total days for the program
 			int[] aryCount = db.getDaysCount(iProgramID);

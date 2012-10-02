@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ab_bottom" >
+
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/borderless_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="Prev"
+             />
+
+        <View
+            android:id="@+id/vertical_divider"
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/borderless_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="Skip"
+             />
+        
+        <View
+            android:id="@+id/vertical_divider1"
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/borderless_background"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:text="Save/Next"
+             />
+    </LinearLayout>
+

@@ -1,15 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlBandSetRow"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/tvActive"
+    <ImageView
+        android:id="@+id/ivActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvBandsLabel"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_marginRight="12sp"
+        android:src="@drawable/active"
         android:text="@string/sActive"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp" />

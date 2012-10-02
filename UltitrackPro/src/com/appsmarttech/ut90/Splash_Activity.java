@@ -64,7 +64,7 @@ public class Splash_Activity extends Activity {
         };
         
         Timer timer = new Timer();
-        timer.schedule(task, splashDelay);
+        timer.schedule(task, splashDelay); 
     }
     
     public void goWhere(){//decides where to go

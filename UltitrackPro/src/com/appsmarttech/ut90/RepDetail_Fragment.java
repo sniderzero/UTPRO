@@ -28,7 +28,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 public class RepDetail_Fragment extends SherlockFragment{
-	Button bDate , bPlusRep, bMinusRep, bPlusWeight, bMinusWeight;
+	Button bDate , bPlusRep, bMinusRep, bPlusWeight, bMinusWeight, bPrev, bSkip, bNext;
 	DBHelper_activity db;
 	int iDayID, iSize, e, ae, iReps, iWeight, iExerID, iYear, iMonth, iDay, iActiveBandSet;
 	List<Stat> Stats;
@@ -36,7 +36,8 @@ public class RepDetail_Fragment extends SherlockFragment{
 	Band loadedBand, selectedBand;
 	EditText etRep, etWeight, etNotes;
 	TextView tvDate;
-	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener, bDateListener;
+	OnClickListener bPlusListener, bMinusListener, bPlusWeightListener, bMinusWeightListener, bDateListener,
+	bNextListener, bSkipListener, bPrevListener;
 	String sDate, saDate, sActiveBandSet;
 	Bundle bArgs;
 	Menu mnuActionBar;
@@ -53,6 +54,9 @@ public class RepDetail_Fragment extends SherlockFragment{
     	// Inflate the layout for this fragment
    	 	View vExercises = inflater.inflate(R.layout.repdetail_fragment, container, false);
    	 	//assigning widgets
+   	 	bPrev = (Button)vExercises.findViewById(R.id.btnPrev);
+   	 	bNext = (Button)vExercises.findViewById(R.id.btnNext);
+   	 	bSkip = (Button)vExercises.findViewById(R.id.btnSkip);
    	 	bDate = (Button)vExercises.findViewById(R.id.bDate);
    	 	bPlusRep = (Button)vExercises.findViewById(R.id.bPlusRep);
    	 	bMinusRep = (Button)vExercises.findViewById(R.id.bMinusRep);
@@ -145,12 +149,50 @@ public class RepDetail_Fragment extends SherlockFragment{
  				diaglogDatePick(vExercises);	
  			}
          };
+         bNextListener = new OnClickListener() {
+
+
+ 			@Override
+ 			public void onClick(View vExercises) {
+ 				onSave();
+				repNavListener.mNavigation(1);
+ 				
+ 			}
+       	  
+         };
+         
+         bPrevListener = new OnClickListener() {
+
+
+ 			@Override
+ 			public void onClick(View vExercises) {
+ 				repNavListener.mNavigation(0);
+ 				
+ 			}
+       	  
+         };
+         
+         bSkipListener = new OnClickListener() {
+
+
+ 			@Override
+ 			public void onClick(View vExercises) {
+ 				repNavListener.mNavigation(1);
+ 				
+ 			}
+       	  
+         };
+         
+         
 		//assigning onclicklisteners
         bPlusRep.setOnClickListener(bPlusListener);
         bMinusRep.setOnClickListener(bMinusListener);
         bPlusWeight.setOnClickListener(bPlusWeightListener);
         bMinusWeight.setOnClickListener(bMinusWeightListener);
         bDate.setOnClickListener(bDateListener);
+        bNext.setOnClickListener(bNextListener);
+        bSkip.setOnClickListener(bSkipListener);
+        bPrev.setOnClickListener(bPrevListener);
         //assigning adapter to spinner
         spBands.setAdapter(spBandsAdapter);
         spBands.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -401,29 +443,14 @@ public class RepDetail_Fragment extends SherlockFragment{
 
 	    }
 		
-		//creating the actionbar
-				public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-					inflater.inflate(R.menu.exer_ab, menu);
-					mnuActionBar = menu;
-					super.onCreateOptionsMenu(menu, inflater);
 
-				}
 
 
 				//setting the actions for the actionbar icons
 				@Override
 				public boolean onOptionsItemSelected(MenuItem item) {
 					switch (item.getItemId()) {
-					case R.id.miSaveRep:
-						onSave();
-						repNavListener.mNavigation(1);
-						break;
-					case R.id.miPrevRep:
-						repNavListener.mNavigation(0);
-						break;
-					case R.id.miSkip:
-						repNavListener.mNavigation(1);
-						break;
+
 					default:
 						inDays = new Intent(getActivity(), Days_Activity.class);
 						startActivity(inDays);

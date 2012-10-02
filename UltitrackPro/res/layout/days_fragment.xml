@@ -13,7 +13,8 @@
             android:layout_alignParentTop="true"
             android:clickable="true"
             android:longClickable="true"
-            android:drawSelectorOnTop="true" >
+            android:drawSelectorOnTop="true"
+            android:cacheColorHint="#00000000" >
 
         </ListView>
         

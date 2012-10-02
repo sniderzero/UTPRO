@@ -77,7 +77,7 @@ public class Days_Fragment extends SherlockFragment{
         bActionPresent = false;
         
         //grabbing the active program from preferences
-        sActiveProgram = spPreferences.getString("kActiveProgram", "0");
+        sActiveProgram = spPreferences.getString("kActiveProgram", "1");
         
         //converting it to Integer
         iActiveProgram = Integer.valueOf(sActiveProgram);

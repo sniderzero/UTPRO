@@ -1,8 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlRepDetail"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
 
     <RelativeLayout
         android:id="@+id/llhRep"
@@ -37,7 +39,8 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
-            android:text="0" >
+            android:text="0"
+            android:background="@drawable/editbox_state" >
 
             <requestFocus />
         </EditText>
@@ -86,7 +89,8 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="number"
-            android:text="0" />
+            android:text="0" 
+            android:background="@drawable/editbox_state"/>
 
         <Button
             android:id="@+id/bMinusWeight"
@@ -127,16 +131,87 @@
         android:layout_marginTop="5sp" >
 
         <EditText
-            
             android:id="@+id/etNotes"
             android:layout_width="0dip"
             android:layout_height="50sp"
             android:layout_weight="1"
+            android:background="@drawable/editbox_state"
             android:ems="10"
             android:hint="@string/sNotesHint"
             android:inputType="textMultiLine"
-            android:textSize="12sp" 
-            />
+            android:textColorHint="@color/black"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+    
+    <com.google.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llhNavBar"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="a1503920cba69e9"
+        ads:loadAdOnCreate="true"
+        ads:testDevices="TEST_EMULATOR, 9559BFD1B4230703E5389D51414D75E5" >
+
+    </com.google.ads.AdView>
+    
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/llhNavBar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ab_bottom" >
+
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="20sp"
+            android:layout_height="48dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/borderless_background"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:text="Prev"
+             />
+
+        <View
+            android:id="@+id/vertical_divider"
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnSkip"
+            android:layout_width="20sp"
+            android:layout_height="48dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/borderless_background"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:text="Skip"
+             />
+        
+        <View
+            android:id="@+id/vertical_divider1"
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="20sp"
+            android:layout_height="48dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/borderless_background"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:text="Save/Next"
+             />
     </LinearLayout>
 
 </RelativeLayout>

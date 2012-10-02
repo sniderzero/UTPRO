@@ -11,7 +11,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:clickable="true" >
+            android:clickable="true" 
+            android:cacheColorHint="#00000000">
 
         </ListView>
 

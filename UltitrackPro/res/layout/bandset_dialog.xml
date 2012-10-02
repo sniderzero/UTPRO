@@ -28,6 +28,7 @@
                 android:layout_width="85sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/metalbutton"
                 android:text="@string/sCancel"
                 android:textSize="20sp" />
 
@@ -36,8 +37,10 @@
                 android:layout_width="85sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/metalbutton"
                 android:text="@string/sActive"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
     </RelativeLayout>

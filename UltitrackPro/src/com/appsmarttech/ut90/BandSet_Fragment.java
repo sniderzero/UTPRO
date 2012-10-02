@@ -5,9 +5,11 @@ import java.util.List;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuItem;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -22,7 +24,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -67,7 +71,10 @@ public class BandSet_Fragment extends SherlockFragment {
         actionBar = getSherlockActivity().getSupportActionBar();
         
         //sets home button as enabled (the app icon in the left corner)
+        setHasOptionsMenu(true);
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //setting activity title
    	 	getActivity().setTitle("Select Bands");
@@ -150,10 +157,10 @@ public class BandSet_Fragment extends SherlockFragment {
 			//marking the active bandset 
 			iBandSetID = bsSelected.getSetID();
 			if(iBandSetID == iActiveBand){
-				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.VISIBLE);
+				((ImageView)rowView.findViewById(R.id.ivActive)).setVisibility(View.VISIBLE);
 			}
 			else{
-				((TextView)rowView.findViewById(R.id.tvActive)).setVisibility(View.INVISIBLE);
+				((ImageView)rowView.findViewById(R.id.ivActive)).setVisibility(View.INVISIBLE);
 			}
 
 			return rowView;
@@ -241,5 +248,18 @@ public class BandSet_Fragment extends SherlockFragment {
     	dialog.show();
 
     }
+    
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			
+		default:
+			Intent inDashboard = new Intent(getActivity(), Preferences_Activity.class);
+			startActivity(inDashboard);
+			break;
+		}
+
+		return true;
+	}
 
 }

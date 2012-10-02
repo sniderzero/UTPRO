@@ -1,7 +1,8 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:background="@drawable/background" >
 
         <TextView
             android:id="@+id/tvTimer"
@@ -69,7 +70,8 @@
             android:ems="10"
             android:hint="@string/sNotesHint"
             android:inputType="textMultiLine"
-            android:textSize="12sp" >
+            android:textSize="12sp"
+            android:background="@drawable/editbox_state" >
 
             <requestFocus />
         </EditText>
